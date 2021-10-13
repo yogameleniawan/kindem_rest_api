@@ -14,10 +14,11 @@ class CreateUsersDetailsTable extends Migration
     public function up()
     {
         Schema::create('users_details', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->primary();
             $table->string('name');
             $table->string('address');
             $table->string('gender');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->timestamps();
         });
     }
