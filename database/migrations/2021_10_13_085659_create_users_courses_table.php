@@ -14,9 +14,12 @@ class CreateUsersCoursesTable extends Migration
     public function up()
     {
         Schema::create('users_courses', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id')->primary();
             $table->string('answer');
             $table->boolean('checked')->default(0);
+            $table->boolean('is_true')->default(0);
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('RESTRICT')->onUpdate('CASCADE');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->timestamps();
         });
     }
