@@ -18,6 +18,7 @@ class CreateUsersDetailsTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('gender');
+            $table->bigIncrements('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->timestamps();
         });
