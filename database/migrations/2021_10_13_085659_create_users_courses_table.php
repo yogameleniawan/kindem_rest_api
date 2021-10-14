@@ -14,7 +14,7 @@ class CreateUsersCoursesTable extends Migration
     public function up()
     {
         Schema::create('users_courses', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary();
+            $table->char('id', 10)->primary();
             $table->string('answer');
             $table->boolean('checked')->default(0);
             $table->boolean('is_true')->default(0);
