@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\SubCategoriesController;
+use App\Http\Controllers\UserCoursesController;
+use App\Http\Controllers\UserDetailsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +23,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
+Route::prefix('admin')->group(function () {
+    Route::resources([
+        'categories' => CategoriesController::class,
+        'courses' => CoursesController::class,
+        'sub_categories' => SubCategoriesController::class,
+        'users' => UsersController::class,
+        'user_courses' => UserCoursesController::class,
+        'user_details' => UserDetailsController::class,
+    ]);
 });
