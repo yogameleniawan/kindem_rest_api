@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
 
 class CoursesController extends Controller
 {
@@ -12,9 +15,32 @@ class CoursesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $data = DB::table('courses')
+                ->select(['courses.id AS id', 'courses.indonesia_text AS indonesia_text', 'courses.english_text AS english_text', 'courses.image AS image']);
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($data) {
+
+                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item" href="' . url('/admin/courses/' . $data->id . '/edit') . '"><li> <i class="ik ik-edit" style="color: green;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" href="#" data-toggle="modal"
+                    data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: red;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
+                    return $btn;
+                })
+                ->addColumn('image', function ($data) {
+                    if ($data->image != null) {
+                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
+                    } else {
+                        $image = '<td></td>';
+                    }
+
+                    return $image;
+                })
+                ->rawColumns(['action', 'image'])
+                ->make(true);
+        }
+        return view('admin.courses.index');
     }
 
     /**
@@ -24,7 +50,7 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.courses.add');
     }
 
     /**
@@ -35,7 +61,15 @@ class CoursesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $table = new Course();
+        $table->id = Str::random(10);
+        $table->indonesia_text = $request->indonesia_text;
+        $table->english_text = $request->english_text;
+        $table->image = $request->image;
+        if ($table->save()) {
+            return redirect()->route('courses.index')
+                ->with('success', 'Courses created successfully.');
+        }
     }
 
     /**
@@ -55,9 +89,10 @@ class CoursesController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($id)
     {
-        //
+        $data = Course::find($id);
+        return view('admin.courses.edit', compact('data'));
     }
 
     /**
@@ -67,9 +102,17 @@ class CoursesController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $id)
     {
-        //
+        $table = Course::find($id);
+        $table->id = Str::random(10);
+        $table->indonesia_text = $request->indonesia_text;
+        $table->english_text = $request->english_text;
+        $table->image = $request->image;
+        if ($table->save()) {
+            return redirect()->route('courses.index')
+                ->with('success', 'Courses created successfully.');
+        }
     }
 
     /**
@@ -78,8 +121,13 @@ class CoursesController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Request $request)
     {
-        //
+        $table = Course::find($request->id);
+
+        if ($table->delete()) {
+            return redirect()->route('courses.index')
+                ->with('success', 'Courses deleted successfully.');
+        }
     }
 }
