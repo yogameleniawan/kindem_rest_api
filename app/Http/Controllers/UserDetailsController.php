@@ -19,9 +19,9 @@ class UserDetailsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('user_details')
-                ->join('users', 'users.id', '=', 'user_details.user_id')
-                ->select(['user_details.id AS id', 'users.email AS email', 'user_details.name AS name', 'user_details.address AS address']);
+            $data = DB::table('users_details')
+                ->join('users', 'users.id', '=', 'users_details.user_id')
+                ->select(['users_details.id AS id', 'users.email AS email', 'users_details.name AS name', 'users_details.address AS address', 'users_details.gender AS gender']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {

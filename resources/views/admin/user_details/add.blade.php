@@ -44,7 +44,7 @@ User Detail
                             </span>
                             <select name="user_id" class="select2 form-control" id="default-select">
                                 @foreach ($users as $user)
-                                <option value="{{$data->id}}">{{$data->email}}</option>
+                                <option value="{{$user->id}}">{{$user->email}}</option>
                                 @endforeach
                             </select>
                         </div>

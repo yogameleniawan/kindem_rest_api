@@ -129,7 +129,7 @@ Users
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
                 {
                     data: 'email',
-                    name: 'email'
+                    name: 'users.email'
                 },
                 {
                     data: 'name',
@@ -138,6 +138,10 @@ Users
                 {
                     data: 'address',
                     name: 'address'
+                },
+                {
+                    data: 'gender',
+                    name: 'gender'
                 },
 
             ]
