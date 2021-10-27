@@ -33,3 +33,7 @@ Route::prefix('admin')->group(function () {
         'user_details' => UserDetailsController::class,
     ]);
 });
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
