@@ -40,15 +40,14 @@ Users
                                     <tr>
                                         <th style="width: 3%"></th>
                                         <th>Email</th>
-                                        <th>Password</th>
                                         <th>Role</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <td style="width: 3%"></td>
-                                        <th>Name</th>
-                                        <td></td>
+                                        <th>Email</th>
+                                        <th>Role</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -122,13 +121,17 @@ Users
             "initComplete": function (settings, json) {
                 $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
             },
-            ajax: "{{ route('categories.index') }}",
+            ajax: "{{ route('users.index') }}",
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'email',
+                    name: 'email'
                 },
-                {data: 'image', name: 'image', orderable: false, searchable: false},
+                {
+                    data: 'role',
+                    name: 'role'
+                },
+
             ]
         });
         table.columns().eq(0).each(function(colIdx) {

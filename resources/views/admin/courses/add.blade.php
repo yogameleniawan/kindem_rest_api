@@ -46,13 +46,16 @@ Courses
                     @csrf
 
                     <div class="form-group">
-                        <label>Sub Categories ID</label>
+                        <label>Sub Category</label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                             </span>
-                            <input type="text" class="form-control  " placeholder="Name"
-                                id="sub_category_id" name="sub_category_id" required>
+                            <select name="sub_category_id" class="select2 form-control" id="default-select">
+                                @foreach ($sub_categories as $data)
+                                <option value="{{$data->id}}">{{$data->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -78,18 +81,7 @@ Courses
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Image</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input type="text" class="form-control  " placeholder="Image"
-                                id="image" name="image" required>
-                        </div>
-                    </div>
-
-                    {{-- <img id="output" width="50%"/>
+                    <img id="output" width="50%"/>
 
                     <div class="form-group">
                         <label>Image</label>
@@ -100,7 +92,7 @@ Courses
                             <input accept="image/*" onchange="loadFile(event)" type="file" class="form-control  " placeholder="Image"
                                 id="image" name="image">
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="footer-buttons">
                         <a class="fixedButtonRefresh" href="{{route('courses.index')}}">

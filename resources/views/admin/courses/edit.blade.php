@@ -47,13 +47,20 @@ Courses
                     @method('PUT')
 
                     <div class="form-group">
-                        <label>Sub Categories ID</label>
+                        <label>Sub Category</label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                             </span>
-                            <input type="text" class="form-control  " placeholder="Name"
-                                id="category_id" name="category_id" value="{{$data->sub_category_id}}" required>
+                            <select name="sub_category_id" class="select2 form-control" id="default-select">
+                                @foreach ($sub_categories as $sub)
+                                <option value="{{$sub->id}}"
+                                    @if($data->sub_category_id == $sub->id)
+                                    {{'selected'}}
+                                    @endif
+                                    >{{$sub->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UserCourse;
+use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +19,9 @@ class UserDetailsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('users_courses')
-                ->select(['users_courses.id AS id', 'users_courses.name AS name', 'users_courses.image AS image']);
+            $data = DB::table('user_details')
+                ->join('users', 'users.id', '=', 'user_details.user_id')
+                ->select(['user_details.id AS id', 'users.email AS email', 'user_details.name AS name', 'user_details.address AS address']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -29,19 +30,10 @@ class UserDetailsController extends Controller
                     data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: red;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
-                ->addColumn('image', function ($data) {
-                    if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
-                    } else {
-                        $image = '<td></td>';
-                    }
-
-                    return $image;
-                })
-                ->rawColumns(['action', 'image'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.categories.index');
+        return view('admin.user_details.index');
     }
 
     /**
@@ -51,7 +43,8 @@ class UserDetailsController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.add');
+        $users = User::all();
+        return view('admin.user_details.add', compact('users'));
     }
 
     /**
@@ -62,13 +55,15 @@ class UserDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        $table = new UserCourse();
+        $table = new UserDetail();
         $table->id = Str::random(10);
         $table->name = $request->name;
-        $table->image = $request->image;
+        $table->address = $request->address;
+        $table->gender = $request->gender;
+        $table->user_id = $request->user_id;
         if ($table->save()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category created successfully.');
+            return redirect()->route('user_details.index')
+                ->with('success', 'User created successfully.');
         }
     }
 
@@ -91,8 +86,9 @@ class UserDetailsController extends Controller
      */
     public function edit(UserDetail $userDetail, $id)
     {
-        $data = UserCourse::find($id);
-        return view('admin.categories.edit', compact('data'));
+        $data = UserDetail::find($id);
+        $users = User::all();
+        return view('admin.user_details.edit', compact('data', 'users'));
     }
 
     /**
@@ -104,13 +100,14 @@ class UserDetailsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $table = UserCourse::find($id);
-        $table->id = Str::random(10);
+        $table = UserDetail::find($id);
         $table->name = $request->name;
-        $table->image = $request->image;
+        $table->address = $request->address;
+        $table->gender = $request->gender;
+        $table->user_id = $request->user_id;
         if ($table->save()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category created successfully.');
+            return redirect()->route('user_details.index')
+                ->with('success', 'User created successfully.');
         }
     }
 
@@ -122,11 +119,11 @@ class UserDetailsController extends Controller
      */
     public function destroy(Request $request)
     {
-        $table = UserCourse::find($request->id);
+        $table = UserDetail::find($request->id);
 
         if ($table->delete()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category deleted successfully.');
+            return redirect()->route('user_details.index')
+                ->with('success', 'User deleted successfully.');
         }
     }
 }

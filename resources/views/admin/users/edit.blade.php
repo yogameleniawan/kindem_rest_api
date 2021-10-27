@@ -67,19 +67,6 @@ Users
                         </div>
                     </div>
 
-                    <!-- <img id="output" src="{{$data->image}}" width="50%"/> -->
-
-                    <div class="form-group">
-                        <label>Image</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input accept="image/*" onchange="loadFile(event)" type="file" class="form-control  " placeholder="Image"
-                                id="image" name="image">
-                        </div>
-                    </div>
-
                     <div class="footer-buttons">
                         <a class="fixedButtonRefresh" href="{{route('users.index')}}">
                             <button data-toggle="tooltip" data-placement="top" title="" type="button"
@@ -108,51 +95,5 @@ Users
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 
-<script>
-    var loadFile = function(event) {
-      var output = document.getElementById('output');
-      output.src = URL.createObjectURL(event.target.files[0]);
-      output.onload = function() {
-        URL.revokeObjectURL(output.src)
-      }
-    };
-</script>
-<script>
-    var SITEURL = "{{URL('/')}}";
-    let validExt = ['jpg', 'png', 'jpeg'];
-
-    function resetForm($form) {
-    $form.find('input:file').val('');
-    }
-
-    $('input').on('change', function(){
-    var extension = this.files[0].type.split('/')[1]
-    console.log(this.files[0].type)
-        if(validExt.indexOf(extension) == -1){
-            alert('Video extensions are allowed is jpg/png/jpeg');
-            resetForm($('#fileUploadForm'));
-        }
-    });
-    $(function () {
-        $(document).ready(function () {
-            $('#fileUploadForm').ajaxForm({
-                beforeSend: function () {
-                    var percentage = '0';
-                },
-                uploadProgress: function (event, position, total, percentComplete) {
-                    var percentage = percentComplete;
-                    $('.progress .progress-bar').css("width", percentage+'%', function() {
-                      return $(this).attr("aria-valuenow", percentage) + "%";
-                    })
-                },
-                complete: function (xhr) {
-                    console.log('File has uploaded');
-                    alert("Upload Success");
-                    window.location.href = SITEURL +"/"+"admin/users";
-                }
-            });
-        });
-    });
-</script>
 @endsection
 

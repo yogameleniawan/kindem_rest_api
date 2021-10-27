@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -19,7 +20,8 @@ class CoursesController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('courses')
-                ->select(['courses.id AS id', 'courses.indonesia_text AS indonesia_text', 'courses.english_text AS english_text', 'courses.image AS image']);
+                ->join('sub_categories', 'sub_categories.id', '=', 'courses.sub_category_id')
+                ->select(['courses.id AS id', 'sub_categories.name as name', 'courses.indonesia_text AS indonesia_text', 'courses.english_text AS english_text', 'courses.image AS image']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -30,7 +32,7 @@ class CoursesController extends Controller
                 })
                 ->addColumn('image', function ($data) {
                     if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
+                        $image = '<td> <a style="color:blue" href="' . asset('/images/' . $data->image) . '" target="_blank">Open Image</a></td>';
                     } else {
                         $image = '<td></td>';
                     }
@@ -50,7 +52,8 @@ class CoursesController extends Controller
      */
     public function create()
     {
-        return view('admin.courses.add');
+        $sub_categories = SubCategory::all();
+        return view('admin.courses.add', compact('sub_categories'));
     }
 
     /**
@@ -65,7 +68,10 @@ class CoursesController extends Controller
         $table->id = Str::random(10);
         $table->indonesia_text = $request->indonesia_text;
         $table->english_text = $request->english_text;
-        $table->image = $request->image;
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $table->image = $imageName;
+        $table->sub_category_id = $request->sub_category_id;
         if ($table->save()) {
             return redirect()->route('courses.index')
                 ->with('success', 'Courses created successfully.');
@@ -91,8 +97,9 @@ class CoursesController extends Controller
      */
     public function edit($id)
     {
+        $sub_categories = SubCategory::all();
         $data = Course::find($id);
-        return view('admin.courses.edit', compact('data'));
+        return view('admin.courses.edit', compact('data', 'sub_categories'));
     }
 
     /**
@@ -105,7 +112,6 @@ class CoursesController extends Controller
     public function update(Request $request, $id)
     {
         $table = Course::find($id);
-        $table->id = Str::random(10);
         $table->indonesia_text = $request->indonesia_text;
         $table->english_text = $request->english_text;
         $table->image = $request->image;

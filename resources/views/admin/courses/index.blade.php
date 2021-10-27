@@ -39,7 +39,7 @@ Courses
                                 <thead>
                                     <tr>
                                         <th style="width: 3%"></th>
-                                        <th>Sub Categories ID</th>
+                                        <th>Sub Category</th>
                                         <th>Indonesian</th>
                                         <th>English</th>
                                         <th>Image</th>
@@ -48,7 +48,9 @@ Courses
                                 <tfoot>
                                     <tr>
                                         <td style="width: 3%"></td>
-                                        <th>Name</th>
+                                        <th>Sub Category</th>
+                                        <th>Indonesian</th>
+                                        <th>English</th>
                                         <td></td>
                                     </tr>
                                 </tfoot>
@@ -123,11 +125,19 @@ Courses
             "initComplete": function (settings, json) {
                 $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
             },
-            ajax: "{{ route('categories.index') }}",
+            ajax: "{{ route('courses.index') }}",
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
                 {
                     data: 'name',
-                    name: 'name'
+                    name: 'sub_categories.name'
+                },
+                {
+                    data: 'indonesia_text',
+                    name: 'courses.indonesia_text'
+                },
+                {
+                    data: 'english_text',
+                    name: 'courses.english_text '
                 },
                 {data: 'image', name: 'image', orderable: false, searchable: false},
             ]

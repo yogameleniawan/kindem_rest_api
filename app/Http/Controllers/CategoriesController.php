@@ -30,7 +30,7 @@ class CategoriesController extends Controller
                 })
                 ->addColumn('image', function ($data) {
                     if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
+                        $image = '<td> <a style="color:blue" href="' . asset('/images/' . $data->image) . '" target="_blank">Open Image</a></td>';
                     } else {
                         $image = '<td></td>';
                     }
@@ -64,7 +64,9 @@ class CategoriesController extends Controller
         $table = new Category();
         $table->id = Str::random(10);
         $table->name = $request->name;
-        $table->image = $request->image;
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $table->image =  $imageName;
         if ($table->save()) {
             return redirect()->route('categories.index')
                 ->with('success', 'Category created successfully.');
@@ -104,7 +106,6 @@ class CategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $table = Category::find($id);
-        $table->id = Str::random(10);
         $table->name = $request->name;
         $table->image = $request->image;
         if ($table->save()) {

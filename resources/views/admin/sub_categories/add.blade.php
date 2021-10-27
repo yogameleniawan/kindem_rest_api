@@ -45,15 +45,17 @@ Sub Categories
                     enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
 
-                    <!-- dropdown Categories ID -->
                     <div class="form-group">
-                        <label>Categories ID</label>
+                        <label>Category</label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                             </span>
-                            <input type="text" class="form-control  " placeholder="Categories ID"
-                                id="sub_category_id" name="sub_category_id" required>
+                            <select name="category_id" class="select2 form-control" id="default-select">
+                                @foreach ($categories as $data)
+                                <option value="{{$data->id}}">{{$data->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -68,18 +70,7 @@ Sub Categories
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Image</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input type="text" class="form-control  " placeholder="Image"
-                                id="image" name="image" required>
-                        </div>
-                    </div>
-
-                    {{-- <img id="output" width="50%"/>
+                    <img id="output" width="50%"/>
 
                     <div class="form-group">
                         <label>Image</label>
@@ -90,7 +81,7 @@ Sub Categories
                             <input accept="image/*" onchange="loadFile(event)" type="file" class="form-control  " placeholder="Image"
                                 id="image" name="image">
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="footer-buttons">
                         <a class="fixedButtonRefresh" href="{{route('sub_categories.index')}}">

@@ -9,13 +9,13 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $table = "sub_category_id";
+    protected $table = "courses";
     protected $fillable = ['id', 'sub_category_id', 'indonesia_text', 'english_text', 'image'];
     public $timestamps = true;
     public $incrementing = false;
     public $keyType = 'char';
 
-    public function category()
+    public function sub_category()
     {
         return $this->belongsTo(SubCategory::class);
     }

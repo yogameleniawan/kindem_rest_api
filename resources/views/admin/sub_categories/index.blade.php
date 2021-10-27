@@ -39,7 +39,7 @@ Sub Categories
                                 <thead>
                                     <tr>
                                         <th style="width: 3%"></th>
-                                        <!-- <th>Categories ID</th> -->
+                                        <th>Category</th>
                                         <th>Name</th>
                                         <th>Image</th>
                                     </tr>
@@ -47,6 +47,7 @@ Sub Categories
                                 <tfoot>
                                     <tr>
                                         <td style="width: 3%"></td>
+                                        <th>Category</th>
                                         <th>Name</th>
                                         <td></td>
                                     </tr>
@@ -124,6 +125,10 @@ Sub Categories
             },
             ajax: "{{ route('sub_categories.index') }}",
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
+                {
+                    data: 'category_name',
+                    name: 'categories.name'
+                },
                 {
                     data: 'name',
                     name: 'name'

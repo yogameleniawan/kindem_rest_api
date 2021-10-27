@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,8 @@ class SubCategoriesController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('sub_categories')
-                ->select(['sub_categories.id AS id', 'sub_categories.category_id AS category_id', 'sub_categories.name AS name', 'sub_categories.image AS image']);
+                ->join('categories', 'categories.id', '=', 'sub_categories.category_id')
+                ->select(['sub_categories.id AS id', 'categories.name AS category_name', 'sub_categories.name AS name', 'sub_categories.image AS image']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -30,7 +32,7 @@ class SubCategoriesController extends Controller
                 })
                 ->addColumn('image', function ($data) {
                     if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
+                        $image = '<td> <a style="color:blue" href="' . asset('/images/' . $data->image) . '" target="_blank">Open Image</a></td>';
                     } else {
                         $image = '<td></td>';
                     }
@@ -50,7 +52,8 @@ class SubCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.sub_categories.add');
+        $categories = Category::all();
+        return view('admin.sub_categories.add', compact('categories'));
     }
 
     /**
@@ -64,7 +67,10 @@ class SubCategoriesController extends Controller
         $table = new SubCategory();
         $table->id = Str::random(10);
         $table->name = $request->name;
-        $table->image = $request->image;
+        $table->category_id = $request->category_id;
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+        $table->image = $imageName;
         if ($table->save()) {
             return redirect()->route('sub_categories.index')
                 ->with('success', 'Sub Category created successfully.');
@@ -104,7 +110,6 @@ class SubCategoriesController extends Controller
     public function update(Request $request, SubCategory $id)
     {
         $table = SubCategory::find($id);
-        $table->id = Str::random(10);
         $table->name = $request->name;
         $table->image = $request->image;
         if ($table->save()) {

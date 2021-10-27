@@ -56,18 +56,7 @@ Categories
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Image</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input type="text" class="form-control  " placeholder="Image"
-                                id="image" name="image" required>
-                        </div>
-                    </div>
-
-                    {{-- <img id="output" width="50%"/>
+                    <img id="output" width="50%"/>
 
                     <div class="form-group">
                         <label>Image</label>
@@ -78,7 +67,7 @@ Categories
                             <input accept="image/*" onchange="loadFile(event)" type="file" class="form-control  " placeholder="Image"
                                 id="image" name="image">
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="footer-buttons">
                         <a class="fixedButtonRefresh" href="{{route('categories.index')}}">

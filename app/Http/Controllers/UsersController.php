@@ -104,7 +104,6 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $table = User::find($id);
-        $table->id = Str::random(10);
         $table->email = $request->email;
         $table->password = $request->password;
         if ($table->save()) {
