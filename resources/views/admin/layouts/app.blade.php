@@ -177,12 +177,18 @@
                             class="nav-link"><i class="ik ik-maximize"></i></button>
                         <div class="dropdown"><a class="dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="avatar"
-                                    src="{{url('assets/admin/images/user.png')}}" alt=""></a>
+                                    src="{{url('assets/admin/img/user.png')}}" alt=""></a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="ik ik-user dropdown-icon"></i>Account</a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="ik ik-power dropdown-icon"></i>Logout</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <a class="dropdown-item" href="{{ route('profile.show') }}">
+                                        <i class="ik ik-user dropdown-icon"></i>Account</a>
+                                    <button class="dropdown-item" href="#">
+                                        <i class="ik ik-power dropdown-icon"></i>Logout</button>
+                                </form>
+
+
 
                             </div>
                         </div>
@@ -200,7 +206,7 @@
                 <div class="sidebar-content">
                     <div class="nav-container">
                         <nav id="main-menu-navigation" class="navigation-main">
-                            <div class="nav-item"><a href=""><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                            <div class="nav-item {{Route::is('dashboard')  ? 'active' : ''}}"><a href=""><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
                             <div
                                 class="nav-item {{Route::is('categories.index') || Route::is('categories.create') || Route::is('categories.edit') || Route::is('categories.destroy') ? 'active' : ''}}">

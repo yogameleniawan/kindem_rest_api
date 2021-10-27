@@ -22,18 +22,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::prefix('admin')->group(function () {
-    Route::resources([
-        'categories' => CategoriesController::class,
-        'courses' => CoursesController::class,
-        'sub_categories' => SubCategoriesController::class,
-        'users' => UsersController::class,
-        'user_courses' => UserCoursesController::class,
-        'user_details' => UserDetailsController::class,
-    ]);
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        return view('admin.dashboard.index');
+    })->name('dashboard');
+    Route::prefix('admin')->group(function () {
+        Route::resources([
+            'categories' => CategoriesController::class,
+            'courses' => CoursesController::class,
+            'sub_categories' => SubCategoriesController::class,
+            'users' => UsersController::class,
+            'user_courses' => UserCoursesController::class,
+            'user_details' => UserDetailsController::class,
+        ]);
+    });
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
