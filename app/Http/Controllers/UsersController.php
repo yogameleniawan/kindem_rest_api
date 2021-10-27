@@ -28,16 +28,7 @@ class UsersController extends Controller
                     data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: red;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
-                ->addColumn('image', function ($data) {
-                    if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
-                    } else {
-                        $image = '<td></td>';
-                    }
-
-                    return $image;
-                })
-                ->rawColumns(['action', 'image'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
         return view('admin.users.index');

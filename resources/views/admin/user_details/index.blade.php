@@ -125,7 +125,7 @@ Users
             "initComplete": function (settings, json) {
                 $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
             },
-            ajax: "{{ route('users.index') }}",
+            ajax: "{{ route('user_details.index') }}",
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
                 {
                     data: 'email',
@@ -163,7 +163,7 @@ Users
         <i class="ik ik-refresh-ccw bg-ik"></i>
     </button>
 </a>
-<a class="fixedButtonAdd" href="{{route('users.create')}}">
+<a class="fixedButtonAdd" href="{{route('user_details.create')}}">
     <button data-toggle="tooltip" data-placement="top" title="" href="" class="btn btn-icon btn-add"
         data-original-title="Add">
         <i class="ik ik-plus"></i>
