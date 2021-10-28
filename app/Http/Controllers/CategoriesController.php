@@ -116,24 +116,16 @@ class CategoriesController extends Controller
     {
         $table = Category::find($id);
         $table->name = $request->name;
-        if (!empty($request->file('image'))) {
-            $gdrive = new GDrive();
-            $id_url = $gdrive->getIdFile($table->image);
-            $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
-            if ($delete_files) {
-                $image = $request->file('image');
-                $file = $image->getContent();
-                $filename = $image->getClientOriginalName();
-                $filename = Str::random(16) . $filename;
-                Storage::disk('google')->put($filename, $file);
-                $listContents = Storage::disk('google')->listContents();
-                $drive = new GDrive();
-                $id = $drive->getDrivePath($listContents, 'name', $filename);
-                $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
-            }
-        } else {
-            $table->image = $table->image;
-        }
+        $image = $request->file('image');
+        $file = $image->getContent();
+        $filename = $image->getClientOriginalName();
+        $filename = Str::random(16) . $filename;
+        Storage::disk('google')->put($filename, $file);
+        $listContents = Storage::disk('google')->listContents();
+        $drive = new GDrive();
+        $id = $drive->getDrivePath($listContents, 'name', $filename);
+        $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+
         if ($table->save()) {
             return redirect()->route('categories.index')
                 ->with('success', 'Category created successfully.');
