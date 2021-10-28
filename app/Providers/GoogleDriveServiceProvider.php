@@ -31,7 +31,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
             $client->setClientId(env('GOOGLE_OAUTH_CLIENT_ID'));
             $client->setClientSecret(env('GOOGLE_OAUTH_CLIENT_SECRET'));
             $client->refreshToken("1//04hocoppqcf8HCgYIARAAGAQSNwF-L9IrsRw2kYPc5ezLFq8UaK6B6vaKq60GzFzpEeaxWlXPH_NNce8zXLjncjdVGqSbmi1Nvwo");
-            $client->fetchAccessTokenWithRefreshToken(env('GOOGLE_DRIVE_REFRESH_TOKEN'));
+            $client->fetchAccessTokenWithRefreshToken("1//04hocoppqcf8HCgYIARAAGAQSNwF-L9IrsRw2kYPc5ezLFq8UaK6B6vaKq60GzFzpEeaxWlXPH_NNce8zXLjncjdVGqSbmi1Nvwo");
             $client->setAccessType("offline");
             $client->setScopes("https://www.googleapis.com/auth/drive.file");
             $client->setApprovalPrompt("force");
