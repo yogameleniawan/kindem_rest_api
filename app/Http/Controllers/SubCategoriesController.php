@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GDrive;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -68,9 +70,16 @@ class SubCategoriesController extends Controller
         $table->id = Str::random(10);
         $table->name = $request->name;
         $table->category_id = $request->category_id;
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $table->image = $imageName;
+        $image = $request->file('image');
+        $file = $image->getContent();
+        $filename = $image->getClientOriginalName();
+        $filename = Str::random(16) . $filename;
+        Storage::disk('google')->put($filename, $file);
+        $listContents = Storage::disk('google')->listContents();
+        $drive = new GDrive();
+        $id = $drive->getDrivePath($listContents, 'name', $filename);
+        $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+
         if ($table->save()) {
             return redirect()->route('sub_categories.index')
                 ->with('success', 'Sub Category created successfully.');
@@ -94,7 +103,7 @@ class SubCategoriesController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(SubCategory $id)
+    public function edit($id)
     {
         $data = SubCategory::find($id);
         return view('admin.sub_categories.edit', compact('data'));
@@ -111,7 +120,25 @@ class SubCategoriesController extends Controller
     {
         $table = SubCategory::find($id);
         $table->name = $request->name;
-        $table->image = $request->image;
+        $table->category_id = $request->category_id;
+        if (!empty($request->file('image'))) {
+            $gdrive = new GDrive();
+            $id_url = $gdrive->getIdFile($table->image);
+            $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
+            if ($delete_files) {
+                $image = $request->file('image');
+                $file = $image->getContent();
+                $filename = $image->getClientOriginalName();
+                $filename = Str::random(16) . $filename;
+                Storage::disk('google')->put($filename, $file);
+                $listContents = Storage::disk('google')->listContents();
+                $drive = new GDrive();
+                $id = $drive->getDrivePath($listContents, 'name', $filename);
+                $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+            }
+        } else {
+            $table->image = $table->image;
+        }
         if ($table->save()) {
             return redirect()->route('sub_categories.index')
                 ->with('success', 'Sub Category created successfully.');
@@ -127,10 +154,14 @@ class SubCategoriesController extends Controller
     public function destroy(Request $request)
     {
         $table = SubCategory::find($request->id);
-
-        if ($table->delete()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category deleted successfully.');
+        $gdrive = new GDrive();
+        $id_url = $gdrive->getIdFile($table->image);
+        $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
+        if ($delete_files) {
+            if ($table->delete()) {
+                return redirect()->route('categories.index')
+                    ->with('success', 'Category deleted successfully.');
+            }
         }
     }
 }

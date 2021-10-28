@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GDrive;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -30,7 +32,7 @@ class CategoriesController extends Controller
                 })
                 ->addColumn('image', function ($data) {
                     if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . asset('/images/' . $data->image) . '" target="_blank">Open Image</a></td>';
+                        $image = '<td> <a style="color:blue" href="' . $data->image . '" target="_blank">Open Image</a></td>';
                     } else {
                         $image = '<td></td>';
                     }
@@ -64,9 +66,16 @@ class CategoriesController extends Controller
         $table = new Category();
         $table->id = Str::random(10);
         $table->name = $request->name;
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $table->image =  $imageName;
+        $image = $request->file('image');
+        $file = $image->getContent();
+        $filename = $image->getClientOriginalName();
+        $filename = Str::random(16) . $filename;
+        Storage::disk('google')->put($filename, $file);
+        $listContents = Storage::disk('google')->listContents();
+        $drive = new GDrive();
+        $id = $drive->getDrivePath($listContents, 'name', $filename);
+        $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+
         if ($table->save()) {
             return redirect()->route('categories.index')
                 ->with('success', 'Category created successfully.');
@@ -107,7 +116,24 @@ class CategoriesController extends Controller
     {
         $table = Category::find($id);
         $table->name = $request->name;
-        $table->image = $request->image;
+        if (!empty($request->file('image'))) {
+            $gdrive = new GDrive();
+            $id_url = $gdrive->getIdFile($table->image);
+            $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
+            if ($delete_files) {
+                $image = $request->file('image');
+                $file = $image->getContent();
+                $filename = $image->getClientOriginalName();
+                $filename = Str::random(16) . $filename;
+                Storage::disk('google')->put($filename, $file);
+                $listContents = Storage::disk('google')->listContents();
+                $drive = new GDrive();
+                $id = $drive->getDrivePath($listContents, 'name', $filename);
+                $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+            }
+        } else {
+            $table->image = $table->image;
+        }
         if ($table->save()) {
             return redirect()->route('categories.index')
                 ->with('success', 'Category created successfully.');
@@ -123,10 +149,14 @@ class CategoriesController extends Controller
     public function destroy(Request $request)
     {
         $table = Category::find($request->id);
-
-        if ($table->delete()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category deleted successfully.');
+        $gdrive = new GDrive();
+        $id_url = $gdrive->getIdFile($table->image);
+        $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
+        if ($delete_files) {
+            if ($table->delete()) {
+                return redirect()->route('categories.index')
+                    ->with('success', 'Category deleted successfully.');
+            }
         }
     }
 }

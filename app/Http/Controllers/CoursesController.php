@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GDrive;
 use App\Models\Course;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -68,9 +70,17 @@ class CoursesController extends Controller
         $table->id = Str::random(10);
         $table->indonesia_text = $request->indonesia_text;
         $table->english_text = $request->english_text;
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-        $table->image = $imageName;
+
+        $image = $request->file('image');
+        $file = $image->getContent();
+        $filename = $image->getClientOriginalName();
+        $filename = Str::random(16) . $filename;
+        Storage::disk('google')->put($filename, $file);
+        $listContents = Storage::disk('google')->listContents();
+        $drive = new GDrive();
+        $id = $drive->getDrivePath($listContents, 'name', $filename);
+        $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+
         $table->sub_category_id = $request->sub_category_id;
         if ($table->save()) {
             return redirect()->route('courses.index')
@@ -114,7 +124,25 @@ class CoursesController extends Controller
         $table = Course::find($id);
         $table->indonesia_text = $request->indonesia_text;
         $table->english_text = $request->english_text;
-        $table->image = $request->image;
+        if (!empty($request->file('image'))) {
+            $gdrive = new GDrive();
+            $id_url = $gdrive->getIdFile($table->image);
+            $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
+            if ($delete_files) {
+                $image = $request->file('image');
+                $file = $image->getContent();
+                $filename = $image->getClientOriginalName();
+                $filename = Str::random(16) . $filename;
+                Storage::disk('google')->put($filename, $file);
+                $listContents = Storage::disk('google')->listContents();
+                $drive = new GDrive();
+                $id = $drive->getDrivePath($listContents, 'name', $filename);
+                $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+            }
+        } else {
+            $table->image = $table->image;
+        }
+        $table->sub_category_id = $request->sub_category_id;
         if ($table->save()) {
             return redirect()->route('courses.index')
                 ->with('success', 'Courses created successfully.');
@@ -130,10 +158,14 @@ class CoursesController extends Controller
     public function destroy(Request $request)
     {
         $table = Course::find($request->id);
-
-        if ($table->delete()) {
-            return redirect()->route('courses.index')
-                ->with('success', 'Courses deleted successfully.');
+        $gdrive = new GDrive();
+        $id_url = $gdrive->getIdFile($table->image);
+        $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
+        if ($delete_files) {
+            if ($table->delete()) {
+                return redirect()->route('courses.index')
+                    ->with('success', 'Courses deleted successfully.');
+            }
         }
     }
 }
