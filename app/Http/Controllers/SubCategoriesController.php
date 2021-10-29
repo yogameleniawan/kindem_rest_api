@@ -34,7 +34,7 @@ class SubCategoriesController extends Controller
                 })
                 ->addColumn('image', function ($data) {
                     if ($data->image != null) {
-                        $image = '<td> <a style="color:blue" href="' . asset('/images/' . $data->image) . '" target="_blank">Open Image</a></td>';
+                        $image = '<td> <a style="color:blue" href="'  . $data->image . '" target="_blank">Open Image</a></td>';
                     } else {
                         $image = '<td></td>';
                     }
