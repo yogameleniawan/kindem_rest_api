@@ -14,4 +14,10 @@ class CoursesController extends Controller
         $data = Course::all();
         return CourseResource::collection($data);
     }
+
+    public function getCoursesById($id)
+    {
+        $data = Course::where('sub_category_id', '=', $id)->get();
+        return CourseResource::collection($data);
+    }
 }

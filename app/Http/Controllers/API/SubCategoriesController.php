@@ -14,4 +14,10 @@ class SubCategoriesController extends Controller
         $data = SubCategory::all();
         return SubCategoryResource::collection($data);
     }
+
+    public function getSubCategoriesById($id)
+    {
+        $data = SubCategory::where('category_id', '=', $id)->get();
+        return SubCategoryResource::collection($data);
+    }
 }
