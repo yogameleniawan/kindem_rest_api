@@ -106,7 +106,8 @@ class SubCategoriesController extends Controller
     public function edit($id)
     {
         $data = SubCategory::find($id);
-        return view('admin.sub_categories.edit', compact('data'));
+        $categories = Category::all();
+        return view('admin.sub_categories.edit', compact('data', 'categories'));
     }
 
     /**

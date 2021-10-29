@@ -27,15 +27,6 @@ Edit Sub Categories
 Sub Categories
 @endsection
 @section('content-wrapper')
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 <!-- Content Wrapper. Contains page content -->
 <div class="row">
     <div class="col-sm-12" style="margin-bottom:20%">
@@ -46,13 +37,20 @@ Sub Categories
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label>Categories ID</label>
+                        <label>Category</label>
                         <div class="input-group">
                             <span class="input-group-prepend">
                                 <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                             </span>
-                            <input type="text" class="form-control  " placeholder="Categories ID"
-                                id="category_id" name="category_id" value="{{$data->category_id}}" required>
+                            <select name="category_id" class="select2 form-control" id="default-select">
+                                @foreach ($categories as $cat)
+                                <option value="{{$cat->id}}"
+                                    @if ($cat->id == $data->category_id)
+                                        {{'selected'}}
+                                    @endif
+                                    >{{$cat->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
