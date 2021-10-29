@@ -117,7 +117,7 @@ class SubCategoriesController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SubCategory $id)
+    public function update(Request $request, $id)
     {
         $table = SubCategory::find($id);
         $table->name = $request->name;
