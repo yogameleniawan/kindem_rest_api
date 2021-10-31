@@ -24,7 +24,7 @@ Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories'
 Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
 Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
 Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
-Route::get('/getCoursesById', [CoursesController::class, 'getCoursesById']);
+Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
 
 Route::prefix('v1')->group(function () {
 
