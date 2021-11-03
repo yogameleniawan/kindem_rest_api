@@ -116,16 +116,19 @@ class CategoriesController extends Controller
     {
         $table = Category::find($id);
         $table->name = $request->name;
-        $image = $request->file('image');
-        $file = $image->getContent();
-        $filename = $image->getClientOriginalName();
-        $filename = Str::random(16) . $filename;
-        Storage::disk('google')->put($filename, $file);
-        $listContents = Storage::disk('google')->listContents();
-        $drive = new GDrive();
-        $id = $drive->getDrivePath($listContents, 'name', $filename);
-        $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
-
+        if (!empty($request->image)) {
+            $image = $request->file('image');
+            $file = $image->getContent();
+            $filename = $image->getClientOriginalName();
+            $filename = Str::random(16) . $filename;
+            Storage::disk('google')->put($filename, $file);
+            $listContents = Storage::disk('google')->listContents();
+            $drive = new GDrive();
+            $id = $drive->getDrivePath($listContents, 'name', $filename);
+            $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+        } else {
+            $table->image = $table->image;
+        }
         if ($table->save()) {
             return redirect()->route('categories.index')
                 ->with('success', 'Category created successfully.');
