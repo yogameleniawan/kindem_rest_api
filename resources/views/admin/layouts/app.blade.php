@@ -61,11 +61,11 @@
         }
 
         .wrapper .header-top[header-theme="light"] {
-            background: #0e0e0e;
+            background: #007251;
         }
 
         .wrapper .page-wrap .app-sidebar.colored .sidebar-header {
-            background-color: #0e0e0e;
+            background-color: #007251;
         }
 
         .wrapper .page-wrap .app-sidebar.colored .sidebar-content .nav-container .navigation-main .nav-item .submenu-content {
@@ -79,7 +79,7 @@
         }
 
         .bg-icon {
-            background-color: #0e0e0e;
+            background-color: #007251;
         }
 
         .btn-refresh {
@@ -200,13 +200,13 @@
             <div class="app-sidebar colored">
                 <div class="sidebar-header"><a class="header-brand" href="index.html">
                         <div class="logo-img">
-                            <img src="{{url('images/logo.png')}}" class="header-brand-img" alt="lavalite">
+                            STULISH
                         </div><span class="text"></span>
                     </a></div>
                 <div class="sidebar-content">
                     <div class="nav-container">
                         <nav id="main-menu-navigation" class="navigation-main">
-                            <div class="nav-item {{Route::is('dashboard')  ? 'active' : ''}}"><a href=""><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                            <div class="nav-item {{Route::is('dashboard')  ? 'active' : ''}}"><a href="{{route('dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
                             <div
                                 class="nav-item {{Route::is('categories.index') || Route::is('categories.create') || Route::is('categories.edit') || Route::is('categories.destroy') ? 'active' : ''}}">
@@ -256,7 +256,7 @@
                                 <nav class="breadcrumb-container" aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <i class="ik ik-home"></i><a href="#"> Home</a>
+                                            <i class="ik ik-home"></i><a href="{{route('dashboard')}}"> Home</a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">@yield('breadcrumb')</li>
                                     </ol>
