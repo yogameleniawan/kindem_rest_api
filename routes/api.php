@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoriesController;
 use App\Http\Controllers\API\CoursesController;
 use App\Http\Controllers\API\SubCategoriesController;
@@ -20,11 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'register']);
 
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
-Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
-Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
-Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
-Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
-Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
+Route::post('/requestToken', [AuthController::class, 'requestToken']);
 
 Route::prefix('v1')->group(function () {
 
@@ -32,6 +29,11 @@ Route::prefix('v1')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
+        Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
+        Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
+        Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
+        Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
+        Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
 
         Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
     });
