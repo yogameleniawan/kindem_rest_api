@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoriesController;
 use App\Http\Controllers\API\CoursesController;
 use App\Http\Controllers\API\SubCategoriesController;
+use App\Http\Controllers\API\UserCourseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +35,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
         Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
         Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
-
+        Route::post('/storeAnswer', [UserCourseController::class, 'storeAnswer']);
         Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
     });
 });
