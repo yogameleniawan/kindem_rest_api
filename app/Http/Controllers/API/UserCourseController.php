@@ -15,7 +15,7 @@ class UserCourseController extends Controller
         $table = new UserCourse();
         $table->id = Str::random(10);
         $table->answer = $request->answer;
-        $table->checked = $request->checked;
+        $table->checked = true;
         if ($request->course_text == $request->answer) {
             $table->is_true = true;
         } else {
