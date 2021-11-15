@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class UserCourseController extends Controller
@@ -33,12 +34,14 @@ class UserCourseController extends Controller
 
     public function getScore(Request $request)
     {
-        $is_true = UserCourse::where('user_id', '=', $request->user_id)
-            ::where('is_true', '=', true)
-            ::where('sub_category_id', '=', $request->sub_category_id)->count();
-        $total_test = UserCourse::where('user_id', '=', $request->user_id)
-            ::where('is_true', '=', true)
-            ::where('sub_category_id', '=', $request->sub_category_id)->count();
+        $is_true = DB::table('users_courses')
+            ->where('user_id', '=', $request->user_id)
+            ->where('is_true', '=', true)
+            ->where('sub_category_id', '=', $request->sub_category_id)->count();
+        $total_test = DB::table('users_courses')
+            ->where('user_id', '=', $request->user_id)
+            ->where('sub_category_id', '=', $request->sub_category_id)->count();
+
         return response()->json([
             'is_true' => $is_true,
             'total_test' => $total_test,
