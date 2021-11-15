@@ -36,6 +36,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
         Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
         Route::post('/storeAnswer', [UserCourseController::class, 'storeAnswer']);
+        Route::get('/getScore', [UserCourseController::class, 'getScore']);
         Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
     });
 });

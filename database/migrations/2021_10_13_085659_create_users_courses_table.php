@@ -19,8 +19,10 @@ class CreateUsersCoursesTable extends Migration
             $table->boolean('checked')->default(0);
             $table->boolean('is_true')->default(0);
             $table->char('course_id', 10);
+            $table->char('sub_category_id', 10);
             $table->bigInteger('user_id');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('RESTRICT')->onUpdate('CASCADE');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->timestamps();
         });

@@ -22,11 +22,27 @@ class UserCourseController extends Controller
             $table->is_true = false;
         }
         $table->course_id = $request->course_id;
+        $table->sub_category_id = $request->sub_category_id;
         $table->user_id = $request->user_id;
         if ($table->save()) {
             return response()->json([
                 'success' => true,
             ], 200);
         }
+    }
+
+    public function getScore(Request $request)
+    {
+        $is_true = UserCourse::where('user_id', '=', $request->user_id)
+            ::where('is_true', '=', true)
+            ::where('sub_category_id', '=', $request->sub_category_id)->count();
+        $total_test = UserCourse::where('user_id', '=', $request->user_id)
+            ::where('is_true', '=', true)
+            ::where('sub_category_id', '=', $request->sub_category_id)->count();
+        return response()->json([
+            'is_true' => $is_true,
+            'total_test' => $total_test,
+            'success' => true,
+        ], 200);
     }
 }
