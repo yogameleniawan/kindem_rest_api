@@ -48,4 +48,16 @@ class UserCourseController extends Controller
             'success' => true,
         ], 200);
     }
+
+    public function reloadTest(Request $request)
+    {
+        $table = UserCourse::where('sub_category_id', '=', $request->sub_category_id)
+            ->where('user_id', '=', $request->user_id)
+            ->delete();
+        if ($table) {
+            return response()->json([
+                'deleted success' => true,
+            ], 200);
+        }
+    }
 }
