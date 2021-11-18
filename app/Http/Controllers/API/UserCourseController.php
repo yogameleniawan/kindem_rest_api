@@ -60,4 +60,20 @@ class UserCourseController extends Controller
             ], 200);
         }
     }
+
+    public function getTest(Request $request)
+    {
+        $total_test = DB::table('users_courses')
+            ->where('user_id', '=', $request->user_id)
+            ->where('sub_category_id', '=', $request->sub_category_id)->count();
+        if ($total_test) {
+            return response()->json([
+                'complete' => true,
+            ], 200);
+        } else {
+            return response()->json([
+                'complete' => false,
+            ], 200);
+        }
+    }
 }
