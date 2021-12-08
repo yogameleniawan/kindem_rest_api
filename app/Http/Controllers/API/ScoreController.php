@@ -13,7 +13,6 @@ class ScoreController extends Controller
     {
         $data = Score::leftJoin('sub_categories', 'scores.sub_category_id', '=', 'sub_categories.id')
             ->where('user_id', '=', $request->user_id)
-            ->orderBy('created_at', 'DESC')
             ->get();
         return ScoreResource::collection($data);
     }
