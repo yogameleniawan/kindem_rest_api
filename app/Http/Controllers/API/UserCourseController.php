@@ -42,17 +42,6 @@ class UserCourseController extends Controller
         $total_test = DB::table('users_courses')
             ->where('user_id', '=', $request->user_id)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
-        $user_course = UserCourse::where('user_id', '=', $request->user_id)
-            ->where('sub_category_id', '=', $request->sub_category_id)
-            ->count();
-        if ($user_course == 0) {
-            $table_score = new Score();
-            $table_score->id = Str::random(10);
-            $table_score->score = $is_true . " / " . $total_test;
-            $table_score->user_id = $request->user_id;
-            $table_score->sub_category_id = $request->sub_category_id;
-            $table_score->save();
-        }
 
         return response()->json([
             'is_true' => $is_true,
@@ -66,6 +55,19 @@ class UserCourseController extends Controller
         $table = UserCourse::where('sub_category_id', '=', $request->sub_category_id)
             ->where('user_id', '=', $request->user_id)
             ->delete();
+        $is_true = DB::table('users_courses')
+            ->where('user_id', '=', $request->user_id)
+            ->where('is_true', '=', true)
+            ->where('sub_category_id', '=', $request->sub_category_id)->count();
+        $total_test = DB::table('users_courses')
+            ->where('user_id', '=', $request->user_id)
+            ->where('sub_category_id', '=', $request->sub_category_id)->count();
+        $table_score = new Score();
+        $table_score->id = Str::random(10);
+        $table_score->score = $is_true . " / " . $total_test;
+        $table_score->user_id = $request->user_id;
+        $table_score->sub_category_id = $request->sub_category_id;
+        $table_score->save();
         if ($table) {
             return response()->json([
                 'deleted success' => true,
