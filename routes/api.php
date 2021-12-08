@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CategoriesController;
 use App\Http\Controllers\API\CoursesController;
+use App\Http\Controllers\API\ScoreController;
 use App\Http\Controllers\API\SubCategoriesController;
 use App\Http\Controllers\API\UserCourseController;
 use Illuminate\Http\Request;
@@ -39,6 +40,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/getScore', [UserCourseController::class, 'getScore']);
         Route::get('/reloadTest', [UserCourseController::class, 'reloadTest']);
         Route::get('/getTest', [UserCourseController::class, 'getTest']);
+        Route::get('/getAllScore', [ScoreController::class, 'getAllScore']);
         Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout']);
     });
 });

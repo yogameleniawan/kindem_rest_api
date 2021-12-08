@@ -19,4 +19,9 @@ class SubCategory extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function score()
+    {
+        return $this->hasMany(Score::class);
+    }
 }
