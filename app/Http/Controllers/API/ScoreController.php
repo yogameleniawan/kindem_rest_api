@@ -11,8 +11,9 @@ class ScoreController extends Controller
 {
     public function getAllScore(Request $request)
     {
-        $data = Score::where('user_id', '=', $request->user_id)
-            ->where('sub_category_id', '=', $request->sub_category_id)
+        $data = Score::leftJoin('sub_categories', 'scores.sub_category_id', '=', 'sub_categories.id')
+            ->where('user_id', '=', $request->user_id)
+            ->orderBy('created_at', 'DESC')
             ->get();
         return ScoreResource::collection($data);
     }
