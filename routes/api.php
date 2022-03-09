@@ -6,6 +6,7 @@ use App\Http\Controllers\API\CoursesController;
 use App\Http\Controllers\API\ScoreController;
 use App\Http\Controllers\API\SubCategoriesController;
 use App\Http\Controllers\API\UserCourseController;
+use App\Http\Controllers\API\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
+        Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
         Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
         Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
