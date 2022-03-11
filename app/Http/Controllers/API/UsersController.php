@@ -11,13 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
-    public function getUsers()
+    public function getAllUsers()
     {
-        if (request('name')) {
-            $data = User::where('role', 'student')->where('name', 'like', '%' . request('name') . '%')->get();
-        } else {
-            $data = User::where('role', 'student')->get();
-        }
+        $data = User::where('role', 'student')->get();
         return UserResource::collection($data);
     }
 }

@@ -32,7 +32,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
-        Route::get('/getUsers', [UsersController::class, 'getUsers']);
+        Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
         Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
         Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
