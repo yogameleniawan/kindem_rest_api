@@ -16,4 +16,12 @@ class UsersController extends Controller
         $data = User::where('role', 'student')->get();
         return UserResource::collection($data);
     }
+
+    public function updateName(Request $request)
+    {
+        $name = $request->name;
+        Auth::user()->update([
+            'name' => $name
+        ]);
+    }
 }

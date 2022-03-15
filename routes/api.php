@@ -33,6 +33,7 @@ Route::prefix('v1')->group(function () {
             return $request->user();
         });
         Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
+        Route::post('/updateName', [UsersController::class, 'updateName']);
         Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
         Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
