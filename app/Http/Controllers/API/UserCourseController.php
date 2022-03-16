@@ -98,6 +98,7 @@ class UserCourseController extends Controller
     public function getFinishCourses()
     {
         $data = UserCourse::where('user_id', '=', Auth::user()->id)
+            ->select('course_id')
             ->groupBy('course_id')
             ->get();
         return APIResource::collection($data);
