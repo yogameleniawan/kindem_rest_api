@@ -11,7 +11,7 @@ class CategoriesController extends Controller
 {
     public function getAllCategories()
     {
-        $data = Category::all();
+        $data = Category::orderBy('level', 'asc');
         return CategoryResource::collection($data);
     }
 }
