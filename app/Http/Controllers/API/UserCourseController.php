@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\APIResource;
+use App\Models\Category;
+use App\Models\CompleteCategory;
 use App\Models\Course;
 use App\Models\Score;
 use App\Models\SubCategory;
@@ -45,6 +47,15 @@ class UserCourseController extends Controller
         $total_test = DB::table('users_courses')
             ->where('user_id', '=', $request->user_id)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
+
+        $sub = SubCategory::find($request->sub_category_id);
+        $category = Category::find($sub->category_id);
+
+        $table = new CompleteCategory();
+        $table->id = Str::random(10);
+        $table->user_id = $request->user_id;
+        $table->category_id = $category->id;
+        $table->save();
 
         return response()->json([
             'is_true' => $is_true,
@@ -98,13 +109,7 @@ class UserCourseController extends Controller
 
     public function getFinishCourses()
     {
-        $data = DB::table('users_courses')
-            ->join('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
-            ->join('categories', 'sub_categories.category_id', '=', 'categories.id')
-            ->where('user_id', Auth::user()->id)
-            ->select('categories.id as category_id')
-            ->groupBy('category_id')
-            ->get();
+        $data = CompleteCategory::where('user_id', Auth::user()->id)->get();
         return response()->json(['data' => $data]);
     }
 }
