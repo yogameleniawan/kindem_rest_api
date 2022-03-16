@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\APIResource;
 use App\Models\Course;
 use App\Models\Score;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -89,5 +91,15 @@ class UserCourseController extends Controller
                 'complete' => false,
             ], 200);
         }
+    }
+
+
+
+    public function getFinishCourses()
+    {
+        $data = UserCourse::where('user_id', '=', Auth::user()->id)
+            ->groupBy('course_id')
+            ->count();
+        return APIResource::collection($data);
     }
 }
