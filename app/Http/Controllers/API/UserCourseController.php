@@ -99,7 +99,7 @@ class UserCourseController extends Controller
     {
         $data = UserCourse::where('user_id', '=', Auth::user()->id)
             ->groupBy('course_id')
-            ->count();
+            ->get();
         return APIResource::collection($data);
     }
 }
