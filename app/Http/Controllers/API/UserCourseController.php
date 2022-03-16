@@ -51,11 +51,26 @@ class UserCourseController extends Controller
         $sub = SubCategory::find($request->sub_category_id);
         $category = Category::find($sub->category_id);
 
-        $table = new CompleteCategory();
-        $table->id = Str::random(10);
-        $table->user_id = $request->user_id;
-        $table->category_id = $category->id;
-        $table->save();
+        $total_sub = SubCategory::where('category_id', $category->id)->count();
+        $data_sub = SubCategory::where('category_id', $category->id)->get();
+
+        $total_complete = 0;
+
+        foreach ($data_sub as $ds) {
+            $available_sub = UserCourse::where('user_id', Auth::user()->id)
+                ->where('sub_category_id', '=', $ds->id)->count();
+            if ($available_sub > 0) {
+                $total_complete++;
+            }
+        }
+
+        if ($total_complete == $total_sub) {
+            $table = new CompleteCategory();
+            $table->id = Str::random(10);
+            $table->user_id = $request->user_id;
+            $table->category_id = $category->id;
+            $table->save();
+        }
 
         return response()->json([
             'is_true' => $is_true,
