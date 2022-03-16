@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\APIResource;
 use App\Models\Course;
 use App\Models\Score;
+use App\Models\SubCategory;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -97,10 +98,13 @@ class UserCourseController extends Controller
 
     public function getFinishCourses()
     {
-        $data = UserCourse::where('user_id', '=', Auth::user()->id)
-            ->select('course_id')
-            ->groupBy('course_id')
+        $data = DB::table('users_courses')
+            ->join('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
+            ->join('categories', 'sub_categories.category_id', '=', 'categories.id')
+            ->where('user_id', Auth::user()->id)
+            ->select('categories.id as category_id')
+            ->groupBy('category_id')
             ->get();
-        return APIResource::collection($data);
+        return response()->json(['data' => $data]);
     }
 }
