@@ -5,7 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
+use App\Models\UserCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CoursesController extends Controller
 {
@@ -18,6 +21,18 @@ class CoursesController extends Controller
     public function getCoursesById($id)
     {
         $data = Course::where('sub_category_id', '=', $id)->inRandomOrder()->get();
+
+        foreach ($data as $d) {
+            $table = new UserCourse();
+            $table->id = Str::random(10);
+            $table->answer = '';
+            $table->checked = false;
+            $table->is_true = false;
+            $table->course_id = $d->id;
+            $table->sub_category_id = $id;
+            $table->user_id = Auth::user()->id;
+            $table->save();
+        }
         return CourseResource::collection($data);
     }
 

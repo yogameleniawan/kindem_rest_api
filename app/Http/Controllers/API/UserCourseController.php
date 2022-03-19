@@ -19,7 +19,7 @@ class UserCourseController extends Controller
 {
     public function storeAnswer(Request $request)
     {
-        $table = new UserCourse();
+        $table = UserCourse::where('course_id', $request->course_id)->first();
         $table->id = Str::random(10);
         $table->answer = $request->answer;
         $table->checked = true;

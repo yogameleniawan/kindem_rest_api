@@ -15,7 +15,7 @@ class CreateUsersCoursesTable extends Migration
     {
         Schema::create('users_courses', function (Blueprint $table) {
             $table->char('id', 10)->primary();
-            $table->string('answer');
+            $table->string('answer')->nullable();
             $table->boolean('checked')->default(0);
             $table->boolean('is_true')->default(0);
             $table->char('course_id', 10);
