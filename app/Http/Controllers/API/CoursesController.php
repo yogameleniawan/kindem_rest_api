@@ -50,6 +50,7 @@ class CoursesController extends Controller
                 'courses.created_at as created_at',
                 'courses.updated_at as updated_at',
             )
+            ->inRandomOrder()
             ->get();
         return response()->json(['data' => $courses], 200);
         // return CourseResource::collection($data);
