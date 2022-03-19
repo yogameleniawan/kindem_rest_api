@@ -120,8 +120,6 @@ class UserCourseController extends Controller
         }
     }
 
-
-
     public function getFinishCourses()
     {
         $data = CompleteCategory::where('user_id', Auth::user()->id)->get();

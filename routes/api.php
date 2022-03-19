@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
         Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
         Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
+        Route::post('/getAnswerChoices', [CoursesController::class, 'getAnswerChoices']);
         Route::post('/storeAnswer', [UserCourseController::class, 'storeAnswer']);
         Route::get('/getScore', [UserCourseController::class, 'getScore']);
         Route::get('/reloadTest', [UserCourseController::class, 'reloadTest']);
