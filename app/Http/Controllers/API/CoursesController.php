@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CoursesController extends Controller
@@ -22,18 +23,36 @@ class CoursesController extends Controller
     {
         $data = Course::where('sub_category_id', '=', $id)->inRandomOrder()->get();
 
-        foreach ($data as $d) {
-            $table = new UserCourse();
-            $table->id = Str::random(10);
-            $table->answer = '';
-            $table->checked = false;
-            $table->is_true = false;
-            $table->course_id = $d->id;
-            $table->sub_category_id = $id;
-            $table->user_id = Auth::user()->id;
-            $table->save();
+        $available_course = UserCourse::where('sub_category_id', '=', $id)->first();
+        if ($available_course == null) {
+            foreach ($data as $d) {
+                $table = new UserCourse();
+                $table->id = Str::random(10);
+                $table->answer = '';
+                $table->checked = false;
+                $table->is_true = false;
+                $table->course_id = $d->id;
+                $table->sub_category_id = $id;
+                $table->user_id = Auth::user()->id;
+                $table->save();
+            }
         }
-        return CourseResource::collection($data);
+
+        $courses = DB::table('users_courses')
+            ->leftJoin('courses', 'users_courses.course_id', '=', 'courses.id')
+            ->select(
+                'courses.id as id',
+                'courses.indonesia_text as indonesia_text',
+                'courses.english_text as english_text',
+                'courses.image as image',
+                'courses.sub_category_id as sub_category_id',
+                'courses.is_voice as is_voice',
+                'courses.created_at as created_at',
+                'courses.updated_at as updated_at',
+            )
+            ->get();
+        return response()->json(['data' => $courses], 200);
+        // return CourseResource::collection($data);
     }
 
     public function getAnswerChoices(Request $request)
