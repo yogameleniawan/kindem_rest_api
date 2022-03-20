@@ -125,4 +125,15 @@ class UserCourseController extends Controller
         $data = CompleteCategory::where('user_id', Auth::user()->id)->get();
         return response()->json(['data' => $data]);
     }
+
+    public function getIncompleteCourses()
+    {
+        $data = DB::table('users_courses')
+            ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
+            ->where('user_id', Auth::user()->id)
+            ->selectRaw("sub_categories.name as name, sub_category_id, count(checked or null) as complete, count(checked) as total")
+            ->groupBy('sub_category_id')
+            ->get();
+        return response()->json(['data' => $data]);
+    }
 }
