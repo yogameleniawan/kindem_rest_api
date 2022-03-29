@@ -132,7 +132,7 @@ class UserCourseController extends Controller
             ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
             ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id')
             ->where('user_id', Auth::user()->id)
-            ->selectRaw("categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
+            ->selectRaw("users_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
             ->groupBy('sub_category_id')
             ->get();
         return response()->json(['data' => $data]);

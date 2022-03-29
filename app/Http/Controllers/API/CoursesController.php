@@ -21,7 +21,7 @@ class CoursesController extends Controller
 
     public function getCoursesById($id)
     {
-        $data = Course::where('sub_category_id', '=', $id)->inRandomOrder()->get();
+        $data = Course::where('sub_category_id', '=', $id)->inRandomOrder()->take(10)->get();
 
         $available_course = UserCourse::where('sub_category_id', '=', $id)->first();
         if ($available_course == null) {
@@ -51,6 +51,7 @@ class CoursesController extends Controller
                 'courses.updated_at as updated_at',
             )
             ->inRandomOrder()
+            ->take(10)
             ->get();
         return response()->json(['data' => $courses], 200);
         // return CourseResource::collection($data);
@@ -69,5 +70,40 @@ class CoursesController extends Controller
         $random_answer[2]->english_text = $true_answer->english_text;
 
         return CourseResource::collection($random_answer)->shuffle();
+    }
+
+    public function redirectCourse(Request $request)
+    {
+        $courses = DB::table('users_courses')
+            ->leftJoin('courses', 'users_courses.course_id', '=', 'courses.id')
+            ->select(
+                'courses.id as id',
+                'courses.indonesia_text as indonesia_text',
+                'courses.english_text as english_text',
+                'courses.image as image',
+                'courses.sub_category_id as sub_category_id',
+                'courses.is_voice as is_voice',
+                'courses.created_at as created_at',
+                'courses.updated_at as updated_at',
+            )
+            ->where('checked', false)
+            ->where('user_id', Auth::user()->id)
+            ->inRandomOrder()
+            ->get();
+
+        $courses_total = UserCourse::where('sub_category_id', $request->sub_category_id)
+            ->where('user_id', Auth::user()->id)
+            ->count();
+
+        $course_answer_total = UserCourse::where('sub_category_id', $request->sub_category_id)
+            ->where('checked', true)
+            ->where('user_id', Auth::user()->id)
+            ->count();
+
+        return response()->json([
+            'data' => $courses,
+            'courses_total' => $courses_total,
+            'course_answer_total' => $course_answer_total
+        ], 200);
     }
 }
