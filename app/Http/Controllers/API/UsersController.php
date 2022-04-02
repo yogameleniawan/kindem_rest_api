@@ -19,9 +19,13 @@ class UsersController extends Controller
 
     public function updateName(Request $request)
     {
-        $name = $request['name'];
-        auth()->user()->tokens()->update([
-            'name' => $name
+        $user = User::find($request->user()->id);
+        $user->name = $request->name;
+        $user->update([
+            'name' => $user->name
         ]);
+
+        return response()
+            ->json(['status' => 'true', 'message' => "Name updated", 'data' => $user]);
     }
 }
