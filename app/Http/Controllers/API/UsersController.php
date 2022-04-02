@@ -17,15 +17,13 @@ class UsersController extends Controller
         return UserResource::collection($data);
     }
 
-    public function updateName(Request $request)
+    public function updateProfile(Request $request)
     {
+        $data = $request->all();
         $user = User::find($request->user()->id);
-        $user->name = $request->name;
-        $user->update([
-            'name' => $user->name
-        ]);
+        $user->update($data);
 
         return response()
-            ->json(['status' => 'true', 'message' => "Name updated", 'data' => $user]);
+            ->json(['status' => 'true', 'message' => "Profile updated", 'data' => $user]);
     }
 }
