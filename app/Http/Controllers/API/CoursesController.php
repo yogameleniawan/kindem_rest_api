@@ -21,23 +21,6 @@ class CoursesController extends Controller
 
     public function getCoursesById($id)
     {
-        $data = Course::where('sub_category_id', '=', $id)->inRandomOrder()->take(10)->get();
-
-        $available_course = UserCourse::where('sub_category_id', '=', $id)->first();
-        if ($available_course == null) {
-            foreach ($data as $d) {
-                $table = new UserCourse();
-                $table->id = Str::random(10);
-                $table->answer = '';
-                $table->checked = false;
-                $table->is_true = false;
-                $table->course_id = $d->id;
-                $table->sub_category_id = $id;
-                $table->user_id = Auth::user()->id;
-                $table->save();
-            }
-        }
-
         $courses = DB::table('users_courses')
             ->leftJoin('courses', 'users_courses.course_id', '=', 'courses.id')
             ->select(
@@ -50,6 +33,7 @@ class CoursesController extends Controller
                 'courses.created_at as created_at',
                 'courses.updated_at as updated_at',
             )
+            ->where('courses.sub_category_id', '=', $id)
             ->inRandomOrder()
             ->take(10)
             ->get();

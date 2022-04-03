@@ -131,8 +131,22 @@ class UserCourseController extends Controller
         $data = DB::table('users_courses')
             ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
             ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id')
-            ->where('user_id', Auth::user()->id)
             ->selectRaw("users_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
+            ->where('user_id', Auth::user()->id)
+            ->havingRaw('count(checked or null) < count(checked)')
+            ->groupBy('sub_category_id')
+            ->get();
+        return response()->json(['data' => $data]);
+    }
+
+    public function checkIncompleteCourse(Request $request)
+    {
+        $data = DB::table('users_courses')
+            ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
+            ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id')
+            ->selectRaw("users_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
+            ->where('user_id', Auth::user()->id)
+            ->where('sub_category_id', $request->sub_category_id)
             ->groupBy('sub_category_id')
             ->get();
         return response()->json(['data' => $data]);
