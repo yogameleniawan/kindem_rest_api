@@ -9,7 +9,7 @@ class UserDetail extends Model
 {
     use HasFactory;
 
-    protected $table = "users_details";
+    protected $table = "user_details";
     protected $fillable = ['id', 'name', 'address', 'gender', 'user_id'];
     public $timestamps = true;
     public $incrementing = false;

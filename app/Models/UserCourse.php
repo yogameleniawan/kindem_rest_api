@@ -9,7 +9,7 @@ class UserCourse extends Model
 {
     use HasFactory;
 
-    protected $table = "users_courses";
+    protected $table = "user_courses";
     protected $fillable = ['id', 'answer', 'checked', 'is_true', 'course_id', 'user_id', 'sub_category_id'];
     public $timestamps = true;
     public $incrementing = false;

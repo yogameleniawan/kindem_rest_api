@@ -6,6 +6,7 @@ use App\Models\Course;
 use App\Models\User;
 use App\Models\UserCourse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
@@ -20,10 +21,10 @@ class UserCoursesController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('users_courses')
-                ->leftJoin('users', 'users.id', '=', 'users_courses.user_id')
-                ->leftJoin('courses', 'courses.id', '=', 'users_courses.course_id')
-                ->select(['users_courses.id AS id', 'users.email AS email', 'courses.english_text AS english_text', 'users_courses.answer AS answer']);
+            $data = DB::table('user_courses')
+                ->leftJoin('users', 'users.id', '=', 'user_courses.user_id')
+                ->leftJoin('courses', 'courses.id', '=', 'user_courses.course_id')
+                ->select(['user_courses.id AS id', 'users.email AS email', 'courses.english_text AS english_text', 'user_courses.answer AS answer']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -64,7 +65,7 @@ class UserCoursesController extends Controller
         $table->checked = $request->checked;
         $table->is_true = $request->is_true;
         $table->course_id = $request->course_id;
-        $table->user_id = $request->user_id;
+        $table->user_id = Auth::user()->id;
         if ($table->save()) {
             return redirect()->route('user_courses.index')
                 ->with('success', 'User created successfully.');
@@ -110,7 +111,7 @@ class UserCoursesController extends Controller
         $table->checked = $request->checked;
         $table->is_true = $request->is_true;
         $table->course_id = $request->course_id;
-        $table->user_id = $request->user_id;
+        $table->user_id = Auth::user()->id;
         if ($table->save()) {
             return redirect()->route('user_courses.index')
                 ->with('success', 'User created successfully.');

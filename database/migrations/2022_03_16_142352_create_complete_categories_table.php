@@ -17,6 +17,7 @@ class CreateCompleteCategoriesTable extends Migration
             $table->char('id', 10)->primary();
             $table->char('category_id', 10);
             $table->bigInteger('user_id');
+            $table->boolean('is_complete')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('RESTRICT')->onUpdate('CASCADE');
             $table->timestamps();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
@@ -19,9 +20,9 @@ class UserDetailsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DB::table('users_details')
-                ->join('users', 'users.id', '=', 'users_details.user_id')
-                ->select(['users_details.id AS id', 'users.email AS email', 'users_details.name AS name', 'users_details.address AS address', 'users_details.gender AS gender']);
+            $data = DB::table('user_details')
+                ->join('users', 'users.id', '=', 'user_details.user_id')
+                ->select(['user_details.id AS id', 'users.email AS email', 'user_details.name AS name', 'user_details.address AS address', 'user_details.gender AS gender']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -60,7 +61,7 @@ class UserDetailsController extends Controller
         $table->name = $request->name;
         $table->address = $request->address;
         $table->gender = $request->gender;
-        $table->user_id = $request->user_id;
+        $table->user_id = Auth::user()->id;
         if ($table->save()) {
             return redirect()->route('user_details.index')
                 ->with('success', 'User created successfully.');
@@ -104,7 +105,7 @@ class UserDetailsController extends Controller
         $table->name = $request->name;
         $table->address = $request->address;
         $table->gender = $request->gender;
-        $table->user_id = $request->user_id;
+        $table->user_id = Auth::user()->id;
         if ($table->save()) {
             return redirect()->route('user_details.index')
                 ->with('success', 'User created successfully.');

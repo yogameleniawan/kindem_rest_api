@@ -30,7 +30,7 @@ class UserCourseController extends Controller
         }
         $table->course_id = $request->course_id;
         $table->sub_category_id = $request->sub_category_id;
-        $table->user_id = $request->user_id;
+        $table->user_id = Auth::user()->id;
         if ($table->save()) {
             return response()->json([
                 'success' => true,
@@ -40,12 +40,12 @@ class UserCourseController extends Controller
 
     public function getScore(Request $request)
     {
-        $is_true = DB::table('users_courses')
-            ->where('user_id', '=', $request->user_id)
+        $is_true = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
             ->where('is_true', '=', true)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
-        $total_test = DB::table('users_courses')
-            ->where('user_id', '=', $request->user_id)
+        $total_test = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
 
         $sub = SubCategory::find($request->sub_category_id);
@@ -57,18 +57,21 @@ class UserCourseController extends Controller
         $total_complete = 0;
 
         foreach ($data_sub as $ds) {
-            $available_sub = UserCourse::where('user_id', Auth::user()->id)
-                ->where('sub_category_id', '=', $ds->id)->count();
-            if ($available_sub > 0) {
+            $course_checked = UserCourse::where('user_id', Auth::user()->id)
+                ->where('sub_category_id', '=', $ds->id)
+                ->where('checked', true)
+                ->count();
+            $total_course = UserCourse::where('user_id', Auth::user()->id)
+                ->where('sub_category_id', '=', $ds->id)
+                ->count();
+            if ($total_course == $course_checked) {
                 $total_complete++;
             }
         }
 
         if ($total_complete == $total_sub) {
-            $table = new CompleteCategory();
-            $table->id = Str::random(10);
-            $table->user_id = $request->user_id;
-            $table->category_id = $category->id;
+            $table = CompleteCategory::where('category_id', $sub->category_id)->first();
+            $table->is_complete = true;
             $table->save();
         }
 
@@ -82,19 +85,19 @@ class UserCourseController extends Controller
     public function reloadTest(Request $request)
     {
         $table = UserCourse::where('sub_category_id', '=', $request->sub_category_id)
-            ->where('user_id', '=', $request->user_id)
+            ->where('user_id', '=', Auth::user()->id)
             ->delete();
-        $is_true = DB::table('users_courses')
-            ->where('user_id', '=', $request->user_id)
+        $is_true = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
             ->where('is_true', '=', true)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
-        $total_test = DB::table('users_courses')
-            ->where('user_id', '=', $request->user_id)
+        $total_test = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
         $table_score = new Score();
         $table_score->id = Str::random(10);
         $table_score->score = $is_true . " / " . $total_test;
-        $table_score->user_id = $request->user_id;
+        $table_score->user_id = Auth::user()->id;
         $table_score->sub_category_id = $request->sub_category_id;
         $table_score->save();
         if ($table) {
@@ -106,8 +109,8 @@ class UserCourseController extends Controller
 
     public function getTest(Request $request)
     {
-        $total_test = DB::table('users_courses')
-            ->where('user_id', '=', $request->user_id)
+        $total_test = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
         if ($total_test) {
             return response()->json([
@@ -128,12 +131,13 @@ class UserCourseController extends Controller
 
     public function getIncompleteCourses()
     {
-        $data = DB::table('users_courses')
-            ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
+        $data = DB::table('user_courses')
+            ->leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
             ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id')
-            ->selectRaw("users_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
+            ->selectRaw("user_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
             ->where('user_id', Auth::user()->id)
             ->havingRaw('count(checked or null) < count(checked)')
+            ->havingRaw('count(checked or null) > 0')
             ->groupBy('sub_category_id')
             ->get();
         return response()->json(['data' => $data]);
@@ -141,10 +145,10 @@ class UserCourseController extends Controller
 
     public function checkIncompleteCourse(Request $request)
     {
-        $data = DB::table('users_courses')
-            ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
+        $data = DB::table('user_courses')
+            ->leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
             ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id')
-            ->selectRaw("users_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
+            ->selectRaw("user_courses.id as id, categories.name as category_name, categories.image as category_image, sub_categories.name as sub_name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as sub_image")
             ->where('user_id', Auth::user()->id)
             ->where('sub_category_id', $request->sub_category_id)
             ->groupBy('sub_category_id')

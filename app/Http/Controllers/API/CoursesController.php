@@ -21,8 +21,8 @@ class CoursesController extends Controller
 
     public function getCoursesById($id)
     {
-        $courses = DB::table('users_courses')
-            ->leftJoin('courses', 'users_courses.course_id', '=', 'courses.id')
+        $courses = DB::table('user_courses')
+            ->leftJoin('courses', 'user_courses.course_id', '=', 'courses.id')
             ->select(
                 'courses.id as id',
                 'courses.indonesia_text as indonesia_text',
@@ -58,8 +58,8 @@ class CoursesController extends Controller
 
     public function redirectCourse(Request $request)
     {
-        $courses = DB::table('users_courses')
-            ->leftJoin('courses', 'users_courses.course_id', '=', 'courses.id')
+        $courses = DB::table('user_courses')
+            ->leftJoin('courses', 'user_courses.course_id', '=', 'courses.id')
             ->select(
                 'courses.id as id',
                 'courses.indonesia_text as indonesia_text',
@@ -72,6 +72,7 @@ class CoursesController extends Controller
             )
             ->where('checked', false)
             ->where('user_id', Auth::user()->id)
+            ->where('courses.sub_category_id', $request->sub_category_id)
             ->inRandomOrder()
             ->get();
 

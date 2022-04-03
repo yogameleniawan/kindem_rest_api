@@ -41,8 +41,8 @@ class SubCategoriesController extends Controller
                 }
             }
         }
-        $data = DB::table('users_courses')
-            ->leftJoin('sub_categories', 'users_courses.sub_category_id', '=', 'sub_categories.id')
+        $data = DB::table('user_courses')
+            ->leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
             ->leftJoin('categories', 'sub_categories.category_id', '=', 'categories.id')
             ->selectRaw("sub_categories.id as id,categories.id as category_id, categories.name as category_name, categories.image as category_image, sub_categories.name as name, sub_category_id, count(checked or null) as complete, count(checked) as total, sub_categories.image as image")
             ->where('user_id', Auth::user()->id)
@@ -50,6 +50,5 @@ class SubCategoriesController extends Controller
             ->groupBy('sub_category_id')
             ->get();
         return response()->json(['data' => $data], 200);
-        // return SubCategoryResource::collection($data);
     }
 }
