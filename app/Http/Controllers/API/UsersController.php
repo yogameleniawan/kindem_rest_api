@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserTutorial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -25,5 +27,21 @@ class UsersController extends Controller
 
         return response()
             ->json(['status' => 'true', 'message' => "Profile updated", 'data' => $user]);
+    }
+
+    public function tutorialCheck(Request $request)
+    {
+        $data = UserTutorial::where('page', $request->page)->where('user_id', Auth::user()->id)->count();
+        if ($data > 0) {
+            return response()->json(['is_done' => true], 200);
+        } else {
+            $tutorial = new UserTutorial();
+            $tutorial->id = Str::random(10);
+            $tutorial->page = $request->page;
+            $tutorial->user_id = Auth::user()->id;
+            $tutorial->is_done = true;
+            $tutorial->save();
+            return response()->json(['is_done' => false], 200);
+        }
     }
 }

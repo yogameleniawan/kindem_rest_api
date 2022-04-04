@@ -34,6 +34,7 @@ Route::prefix('v1')->group(function () {
         });
         Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
         Route::post('/updateProfile', [UsersController::class, 'updateProfile']);
+        Route::post('/tutorialCheck', [UsersController::class, 'tutorialCheck']);
         Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
         Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
