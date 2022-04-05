@@ -7,9 +7,11 @@ use App\Http\Resources\APIResource;
 use App\Models\Category;
 use App\Models\CompleteCategory;
 use App\Models\Course;
+use App\Models\Level;
 use App\Models\Score;
 use App\Models\SubCategory;
 use App\Models\UserCourse;
+use App\Models\UserLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -75,9 +77,30 @@ class UserCourseController extends Controller
             $table->save();
         }
 
+        $user_level = UserLevel::leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->where('user_id', Auth::user()->id)->first();
+
+        $total_score = UserCourse::where('user_id', Auth::user()->id)->where('is_true', true)->count();
+        $next_level = Level::where('point', '>', $user_level->point)
+            ->orderBy('point', 'asc')
+            ->first();
+        $level_up = false;
+        if ($next_level != null) {
+            if ($total_score > $next_level->point) {
+                $level_up = true;
+                $level = UserLevel::where('user_id', Auth::user()->id)->first();
+                $level->level_id = $next_level->id;
+                $level->save();
+            }
+        }
         return response()->json([
+            'user_level' => $user_level->name,
+            'next_level' => $next_level != null ? $next_level->name : 'MAX',
+            'next_point_level' => $next_level != null ? $next_level->point : 'MAX',
+            'total_score' => $total_score,
             'is_true' => $is_true,
             'total_test' => $total_test,
+            'level_up' => $level_up,
             'success' => true,
         ], 200);
     }
@@ -87,22 +110,26 @@ class UserCourseController extends Controller
         $table = UserCourse::where('sub_category_id', '=', $request->sub_category_id)
             ->where('user_id', '=', Auth::user()->id)
             ->delete();
-        $is_true = DB::table('user_courses')
-            ->where('user_id', '=', Auth::user()->id)
-            ->where('is_true', '=', true)
-            ->where('sub_category_id', '=', $request->sub_category_id)->count();
-        $total_test = DB::table('user_courses')
-            ->where('user_id', '=', Auth::user()->id)
-            ->where('sub_category_id', '=', $request->sub_category_id)->count();
-        $table_score = new Score();
-        $table_score->id = Str::random(10);
-        $table_score->score = $is_true . " / " . $total_test;
-        $table_score->user_id = Auth::user()->id;
-        $table_score->sub_category_id = $request->sub_category_id;
-        $table_score->save();
+
+        $courses = Course::where('sub_category_id', '=', $request->sub_category_id)->inRandomOrder()->take(10)->get();
+
+        $available_course = UserCourse::where('sub_category_id', '=', $request->sub_category_id)->first();
+        if ($available_course == null) {
+            foreach ($courses as $d) {
+                $table = new UserCourse();
+                $table->id = Str::random(10);
+                $table->answer = '';
+                $table->checked = false;
+                $table->is_true = false;
+                $table->course_id = $d->id;
+                $table->sub_category_id = $request->sub_category_id;
+                $table->user_id = Auth::user()->id;
+                $table->save();
+            }
+        }
         if ($table) {
             return response()->json([
-                'deleted success' => true,
+                'status' => true,
             ], 200);
         }
     }

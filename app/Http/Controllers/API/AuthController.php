@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\UserLevel;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth as Auth;
 use Illuminate\Support\Facades\Validator as Validator;
 use Illuminate\Validation\ValidationException;
@@ -46,6 +48,12 @@ class AuthController extends Controller
         $user = User::where('email', $request['email'])->firstOrFail();
 
         $token = $user->createToken('auth_token')->plainTextToken;
+
+        $user_level = new UserLevel();
+        $user_level->id = Str::random(10);
+        $user_level->level_id = '70SFBb1pje';
+        $user_level->user_id = $user->id;
+        $user_level->save();
 
         return response()
             ->json(['message' => 'Hi ' . $user->name . ', welcome to home', 'access_token' => $token, 'token_type' => 'Bearer',]);
