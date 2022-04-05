@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -23,10 +24,18 @@ class UsersController extends Controller
     {
         $data = $request->all();
         $user = User::find($request->user()->id);
-        $user->update($data);
-
-        return response()
-            ->json(['status' => 'true', 'message' => "Profile updated", 'data' => $user]);
+        if ($request->password) {
+            $newPassword = Hash::make($request->password);
+            $user->update([
+                'password' => $newPassword
+            ]);
+            return response()
+                ->json(['status' => 'true', 'message' => "Password updated", 'data' => $newPassword]);
+        } else {
+            $user->update($data);
+            return response()
+                ->json(['status' => 'true', 'message' => "Profile updated", 'data' => $user]);
+        }
     }
 
     public function tutorialCheck(Request $request)
