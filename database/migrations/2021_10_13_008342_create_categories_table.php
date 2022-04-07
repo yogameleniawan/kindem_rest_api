@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->char('id', 10)->primary();
             $table->string('name');
             $table->string('image');
-            $table->string('level');
+            $table->integer('level');
             $table->timestamps();
         });
     }

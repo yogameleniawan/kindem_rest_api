@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\APIController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\SubCategoriesController;
@@ -35,6 +36,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             'user_courses' => UserCoursesController::class,
             'user_details' => UserDetailsController::class,
         ]);
+    });
+    Route::prefix('api')->group(function () {
+        Route::get('getAllChapter', [APIController::class, 'getAllChapter'])->name('getAllChapter');
+        Route::post('getCategoryById', [APIController::class, 'getCategoryById'])->name('getCategoryById');
+        Route::post('updateCategory', [APIController::class, 'updateCategory'])->name('updateCategory');
     });
 });
 

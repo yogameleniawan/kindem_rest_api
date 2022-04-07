@@ -34,7 +34,11 @@
     <link rel="stylesheet" href="{{url('assets/admin/src/js/vendor/modernizr-2.8.3.min.js')}}">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/summernote/dist/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
     {{-- <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @yield('css')
 </head>
 
@@ -43,29 +47,13 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <style>
-        .wrapper .page-wrap .app-sidebar.colored .sidebar-content .nav-container .navigation-main .nav-item.open::after,
-        .wrapper .page-wrap .app-sidebar.colored .sidebar-content .nav-container .navigation-main .nav-item.active::after {
-            background-color: #F00512;
-        }
-
-        .wrapper .page-wrap .app-sidebar.colored .sidebar-content {
-            background-color: #E5E5E5;
-        }
-
-        .wrapper .page-wrap .app-sidebar.colored .sidebar-content .nav-container .navigation-main .nav-item a {
-            color: #0e0e0e;
-        }
-
-        .wrapper .page-wrap .app-sidebar.colored .sidebar-content .nav-container .navigation-main .nav-item a i {
-            color: #0e0e0e;
-        }
 
         .wrapper .header-top[header-theme="light"] {
-            background: #007251;
+            background: #007bff;
         }
 
         .wrapper .page-wrap .app-sidebar.colored .sidebar-header {
-            background-color: #007251;
+            background-color: #007bff;
         }
 
         .wrapper .page-wrap .app-sidebar.colored .sidebar-content .nav-container .navigation-main .nav-item .submenu-content {
@@ -79,7 +67,7 @@
         }
 
         .bg-icon {
-            background-color: #007251;
+            background-color: #007bff;
         }
 
         .btn-refresh {
@@ -187,9 +175,6 @@
                                     <button class="dropdown-item" href="#">
                                         <i class="ik ik-power dropdown-icon"></i>Logout</button>
                                 </form>
-
-
-
                             </div>
                         </div>
                     </div>
@@ -197,10 +182,10 @@
             </div>
         </header>
         <div class="page-wrap">
-            <div class="app-sidebar colored">
+            <div id="btn-sidebar" class="app-sidebar colored">
                 <div class="sidebar-header"><a class="header-brand" href="index.html">
                         <div class="logo-img">
-                            STULISH
+                            <img src="{{url('images/kindem-logo.png')}}" alt="" style="width: 500%;">
                         </div><span class="text"></span>
                     </a></div>
                 <div class="sidebar-content">
@@ -280,6 +265,12 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $('.mobile-nav-toggle').click(function(){
+            $('#btn-sidebar').removeClass('hide-sidebar')
+        })
+    </script>
     <script>
         window.jQuery || document.write('<script src="assets/admin/src/js/vendor/jquery-3.3.1.min.js"><\/script>')
 
@@ -305,7 +296,14 @@
     <script src="{{url('assets/admin/js/charts.js')}}"></script>
     <script src="{{url('assets/admin/dist/js/theme.min.js')}}"></script>
     <script src="{{url('assets/admin/plugins/summernote/dist/summernote-bs4.min.js')}}"></script>
-
+    <script src="{{url('assets/admin/plugins/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{url('assets/admin/js/form-advanced.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/jquery.repeater/jquery.repeater.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/mohithg-switchery/dist/switchery.min.js')}}"></script>
+    <script src="{{url('assets/admin/dist/js/theme.min.js')}}"></script>
+    <script src="{{url('assets/admin/js/alerts.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
     @yield('footer')
 
 </body>

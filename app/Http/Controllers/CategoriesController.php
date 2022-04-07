@@ -63,6 +63,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $category = Category::orderBy('level', 'desc')->first();
         $table = new Category();
         $table->id = Str::random(10);
         $table->name = $request->name;
@@ -76,9 +77,17 @@ class CategoriesController extends Controller
         $id = $drive->getDrivePath($listContents, 'name', $filename);
         $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
 
+
+        if ($category == null) {
+            $table->level = 0;
+        } else {
+            $table->level = $category->level + 1;
+        }
+
         if ($table->save()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category created successfully.');
+            // return redirect()->route('categories.index')
+            //     ->with('success', 'Category created successfully.');
+            return response()->json($table, 200);
         }
     }
 
@@ -129,9 +138,11 @@ class CategoriesController extends Controller
         } else {
             $table->image = $table->image;
         }
+        $table->level = $table->level;
         if ($table->save()) {
-            return redirect()->route('categories.index')
-                ->with('success', 'Category created successfully.');
+            return response()->json($table, 200);
+            // return redirect()->route('categories.index')
+            //     ->with('success', 'Category created successfully.');
         }
     }
 
@@ -147,11 +158,8 @@ class CategoriesController extends Controller
         $gdrive = new GDrive();
         $id_url = $gdrive->getIdFile($table->image);
         $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
-        if ($delete_files) {
-            if ($table->delete()) {
-                return redirect()->route('categories.index')
-                    ->with('success', 'Category deleted successfully.');
-            }
-        }
+
+        $table->delete();
+        return response()->json(['data' => $table], 200);
     }
 }
