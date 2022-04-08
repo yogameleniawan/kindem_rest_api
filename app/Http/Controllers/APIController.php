@@ -58,4 +58,10 @@ class APIController extends Controller
             return response()->json(['data' => $table], 200);
         }
     }
+
+    public function getAllMateri()
+    {
+        $data = SubCategory::all();
+        return response()->json(['data' => $data], 200);
+    }
 }

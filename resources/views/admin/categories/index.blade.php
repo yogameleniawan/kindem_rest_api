@@ -357,6 +357,156 @@ Materi
     </div>
     <!-- /.col -->
 </div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="ik ik-plus-square" onclick="addMateriPage()"></i>
+            </div>
+            <div class="box-body">
+                <div id="add_materi">
+                <form class="sample-form text-left border border-light p-5" id="form-add-course" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="">Nama Materi </label>
+                        <select class="form-control select2" id="select_materi" name="sub_category_id">
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Course</label>
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                            </span>
+                            <input type="text" class="form-control  " placeholder="Nama Materi" id="materi"
+                                name="name" required>
+                        </div>
+                    </div>
+
+                    <img id="output_materi_add" width="30%" />
+
+                        <div class="form-group">
+                            <label>Gambar Course</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input accept="image/*" onchange="loadFileMateri(event)" type="file" class="form-control  "
+                                    placeholder="Image" id="image" name="image">
+                            </div>
+                        </div>
+
+                    <div class="footer-buttons">
+                        <div id="materi-loader" class="loader d-none"></div>
+                        <button id="materi-btn" type="button" class="btn btn-primary" onclick="addMateri()">
+                            Tambah
+                        </button>
+                    </div>
+
+                </form>
+                </div>
+                <div id="edit_materi" class="d-none">
+                    <form class="sample-form text-left border border-light p-5" id="form-materi-edit" enctype="multipart/form-data">
+                        <input type="hidden" id="id_materi_edit" name="id_materi_edit">
+                        <div class="form-group">
+                            <label for="">Nama Chapter </label>
+                            <select class="form-control select2" id="select_chapter_edit" name="category_id">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Materi</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control  " placeholder="Nama Materi" id="materi_edit"
+                                    name="name" required>
+                            </div>
+                        </div>
+
+                        <img id="output_materi_edit" width="30%" />
+
+                        <div class="form-group">
+                            <label>Gambar Course</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input accept="image/*" onchange="loadFileMateriEdit(event)" type="file" class="form-control  "
+                                    placeholder="Image" id="image" name="image">
+                            </div>
+                        </div>
+
+                        <div class="footer-buttons">
+                            <div id="materi-loader-update" class="loader d-none"></div>
+                            <button id="materi-btn-update" type="button" class="btn btn-success" onclick="updateMateri()">
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+                    </div>
+                    <div id="remove_materi" class="d-none">
+                        <form class="sample-form text-left border border-light p-5" id="form-add-sub" enctype="multipart/form-data">
+                            <input type="hidden" id="id_materi" name="id_materi">
+                            <div class="form-group">
+                                <label>Nama Materi</label>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                    </span>
+                                    <input type="text" class="form-control  " placeholder="Nama Materi" id="name_materi">
+                                </div>
+                            </div>
+
+                            <div class="footer-buttons">
+                                <div id="materi-loader-delete" class="loader d-none"></div>
+                                <button id="materi-btn-delete" type="button" class="btn btn-danger" onclick="deleteMateri()">
+                                    Hapus
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-body">
+                                <div class="dt-responsive">
+                                    <table class="table table-bordered" id="data-table-course" style="width: 102%">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3%"></th>
+                                                <th>Materi</th>
+                                                <th>Indonesian</th>
+                                                <th>English</th>
+                                                <th>Image</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <td style="width: 3%"></td>
+                                                <th>Materi</th>
+                                                <th>Indonesian</th>
+                                                <th>English</th>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
 <!-- /.content-wrapper -->
 @endsection
 @section('footer')
@@ -367,6 +517,7 @@ Materi
     });
 
     function fetchChapter(){
+        selectChapterTable()
         selectChapterMateri()
         selectChapterMateriEdit()
     }
@@ -417,6 +568,7 @@ Materi
    $(document).ready(function () {
         initTableChapter()
         initTableMateri()
+        initTableCourse()
    });
 
    var tableChapter = $('#data-table').DataTable({
@@ -442,6 +594,20 @@ Materi
             searching: true,
             "initComplete": function (settings, json) {
                 $("#data-table-materi").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+                this.api().columns([1]).every( function () {
+                var column = this;
+                var select = $('<select class="form-control select2" id="select_chapter_table"><option value="">Cari Chapter</option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+            } );
             },
             ajax: "{{ route('sub_categories.index') }}",
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
@@ -453,6 +619,33 @@ Materi
                     data: 'name',
                     name: 'name'
                 },
+            ]
+        });
+
+    var tableCourse = $('#data-table-course').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            "bFilter": true,
+            "sDom":"lrtip",
+            "initComplete": function (settings, json) {
+                $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+            },
+            ajax: "{{ route('courses.index') }}",
+            columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
+                {
+                    data: 'name',
+                    name: 'sub_categories.name'
+                },
+                {
+                    data: 'indonesia_text',
+                    name: 'courses.indonesia_text'
+                },
+                {
+                    data: 'english_text',
+                    name: 'courses.english_text '
+                },
+                {data: 'image', name: 'image', orderable: false, searchable: false},
             ]
         });
 
@@ -498,7 +691,29 @@ Materi
             });
         });
     }
-   </script>
+
+    function initTableCourse()
+    {
+        $('#data-table-course tfoot th').each(function() {
+            var title = $('#data-table-course thead th').eq($(this).index()).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+        });
+
+        $('tfoot').each(function () {
+            $(this).insertAfter($(this).siblings('thead'));
+        });
+
+        tableCourse.columns().eq(0).each(function(colIdx) {
+            $('input', tableCourse.column(colIdx).footer()).on('keyup change', function() {
+                console.log(colIdx + '-' + this.value);
+                tableCourse
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+            });
+        });
+    }
+</script>
 
 <script>
     function addMateriPage()
@@ -516,7 +731,6 @@ Materi
         $('#id_materi_edit').val(id)
         $('#materi_edit').val(name)
         $('#select_chapter_edit option[value="'+id_chapter+'"]').attr('selected', 'selected');
-        console.log($('#id_materi_edit').val())
     }
 
     function deleteMateriPage(id, name)
@@ -530,8 +744,29 @@ Materi
     }
 
     $('#select_chapter').change(function () {
-        console.log($(this).val())
+        tableMateri.search($("#select_chapter option:selected" ).text()).draw()
     })
+
+    function selectChapterTable() {
+        $('#select_chapter_table').html('<option disabled selected>Cari Chapter</option>')
+        $.ajax({
+            url: '{{route('getAllChapter')}}',
+            type: "GET",
+            dataType: "json",
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                var html = ''
+                data.data.forEach(item => {
+                    html = `<option name='category_id' value='${item.name}'>${item.name}</option>`
+                    $('#select_chapter_table').append(html)
+                });
+            }
+        });
+    }
 
     function selectChapterMateri() {
         $('#select_chapter').html('<option disabled selected>Pilih Nama Chapter</option>')
@@ -635,8 +870,8 @@ Materi
                 },
             },
             success: function (data) {
-                $('#materi-loader-update').removeClass('d-none')
-                $('#materi-btn-update').addClass('d-none')
+                $('#materi-loader-update').addClass('d-none')
+                $('#materi-btn-update').removeClass('d-none')
                 $("#form-materi-edit")[0].reset()
                 $.toast({
                     heading: 'Materi Diperbarui',
@@ -901,6 +1136,22 @@ Materi
 
     var loadFileEdit = function (event) {
         var output = document.getElementById('output_chapter_edit');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src)
+        }
+    };
+
+    var loadFileMateri = function (event) {
+        var output = document.getElementById('output_materi_add');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src)
+        }
+    };
+
+    var loadFileMateriEdit = function (event) {
+        var output = document.getElementById('output_materi_edit');
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function () {
             URL.revokeObjectURL(output.src)

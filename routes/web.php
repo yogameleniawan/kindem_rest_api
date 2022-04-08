@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     });
     Route::prefix('api')->group(function () {
         Route::get('getAllChapter', [APIController::class, 'getAllChapter'])->name('getAllChapter');
+        Route::get('getAllMateri', [APIController::class, 'getAllMateri'])->name('getAllMateri');
         Route::post('getCategoryById', [APIController::class, 'getCategoryById'])->name('getCategoryById');
         Route::post('updateCategory', [APIController::class, 'updateCategory'])->name('updateCategory');
         Route::post('updateMateri', [APIController::class, 'updateMateri'])->name('updateMateri');
