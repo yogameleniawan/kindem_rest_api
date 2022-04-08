@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\GDrive;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -44,6 +45,17 @@ class APIController extends Controller
             return response()->json($table, 200);
             // return redirect()->route('categories.index')
             //     ->with('success', 'Category created successfully.');
+        }
+    }
+
+    public function updateMateri(Request $request)
+    {
+        $table = SubCategory::find($request->id_materi_edit);
+        $table->name = $request->name;
+        $table->category_id = $request->category_id;
+
+        if ($table->save()) {
+            return response()->json(['data' => $table], 200);
         }
     }
 }

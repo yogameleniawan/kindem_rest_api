@@ -195,16 +195,16 @@
                             </div>
                             <div
                                 class="nav-item {{Route::is('categories.index') || Route::is('categories.create') || Route::is('categories.edit') || Route::is('categories.destroy') ? 'active' : ''}}">
-                                <a href="{{route('categories.index')}}"><i class="ik ik-menu"></i><span>Categories</span></a>
+                                <a href="{{route('categories.index')}}"><i class="ik ik-menu"></i><span>Materi</span></a>
                             </div>
-                            <div
+                            {{-- <div
                                 class="nav-item {{Route::is('sub_categories.index') || Route::is('sub_categories.create') || Route::is('sub_categories.edit') || Route::is('sub_categories.destroy') ? 'active' : ''}}">
                                 <a href="{{route('sub_categories.index')}}"><i class="ik ik-film"></i><span>Sub Categories</span></a>
                             </div>
                             <div
                                 class="nav-item {{Route::is('courses.index') || Route::is('courses.create') || Route::is('courses.edit') || Route::is('courses.destroy') ? 'active' : ''}}">
                                 <a href="{{route('courses.index')}}"><i class="ik ik-layers"></i><span>Courses</span></a>
-                            </div>
+                            </div> --}}
 
                             <div
                                 class="nav-item has-sub {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') || Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') || Route::is('user_course_details.index') || Route::is('user_course_details.create') || Route::is('user_course_details.edit') || Route::is('user_course_details.destroy') || Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'open' : ''}}">

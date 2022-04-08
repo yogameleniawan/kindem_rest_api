@@ -76,6 +76,14 @@ Add Categories
 
     }
 
+    .edit-table:hover{
+        cursor: pointer;
+    }
+
+    .delete:hover{
+        cursor: pointer;
+    }
+
 </style>
 @endsection
 @section('iconHeader')
@@ -98,8 +106,6 @@ Materi
             <div class="box-body">
                 <div class="card-header">
                     <i class="ik ik-plus-square" onclick="addChapterPage()"></i>
-                    <i class="ik ik-edit" onclick="editChapterPage()"></i>
-                    <i class="ik ik-trash-2" onclick="deleteChapterPage()"></i>
                 </div>
 
                 <div id="add_chapter">
@@ -140,13 +146,7 @@ Materi
 
                 <div id="edit_chapter" class="d-none">
                     <form class="text-left border border-light p-5" id="form-chapter-edit" enctype="multipart/form-data">
-                        <input type="hidden" name="id-edit-chapter" id="id-edit-chapter">
-                        <div class="form-group">
-                            <label for="">Nama Chapter </label>
-                            <select class="form-control select2" id="chapter_edit" name="category_id">
-
-                            </select>
-                        </div>
+                        <input type="hidden" name="category_id" id="id-edit-chapter">
 
                         <div class="form-group">
                             <label>Nama Chapter</label>
@@ -183,15 +183,16 @@ Materi
 
                 <div id="remove_chapter" class="d-none">
                     <form class="text-left border border-light p-5" id="form-chapter" enctype="multipart/form-data">
-
+                        <input type="hidden" id="id_chapter_delete">
                         <div class="form-group">
-                            <label for="">Nama Chapter </label>
-                            <select class="form-control select2" id="chapter_delete">
-
-                            </select>
+                            <label>Nama Chapter</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Name" id="name_chapter_delete" name="name" required>
+                            </div>
                         </div>
-
-                        <img id="output" width="50%" />
 
                         <div class="footer-buttons">
 
@@ -201,6 +202,32 @@ Materi
                             </button>
                         </div>
                     </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered" id="data-table" style="width: 102%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th>Name</th>
+                                            <th>Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="width: 3%"></td>
+                                            <th>Name</th>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
                 </div>
 
             </div>
@@ -214,8 +241,14 @@ Materi
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
+            <div class="card-header">
+                <i class="ik ik-plus-square" onclick="addMateriPage()"></i>
+                <i class="ik ik-edit" onclick="editMateriPage()"></i>
+                <i class="ik ik-trash-2" onclick="deleteMateriPage()"></i>
+            </div>
             <div class="box-body">
-                <form class="sample-form text-left border border-light p-5" enctype="multipart/form-data">
+                <div id="add_materi">
+                <form class="sample-form text-left border border-light p-5" id="form-add-sub" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="">Nama Chapter </label>
                         <select class="form-control select2" id="select_chapter">
@@ -240,6 +273,89 @@ Materi
                     </div>
 
                 </form>
+                </div>
+                <div id="edit_materi" class="d-none">
+                    <form class="sample-form text-left border border-light p-5" id="form-add-sub" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Nama Chapter </label>
+                            <select class="form-control select2" id="select_chapter">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Materi</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control  " placeholder="Nama Materi" id="materi"
+                                    name="materi" required>
+                            </div>
+                        </div>
+
+                        <div class="footer-buttons">
+                            <button type="button" class="btn btn-success" onclick="selectChapterMateri()">
+                                Update
+                            </button>
+                        </div>
+
+                    </form>
+                    </div>
+                    <div id="remove_materi" class="d-none">
+                        <form class="sample-form text-left border border-light p-5" id="form-add-sub" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="">Nama Chapter </label>
+                                <select class="form-control select2" id="select_chapter">
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nama Materi</label>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                    </span>
+                                    <input type="text" class="form-control  " placeholder="Nama Materi" id="materi"
+                                        name="materi" required>
+                                </div>
+                            </div>
+
+                            <div class="footer-buttons">
+                                <button type="button" class="btn btn-danger" onclick="selectChapterMateri()">
+                                    Hapus
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card-body">
+                                <div class="dt-responsive">
+                                    <table class="table table-bordered" id="data-table-materi" style="width: 102%">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3%"></th>
+                                                <th>Category</th>
+                                                <th>Name</th>
+                                                <th>Image</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <td style="width: 3%"></td>
+                                                <th>Category</th>
+                                                <th>Name</th>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
             </div>
             <!-- /.box-body -->
         </div>
@@ -258,8 +374,6 @@ Materi
 
     function fetchChapter(){
         selectChapterMateri()
-        selectChapterEdit()
-        selectChapterDelete()
     }
 
 </script>
@@ -302,11 +416,121 @@ Materi
         })
     };
 
+</script>
+
+<script type="text/javascript">
+   $(document).ready(function () {
+        initTableChapter()
+        initTableMateri()
+   });
+
+   var tableChapter = $('#data-table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    searching: true,
+                    "initComplete": function (settings, json) {
+                        $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+                    },
+                    ajax: "{{ route('categories.index') }}",
+                    columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
+                        {
+                            data: 'name',
+                            name: 'name'
+                        },
+                        {data: 'image', name: 'image', orderable: false, searchable: false},
+                    ]
+                });
+
+                var tableMateri = $('#data-table-materi').DataTable({
+            processing: true,
+            serverSide: true,
+            searching: true,
+            "initComplete": function (settings, json) {
+                $("#data-table-materi").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+            },
+            ajax: "{{ route('sub_categories.index') }}",
+            columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
+                {
+                    data: 'category_name',
+                    name: 'categories.name'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {data: 'image', name: 'image', orderable: false, searchable: false},
+            ]
+        });
+
+   function initTableChapter(){
+                $('#data-table tfoot th').each(function() {
+                    var title = $('#data-table thead th').eq($(this).index()).text();
+                    $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+                });
+
+                $('tfoot').each(function () {
+                    $(this).insertAfter($(this).siblings('thead'));
+                });
+
+                tableChapter.columns().eq(0).each(function(colIdx) {
+                    $('input', tableChapter.column(colIdx).footer()).on('keyup change', function() {
+                        console.log(colIdx + '-' + this.value);
+                        tableChapter
+                                .column(colIdx)
+                                .search(this.value)
+                                .draw();
+                    });
+                });
+        }
+
+    function initTableMateri()
+    {
+        $('#data-table-materi tfoot th').each(function() {
+            var title = $('#data-table-materi thead th').eq($(this).index()).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+        });
+
+        $('tfoot').each(function () {
+            $(this).insertAfter($(this).siblings('thead'));
+        });
+
+        tableMateri.columns().eq(0).each(function(colIdx) {
+            $('input', tableMateri.column(colIdx).footer()).on('keyup change', function() {
+                console.log(colIdx + '-' + this.value);
+                tableMateri
+                        .column(colIdx)
+                        .search(this.value)
+                        .draw();
+            });
+        });
+    }
+   </script>
+
+<script>
+    function addMateriPage()
+    {
+        $('#add_materi').removeClass('d-none')
+        $('#edit_materi').addClass('d-none')
+        $('#remove_materi').addClass('d-none')
+    }
+
+    function editMateriPage()
+    {
+        $('#add_materi').addClass('d-none')
+        $('#edit_materi').removeClass('d-none')
+        $('#remove_materi').addClass('d-none')
+    }
+
+    function deleteMateriPage()
+    {
+        $('#add_materi').addClass('d-none')
+        $('#edit_materi').addClass('d-none')
+        $('#remove_materi').removeClass('d-none')
+    }
+
     $('#select_chapter').change(function () {
         console.log($(this).val())
     })
-
-
 
     function selectChapterMateri() {
         $('#select_chapter').html('<option disabled selected>Pilih Nama Chapter</option>')
@@ -328,7 +552,6 @@ Materi
             }
         });
     }
-
 </script>
 
 <script>
@@ -340,18 +563,21 @@ Materi
         $('#remove_chapter').addClass('d-none')
     }
 
-    function editChapterPage()
+    function editChapterPage(id_chapter)
     {
         $('#add_chapter').addClass('d-none')
         $('#edit_chapter').removeClass('d-none')
         $('#remove_chapter').addClass('d-none')
+        getChapterById(id_chapter)
     }
 
-    function deleteChapterPage()
+    function deleteChapterPage(id_chapter, name)
     {
         $('#add_chapter').addClass('d-none')
         $('#edit_chapter').addClass('d-none')
         $('#remove_chapter').removeClass('d-none')
+        $('#id_chapter_delete').val(id_chapter)
+        $('#name_chapter_delete').val(name)
     }
 
     function addChapter() {
@@ -383,6 +609,7 @@ Materi
                 $("#form-chapter")[0].reset()
                 successToast()
                 fetchChapter()
+                tableChapter.ajax.reload()
             }
         });
     }
@@ -421,35 +648,16 @@ Materi
                     stack: false,
                     loaderBg: '#f96868'
                 })
+                $('#edit_chapter').addClass('d-none')
+                $('#add_chapter').removeClass('d-none')
                 fetchChapter()
+                tableChapter.ajax.reload();
             }
         });
     }
 
-    function selectChapterEdit()
+    function getChapterById(id)
     {
-        $('#chapter_edit').html('<option disabled selected>Pilih Nama Chapter</option>')
-        $.ajax({
-            url: '{{route('getAllChapter')}}',
-            type: "GET",
-            dataType: "json",
-            statusCode: {
-                500: function (response) {
-                    console.log(response)
-                },
-            },
-            success: function (data) {
-                var html = ''
-                data.data.forEach(item => {
-                    html = `<option name='category_id' value='${item.id}'>${item.name}</option>`
-                    $('#chapter_edit').append(html)
-                });
-            }
-        });
-    }
-
-    $('#chapter_edit').change(function(){
-
         $.ajax({
             url: '{{route('getCategoryById')}}',
             type: "POST",
@@ -458,7 +666,7 @@ Materi
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-                'id': $('#chapter_edit').val()
+                'id': id
             },
             statusCode: {
                 500: function (response) {
@@ -470,28 +678,6 @@ Materi
                 $('#id-edit-chapter').val(data.data.id)
                 var output = document.getElementById('output_chapter_edit');
                 output.src = data.data.image;
-            }
-        });
-    })
-
-    function selectChapterDelete()
-    {
-        $('#chapter_delete').html('<option disabled selected>Pilih Nama Chapter</option>')
-        $.ajax({
-            url: '{{route('getAllChapter')}}',
-            type: "GET",
-            dataType: "json",
-            statusCode: {
-                500: function (response) {
-                    console.log(response)
-                },
-            },
-            success: function (data) {
-                var html = ''
-                data.data.forEach(item => {
-                    html = `<option name='category_id' value='${item.id}'>${item.name}</option>`
-                    $('#chapter_delete').append(html)
-                });
             }
         });
     }
@@ -508,7 +694,7 @@ Materi
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             data: {
-                'id': $('#chapter_delete').val(),
+                'id': $('#id_chapter_delete').val(),
             },
             statusCode: {
                 500: function (response) {
@@ -531,6 +717,11 @@ Materi
                 fetchChapter()
                 $('#chapter-loader-delete').addClass('d-none')
                 $('#btn-chapter-delete').removeClass('d-none')
+                $('#id_chapter_delete').val('')
+                $('#name_chapter_delete').val('')
+                $('#remove_chapter').addClass('d-none')
+                $('#add_chapter').removeClass('d-none')
+                tableChapter.ajax.reload()
             }
         });
     }
