@@ -16,8 +16,14 @@ class UsersController extends Controller
 {
     public function getAllUsers()
     {
-        $data = User::where('role', 'student')->get();
-        return UserResource::collection($data);
+        $data = DB::table('users')
+            ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
+            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level')
+            ->orderBy('levels.point', 'DESC')
+            ->where('users.role', 'student')
+            ->get();
+        return response()->json(['data' => $data], 200);
     }
 
     public function updateProfile(Request $request)
