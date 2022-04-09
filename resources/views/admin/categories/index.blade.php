@@ -393,15 +393,15 @@ Materi
                                         <thead>
                                             <tr>
                                                 <th style="width: 3%"></th>
-                                                <th>Category</th>
-                                                <th>Name</th>
+                                                <th>Chapter</th>
+                                                <th>Nama</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <td style="width: 3%"></td>
-                                                <th>Category</th>
-                                                <th>Name</th>
+                                                <th>Chapter</th>
+                                                <th>Nama</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -511,18 +511,18 @@ Materi
                                             <tr>
                                                 <th style="width: 3%"></th>
                                                 <th>Materi</th>
-                                                <th>Indonesian</th>
-                                                <th>English</th>
-                                                <th>Image</th>
+                                                <th>Bahasa Indonesia</th>
+                                                <th>Bahasa Inggris</th>
+                                                <th>Gambar</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <td style="width: 3%"></td>
                                                 <th>Materi</th>
-                                                <th>Indonesian</th>
-                                                <th>English</th>
-                                                <td></td>
+                                                <th>Bahasa Indonesia</th>
+                                                <th>Bahasa Inggris</th>
+                                                <th></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -666,7 +666,7 @@ Materi
                 $("#data-table-course").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
                 this.api().columns([1]).every( function () {
                 var column = this;
-                var select = $('<select class="form-control select2" id="select_course_table"><option value="">Cari Chapter</option></select>')
+                var select = $('<select class="form-control select2" id="select_course_table"><option value="">Cari Materi</option></select>')
                     .appendTo( $(column.footer()).empty() )
                     .on( 'change', function () {
                         var val = $.fn.dataTable.util.escapeRegex(
