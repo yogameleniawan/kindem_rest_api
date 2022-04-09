@@ -663,7 +663,7 @@ Materi
             "bFilter": true,
             "sDom":"lrtip",
             "initComplete": function (settings, json) {
-                $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+                $("#data-table-course").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
                 this.api().columns([1]).every( function () {
                 var column = this;
                 var select = $('<select class="form-control select2" id="select_course_table"><option value="">Cari Chapter</option></select>')
