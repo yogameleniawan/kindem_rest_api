@@ -41,7 +41,7 @@ Categories
     <div class="col-sm-12" style="margin-bottom:20%">
         <div class="card">
             <div class="box-body" style="padding-bottom:50px">
-                <form class="text-left border border-light p-5" action="{{route('categories.update', $data->id)}}" method="POST"
+                <form class="text-left border border-light p-5" action="{{route('materi.update', $data->id)}}" method="POST"
                     enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
                     @method('PUT')
@@ -70,7 +70,7 @@ Categories
                     </div>
 
                     <div class="footer-buttons">
-                        <a class="fixedButtonRefresh" href="{{route('categories.index')}}">
+                        <a class="fixedButtonRefresh" href="{{route('materi.index')}}">
                             <button data-toggle="tooltip" data-placement="top" title="" type="button"
                                 class="btn btn-icon btn-refresh " data-original-title="Back">
                                 <i class="ik ik-arrow-left bg-ik"></i>

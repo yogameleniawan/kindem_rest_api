@@ -79,7 +79,7 @@ Users
                     </div>
 
                     <div class="footer-buttons">
-                        <a class="fixedButtonRefresh" href="{{route('categories.index')}}">
+                        <a class="fixedButtonRefresh" href="{{route('materi.index')}}">
                             <button data-toggle="tooltip" data-placement="top" title="" type="button"
                                 class="btn btn-icon btn-refresh " data-original-title="Back">
                                 <i class="ik ik-arrow-left bg-ik"></i>

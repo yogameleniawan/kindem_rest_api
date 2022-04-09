@@ -29,7 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     })->name('dashboard');
     Route::prefix('admin')->group(function () {
         Route::resources([
-            'categories' => CategoriesController::class,
+            'materi' => CategoriesController::class,
             'courses' => CoursesController::class,
             'sub_categories' => SubCategoriesController::class,
             'users' => UsersController::class,
@@ -43,6 +43,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('getCategoryById', [APIController::class, 'getCategoryById'])->name('getCategoryById');
         Route::post('updateCategory', [APIController::class, 'updateCategory'])->name('updateCategory');
         Route::post('updateMateri', [APIController::class, 'updateMateri'])->name('updateMateri');
+        Route::post('updateSoal', [APIController::class, 'updateSoal'])->name('updateSoal');
     });
 });
 

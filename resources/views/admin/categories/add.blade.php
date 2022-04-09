@@ -431,7 +431,7 @@ Materi
                     "initComplete": function (settings, json) {
                         $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
                     },
-                    ajax: "{{ route('categories.index') }}",
+                    ajax: "{{ route('materi.index') }}",
                     columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
                         {
                             data: 'name',
@@ -448,11 +448,11 @@ Materi
             "initComplete": function (settings, json) {
                 $("#data-table-materi").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
             },
-            ajax: "{{ route('sub_categories.index') }}",
+            ajax: "{{ route('sub_materi.index') }}",
             columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
                 {
                     data: 'category_name',
-                    name: 'categories.name'
+                    name: 'materi.name'
                 },
                 {
                     data: 'name',
@@ -586,7 +586,7 @@ Materi
         var data = new FormData($('#form-chapter')[0]);
         console.log(data)
         $.ajax({
-            url: '{{route('categories.store')}}',
+            url: '{{route('materi.store')}}',
             type: "POST",
             dataType: "json",
             cache: false,
@@ -687,7 +687,7 @@ Materi
         $('#chapter-loader-delete').removeClass('d-none')
         $('#btn-chapter-delete').addClass('d-none')
         $.ajax({
-            url: '{{route('categories.destroy',"id")}}',
+            url: '{{route('materi.destroy',"id")}}',
             type: "DELETE",
             dataType: "json",
             headers: {

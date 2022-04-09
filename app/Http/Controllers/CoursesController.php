@@ -23,12 +23,12 @@ class CoursesController extends Controller
         if ($request->ajax()) {
             $data = DB::table('courses')
                 ->join('sub_categories', 'sub_categories.id', '=', 'courses.sub_category_id')
-                ->select(['courses.id AS id', 'sub_categories.id as sub_category_id', 'sub_categories.name as name', 'courses.indonesia_text AS indonesia_text', 'courses.english_text AS english_text', 'courses.image AS image']);
+                ->select(['courses.id AS id', 'sub_categories.id as sub_category_id', 'sub_categories.name as name', 'courses.indonesia_text AS indonesia_text', 'courses.english_text AS english_text', 'courses.image AS image', 'courses.is_voice AS is_voice']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
 
-                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editMateriPage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->name . '`)"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteMateriPage(`' . $data->id .  '`,`' . $data->name . '`)" data-toggle="modal"
+                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editCoursePage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->indonesia_text . '`,`' . $data->english_text . '`,`' . $data->image . '`,`' . $data->is_voice . '`)"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteCoursePage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->indonesia_text . '`,`' . $data->english_text . '`,`' . $data->image . '`,`' . $data->is_voice . '`)" data-toggle="modal"
                     data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
@@ -81,10 +81,14 @@ class CoursesController extends Controller
         $id = $drive->getDrivePath($listContents, 'name', $filename);
         $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
 
+        if ($request->is_voice == 'true') {
+            $table->is_voice = true;
+        } else {
+            $table->is_voice = false;
+        }
         $table->sub_category_id = $request->sub_category_id;
         if ($table->save()) {
-            return redirect()->route('courses.index')
-                ->with('success', 'Courses created successfully.');
+            return response()->json(['data' => $table], 200);
         }
     }
 
@@ -138,9 +142,13 @@ class CoursesController extends Controller
         } else {
             $table->image = $table->image;
         }
+        if ($request->is_voice == 'true') {
+            $table->is_voice = true;
+        } else {
+            $table->is_voice = false;
+        }
         if ($table->save()) {
-            return redirect()->route('courses.index')
-                ->with('success', 'Courses created successfully.');
+            return response()->json(['data' => $table], 200);
         }
     }
 
@@ -158,8 +166,7 @@ class CoursesController extends Controller
         $delete_files = Storage::disk('google')->delete('16E_l0AY9RJyLN3NnuJrxl4SzCA4wVnVh/' . $id_url);
         if ($delete_files) {
             if ($table->delete()) {
-                return redirect()->route('courses.index')
-                    ->with('success', 'Courses deleted successfully.');
+                return response()->json(['data' => $table], 200);
             }
         }
     }

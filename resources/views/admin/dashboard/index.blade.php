@@ -60,7 +60,7 @@ Dashboard
                                     Categories
                                     <hr>
                                     <div class="gridmore">
-                                        <a href="{{route('categories.index')}}">More ...</a>
+                                        <a href="{{route('materi.index')}}">More ...</a>
                                     </div>
                                 </div>
                                 <div class="grid">

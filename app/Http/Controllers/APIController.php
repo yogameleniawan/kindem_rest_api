@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\GDrive;
 use App\Models\Category;
+use App\Models\Course;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -63,5 +64,34 @@ class APIController extends Controller
     {
         $data = SubCategory::all();
         return response()->json(['data' => $data], 200);
+    }
+
+    public function updateSoal(Request $request)
+    {
+        $table = Course::find($request->id_course);
+        $table->indonesia_text = $request->indonesia_text;
+        $table->english_text = $request->english_text;
+        $table->sub_category_id = $request->sub_category_id;
+        if (!empty($request->image)) {
+            $image = $request->file('image');
+            $file = $image->getContent();
+            $filename = $image->getClientOriginalName();
+            $filename = Str::random(16) . $filename;
+            Storage::disk('google')->put($filename, $file);
+            $listContents = Storage::disk('google')->listContents();
+            $drive = new GDrive();
+            $id = $drive->getDrivePath($listContents, 'name', $filename);
+            $table->image = "https://drive.google.com/uc?id=" . $id['path'] . "&export=media";
+        } else {
+            $table->image = $table->image;
+        }
+        if ($request->is_voice == 'true') {
+            $table->is_voice = true;
+        } else {
+            $table->is_voice = false;
+        }
+        if ($table->save()) {
+            return response()->json(['data' => $table], 200);
+        }
     }
 }

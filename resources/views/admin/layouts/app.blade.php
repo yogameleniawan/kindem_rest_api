@@ -14,12 +14,17 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
-
     <link rel="stylesheet" href="{{url('assets/admin/plugins/bootstrap/dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/fontawesome-free/css/all.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/admin/plugins/icon-kit/dist/css/iconkit.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/ionicons/dist/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/icon-kit/dist/css/iconkit.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/select2/dist/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/summernote/dist/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/mohithg-switchery/dist/switchery.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/dist/css/theme.min.css')}}">
+    <link rel="stylesheet" href="{{url('assets/admin/src/js/vendor/modernizr-2.8.3.min.js')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet"
         href="{{url('assets/admin/plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}">
@@ -30,12 +35,7 @@
     <link rel="stylesheet" href="{{url('assets/admin/plugins/c3/c3.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/owl.carousel/dist/assets/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/owl.carousel/dist/assets/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/admin/dist/css/theme.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/admin/src/js/vendor/modernizr-2.8.3.min.js')}}">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="{{url('assets/admin/plugins/summernote/dist/summernote-bs4.css')}}">
-    <link rel="stylesheet" href="{{url('assets/admin/plugins/select2/dist/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{url('assets/admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
     {{-- <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -47,7 +47,6 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <style>
-
         .wrapper .header-top[header-theme="light"] {
             background: #007bff;
         }
@@ -191,93 +190,108 @@
                 <div class="sidebar-content">
                     <div class="nav-container">
                         <nav id="main-menu-navigation" class="navigation-main">
-                            <div class="nav-item {{Route::is('dashboard')  ? 'active' : ''}}"><a href="{{route('dashboard')}}"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
+                            <div class="nav-item {{Route::is('dashboard')  ? 'active' : ''}}"><a
+                                    href="{{route('dashboard')}}"><i
+                                        class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
                             </div>
                             <div
-                                class="nav-item {{Route::is('categories.index') || Route::is('categories.create') || Route::is('categories.edit') || Route::is('categories.destroy') ? 'active' : ''}}">
-                                <a href="{{route('categories.index')}}"><i class="ik ik-menu"></i><span>Materi</span></a>
+                                class="nav-item {{Route::is('materi.index') || Route::is('materi.create') || Route::is('materi.edit') || Route::is('materi.destroy') ? 'active' : ''}}">
+                                <a href="{{route('materi.index')}}"><i
+                                        class="ik ik-menu"></i><span>Materi</span></a>
                             </div>
                             {{-- <div
                                 class="nav-item {{Route::is('sub_categories.index') || Route::is('sub_categories.create') || Route::is('sub_categories.edit') || Route::is('sub_categories.destroy') ? 'active' : ''}}">
-                                <a href="{{route('sub_categories.index')}}"><i class="ik ik-film"></i><span>Sub Categories</span></a>
-                            </div>
-                            <div
-                                class="nav-item {{Route::is('courses.index') || Route::is('courses.create') || Route::is('courses.edit') || Route::is('courses.destroy') ? 'active' : ''}}">
-                                <a href="{{route('courses.index')}}"><i class="ik ik-layers"></i><span>Courses</span></a>
-                            </div> --}}
-
-                            <div
-                                class="nav-item has-sub {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') || Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') || Route::is('user_course_details.index') || Route::is('user_course_details.create') || Route::is('user_course_details.edit') || Route::is('user_course_details.destroy') || Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'open' : ''}}">
-                                <a href="javascript:void(0)"><i class="ik ik-user"></i><span>Users</span></a>
-                                <div class="submenu-content">
-                                    <a href="{{route('users.index')}}"
-                                        class="menu-item {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') ? 'active' : ''}}">User</a>
-                                    <a href="{{route('user_courses.index')}}"
-                                        class="menu-item {{Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') ? 'active' : ''}}">User
-                                        Courses</a>
-                                    <a href="{{route('user_details.index')}}"
-                                        class="menu-item {{Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'active' : ''}}">User
-                                        Details</a>
-                                </div>
-                            </div>
-                        </nav>
+                            <a href="{{route('sub_categories.index')}}"><i class="ik ik-film"></i><span>Sub
+                                    Categories</span></a>
                     </div>
-                </div>
-            </div>
-            <div class="main-content">
-                <div class="container-fluid">
-                    <div class="page-header">
-                        <div class="row align-items-end">
-                            <div class="col-lg-8">
-                                <div class="page-header-title">
-                                    @yield('iconHeader')
-                                    <div class="d-inline">
-                                        <h5>@yield('titleHeader')</h5>
-                                        <span>@yield('subtitleHeader')</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <nav class="breadcrumb-container" aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            <i class="ik ik-home"></i><a href="{{route('dashboard')}}"> Home</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">@yield('breadcrumb')</li>
-                                    </ol>
-                                </nav>
-                            </div>
+                    <div
+                        class="nav-item {{Route::is('courses.index') || Route::is('courses.create') || Route::is('courses.edit') || Route::is('courses.destroy') ? 'active' : ''}}">
+                        <a href="{{route('courses.index')}}"><i class="ik ik-layers"></i><span>Courses</span></a>
+                    </div> --}}
+
+                    <div
+                        class="nav-item has-sub {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') || Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') || Route::is('user_course_details.index') || Route::is('user_course_details.create') || Route::is('user_course_details.edit') || Route::is('user_course_details.destroy') || Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'open' : ''}}">
+                        <a href="javascript:void(0)"><i class="ik ik-user"></i><span>Users</span></a>
+                        <div class="submenu-content">
+                            <a href="{{route('users.index')}}"
+                                class="menu-item {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') ? 'active' : ''}}">User</a>
+                            <a href="{{route('user_courses.index')}}"
+                                class="menu-item {{Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') ? 'active' : ''}}">User
+                                Courses</a>
+                            <a href="{{route('user_details.index')}}"
+                                class="menu-item {{Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'active' : ''}}">User
+                                Details</a>
                         </div>
                     </div>
-                    @yield('content-wrapper')
+                    </nav>
                 </div>
             </div>
-
-            <div class='footer-buttons'>
-                @yield('fixedButton')
-            </div>
-
-            <footer class="footer">
-                <div class="w-100 clearfix"><span class="text-center text-sm-left d-md-inline-block">Copyright ©
-                        2021 </span></div>
-            </footer>
         </div>
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="page-header">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                @yield('iconHeader')
+                                <div class="d-inline">
+                                    <h5>@yield('titleHeader')</h5>
+                                    <span>@yield('subtitleHeader')</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <nav class="breadcrumb-container" aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item">
+                                        <i class="ik ik-home"></i><a href="{{route('dashboard')}}"> Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active" aria-current="page">@yield('breadcrumb')</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+                @yield('content-wrapper')
+            </div>
+        </div>
+
+        <div class='footer-buttons'>
+            @yield('fixedButton')
+        </div>
+
+        <footer class="footer">
+            <div class="w-100 clearfix"><span class="text-center text-sm-left d-md-inline-block">Copyright ©
+                    2021 </span></div>
+        </footer>
+    </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <script>
-        $('.mobile-nav-toggle').click(function(){
+        $('.mobile-nav-toggle').click(function () {
             $('#btn-sidebar').removeClass('hide-sidebar')
         })
+
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-        window.jQuery || document.write('<script src="assets/admin/src/js/vendor/jquery-3.3.1.min.js"><\/script>')
+        window.jQuery || document.write(
+            '<script src="{{url("assets/admin/src/js/vendor/jquery-3.3.1.min.js")}}"><\/script>')
 
     </script>
     <script src="{{url('assets/admin/plugins/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{url('assets/admin/plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{url('assets/admin/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/select2/dist/js/select2.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/summernote/dist/summernote-bs4.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/jquery.repeater/jquery.repeater.min.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/mohithg-switchery/dist/switchery.min.js')}}"></script>
+    <script src="{{url('assets/admin/dist/js/theme.min.js')}}"></script>
+    <script src="{{url('assets/admin/js/form-advanced.js')}}"></script>
+
     <script src="{{url('assets/admin/plugins/screenfull/dist/screenfull.js')}}"></script>
     <script src="{{url('assets/admin/plugins/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{url('assets/admin/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -294,16 +308,9 @@
 
     <script src="{{url('assets/admin/js/widgets.js')}}"></script>
     <script src="{{url('assets/admin/js/charts.js')}}"></script>
-    <script src="{{url('assets/admin/dist/js/theme.min.js')}}"></script>
-    <script src="{{url('assets/admin/plugins/summernote/dist/summernote-bs4.min.js')}}"></script>
-    <script src="{{url('assets/admin/plugins/select2/dist/js/select2.min.js')}}"></script>
-    <script src="{{url('assets/admin/js/form-advanced.js')}}"></script>
-    <script src="{{url('assets/admin/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
-    <script src="{{url('assets/admin/plugins/jquery.repeater/jquery.repeater.min.js')}}"></script>
-    <script src="{{url('assets/admin/plugins/mohithg-switchery/dist/switchery.min.js')}}"></script>
-    <script src="{{url('assets/admin/dist/js/theme.min.js')}}"></script>
     <script src="{{url('assets/admin/js/alerts.js')}}"></script>
     <script src="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
+
     @yield('footer')
 
 </body>

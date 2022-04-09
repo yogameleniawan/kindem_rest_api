@@ -98,7 +98,7 @@ class UsersController extends Controller
         $table->email = $request->email;
         $table->password = $request->password;
         if ($table->save()) {
-            return redirect()->route('categories.index')
+            return redirect()->route('materi.index')
                 ->with('success', 'Users created successfully.');
         }
     }
