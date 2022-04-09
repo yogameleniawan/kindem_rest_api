@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Admin Page | @yield('title')
     </title>
-    <link rel="icon" href="{{url('images/icon.png')}}">
+    <link rel="icon" href="{{url('images/kindem-logo-single.png')}}">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
