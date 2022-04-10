@@ -379,6 +379,10 @@ var table = $('#data-table').DataTable({
 
         $('#password-form').removeClass('d-none')
         $('#user-stats').addClass('d-none')
+
+        $('#id').val('')
+        $('#email').val('')
+        $('#nama').val('')
     }
 
     function editUserPage(id,email,name)
@@ -487,9 +491,7 @@ var table = $('#data-table').DataTable({
                     loaderBg: '#f96868'
                 })
                 addUserPage()
-                    $('#id').val('')
-                    $('#email').val('')
-                    $('#nama').val('')
+
                 table.ajax.reload();
             }
         });
@@ -525,9 +527,6 @@ var table = $('#data-table').DataTable({
                     })
                     $('#user-loader').addClass('d-none')
                     addUserPage()
-                    $('#id').val('')
-                    $('#email').val('')
-                    $('#nama').val('')
                 table.ajax.reload()
             }
         });
