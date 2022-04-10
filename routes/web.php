@@ -3,6 +3,7 @@
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CoursesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SubCategoriesController;
 use App\Http\Controllers\UserCoursesController;
 use App\Http\Controllers\UserDetailsController;
@@ -24,9 +25,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard.index');
-    })->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::prefix('admin')->group(function () {
         Route::resources([
             'materi' => CategoriesController::class,
