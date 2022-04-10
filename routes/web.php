@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard.index');
     })->name('dashboard');
@@ -44,7 +44,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('updateCategory', [APIController::class, 'updateCategory'])->name('updateCategory');
         Route::post('updateMateri', [APIController::class, 'updateMateri'])->name('updateMateri');
         Route::post('updateSoal', [APIController::class, 'updateSoal'])->name('updateSoal');
+        Route::post('updateUser', [APIController::class, 'updateUser'])->name('updateUser');
     });
+    Route::get('userStatistic', [APIController::class, 'userStatistic'])->name('userStatistic');
 });
 
 

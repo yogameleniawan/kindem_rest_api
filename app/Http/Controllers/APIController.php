@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Helpers\GDrive;
 use App\Models\Category;
+use App\Models\CompleteCategory;
 use App\Models\Course;
+use App\Models\Level;
 use App\Models\SubCategory;
+use App\Models\User;
+use App\Models\UserCourse;
+use App\Models\UserLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -93,5 +100,123 @@ class APIController extends Controller
         if ($table->save()) {
             return response()->json(['data' => $table], 200);
         }
+    }
+
+    public function updateUser(Request $request)
+    {
+        $table = User::find($request->id);
+        $table->email = $request->email;
+        $table->name = $request->name;
+        if ($request->password) {
+            $table->password = Hash::make($request->password);
+        } else {
+            $table->password = $table->password;
+        }
+        if ($table->save()) {
+            return response()->json(['data' => $table], 200);
+        }
+    }
+
+    public function userStatistic(Request $request)
+    {
+        $user_id = $request->user_id;
+        $user_level = UserLevel::leftJoin('users', 'user_levels.user_id', '=', 'users.id')
+            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->select('user_levels.user_id as user_id', 'levels.name as name', 'levels.point as point')
+            ->where('user_levels.user_id', $user_id)
+            ->first();
+        $user_level_name = $user_level->name;
+        $next_level = Level::where('point', '>', $user_level->point)
+            ->orderBy('point', 'asc')
+            ->first();
+
+        $user_point = UserCourse::where('user_id', $user_id)
+            ->where('is_true', true)
+            ->count();
+        $sisa_point = $next_level->point - $user_point;
+        $percent =   number_format(round(($user_point / $next_level->point) * 10) * 10, 0);
+
+        // Chapter Card
+        $chapter_complete = CompleteCategory::where('user_id', $user_id)
+            ->where('is_complete', true)
+            ->count();
+        if ($chapter_complete == null) {
+            $chapter_complete = 0;
+        }
+
+        $chapter_count = Category::all()->count();
+        $chapter_incomplete = $chapter_count - $chapter_complete;
+        // Chapter Card
+
+        // Materi Card
+        $materi_complete = UserCourse::leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
+            ->select('user_courses.sub_category_id as sub_category_id', 'user_courses.checked as checked', 'user_courses.user_id as user_id', 'user_courses.is_true as is_true')
+            ->where('user_id', $user_id)
+            ->where('checked', true)
+            ->groupBy('sub_category_id')
+            ->get()
+            ->count();
+        $materi = SubCategory::all()->count();
+        $materi_incomplete = $materi - $materi_complete;
+        // Materi Card
+
+        // Benar
+        $jumlah_benar = UserCourse::where('user_id', $user_id)
+            ->where('is_true', true)
+            ->count();
+
+        $materi_dikuasai = UserCourse::leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
+            ->select('user_courses.sub_category_id as sub_category_id', 'user_courses.checked as checked', 'user_courses.user_id as user_id', 'user_courses.is_true as is_true', 'sub_categories.name as name', DB::raw('COUNT(user_courses.is_true) as total_true'))
+            ->where('user_id', $user_id)
+            ->where('is_true', true)
+            ->groupBy('sub_category_id')
+            ->orderBy('total_true', 'desc')
+            ->first();
+        if ($materi_dikuasai == null) {
+            $nama_materi_dikuasai = "Belum ada";
+        } else {
+            $nama_materi_dikuasai = $materi_dikuasai->name;
+        }
+        // Benar
+
+        // Salah
+        $jumlah_salah = UserCourse::where('user_id', $user_id)
+            ->where('is_true', false)
+            ->where('checked', true)
+            ->count();
+
+        $materi_tidak_dikuasai = UserCourse::leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
+            ->select('user_courses.sub_category_id as sub_category_id', 'user_courses.checked as checked', 'user_courses.user_id as user_id', 'user_courses.is_true as is_true', 'sub_categories.name as name', DB::raw('COUNT(user_courses.is_true) as total_false'))
+            ->where('user_id', $user_id)
+            ->where('is_true', false)
+            ->where('checked', true)
+            ->groupBy('sub_category_id')
+            ->orderBy('total_false', 'desc')
+            ->first();
+
+        if ($materi_tidak_dikuasai == null) {
+            $nama_materi_tidak_dikuasai = "Belum ada";
+        } else {
+            $nama_materi_tidak_dikuasai = $materi_tidak_dikuasai->name;
+        }
+        // Salah
+
+        $data = array(
+            [
+                'user_level_name' => $user_level_name,
+                'user_point' => $user_point,
+                'sisa_point' => $sisa_point,
+                'percent' => $percent,
+                'chapter_complete' => $chapter_complete,
+                'chapter_incomplete' => $chapter_incomplete,
+                'materi_complete' => $materi_complete,
+                'materi_incomplete' => $materi_incomplete,
+                'jumlah_benar' => $jumlah_benar,
+                'nama_materi_dikuasai' => $nama_materi_dikuasai,
+                'jumlah_salah' => $jumlah_salah,
+                'nama_materi_tidak_dikuasai' => $nama_materi_tidak_dikuasai,
+            ]
+        );
+        return response()->json(['data' => $data], 200);
     }
 }

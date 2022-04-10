@@ -14,7 +14,7 @@ Dashboard
 </style>
 @endsection
 @section('iconHeader')
-<i class="ik ik-menu bg-icon"></i>
+<i class="ik ik-bar-chart-2 bg-icon"></i>
 @endsection
 @section('titleHeader')
 Dashboard

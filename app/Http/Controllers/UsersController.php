@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Level;
 use App\Models\User;
+use App\Models\UserLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,13 +22,13 @@ class UsersController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('users')
-                ->select(['users.id AS id', 'users.email AS email', 'users.password AS password', 'users.role AS role']);
+                ->select(['users.id AS id', 'users.email AS email', 'users.password AS password', 'users.name AS name']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
 
-                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item" href="' . url('/admin/users/' . $data->id . '/edit') . '"><li> <i class="ik ik-edit" style="color: green;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" href="#" data-toggle="modal"
-                    data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: red;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
+                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editUserPage(`' . $data->id . '`,`' . $data->email . '`,`' . $data->name . ',`)"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteUserPage(`' . $data->id .  '`,`' . $data->email . '`,`' . $data->name . '`)" data-toggle="modal"
+                    data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -52,13 +55,26 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::orderBy('id', 'desc')->first();
         $table = new User();
-        $table->id = Str::random(10);
+        $table->id = $user->id + 1;
         $table->email = $request->email;
-        $table->password = $request->password;
-        if ($table->save()) {
-            return redirect()->route('users.index')
-                ->with('success', 'Users created successfully.');
+        $table->name = $request->name;
+        $table->password = Hash::make($request->password);
+        $table->role = 'student';
+        $table->save();
+
+        $level = Level::orderBy('point', 'asc')->first();
+
+        $user_level = new UserLevel();
+        $user_level->id = Str::random(10);
+        $user_level->user_id = $user->id + 1;
+        $user_level->level_id = $level->id;
+
+        if ($user_level->save()) {
+            return response()->json(['data' => $table], 200);
+            // return redirect()->route('users.index')
+            //     ->with('success', 'Users created successfully.');
         }
     }
 
@@ -114,8 +130,7 @@ class UsersController extends Controller
         $table = User::find($request->id);
 
         if ($table->delete()) {
-            return redirect()->route('users.index')
-                ->with('success', 'Users deleted successfully.');
+            return response()->json(['data' => $table], 200);
         }
     }
 }

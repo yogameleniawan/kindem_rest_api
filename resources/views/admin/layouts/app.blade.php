@@ -196,75 +196,55 @@
                             </div>
                             <div
                                 class="nav-item {{Route::is('materi.index') || Route::is('materi.create') || Route::is('materi.edit') || Route::is('materi.destroy') ? 'active' : ''}}">
-                                <a href="{{route('materi.index')}}"><i
-                                        class="ik ik-menu"></i><span>Materi</span></a>
+                                <a href="{{route('materi.index')}}"><i class="ik ik-menu"></i><span>Materi</span></a>
                             </div>
-                            {{-- <div
-                                class="nav-item {{Route::is('sub_categories.index') || Route::is('sub_categories.create') || Route::is('sub_categories.edit') || Route::is('sub_categories.destroy') ? 'active' : ''}}">
-                            <a href="{{route('sub_categories.index')}}"><i class="ik ik-film"></i><span>Sub
-                                    Categories</span></a>
-                    </div>
-                    <div
-                        class="nav-item {{Route::is('courses.index') || Route::is('courses.create') || Route::is('courses.edit') || Route::is('courses.destroy') ? 'active' : ''}}">
-                        <a href="{{route('courses.index')}}"><i class="ik ik-layers"></i><span>Courses</span></a>
-                    </div> --}}
 
-                    <div
-                        class="nav-item has-sub {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') || Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') || Route::is('user_course_details.index') || Route::is('user_course_details.create') || Route::is('user_course_details.edit') || Route::is('user_course_details.destroy') || Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'open' : ''}}">
-                        <a href="javascript:void(0)"><i class="ik ik-user"></i><span>Users</span></a>
-                        <div class="submenu-content">
-                            <a href="{{route('users.index')}}"
-                                class="menu-item {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') ? 'active' : ''}}">User</a>
-                            <a href="{{route('user_courses.index')}}"
-                                class="menu-item {{Route::is('user_courses.index') || Route::is('user_courses.create') || Route::is('user_courses.edit') || Route::is('user_courses.destroy') ? 'active' : ''}}">User
-                                Courses</a>
-                            <a href="{{route('user_details.index')}}"
-                                class="menu-item {{Route::is('user_details.index') || Route::is('user_details.create') || Route::is('user_details.edit') || Route::is('user_details.destroy') ? 'active' : ''}}">User
-                                Details</a>
-                        </div>
+                            <div
+                                class="nav-item {{Route::is('users.index') || Route::is('users.create') || Route::is('users.edit') || Route::is('users.destroy') ? 'active' : ''}}">
+                                <a href="{{route('users.index')}}"><i class="ik ik-user"></i><span>Users</span></a>
+                            </div>
+                        </nav>
                     </div>
-                    </nav>
                 </div>
             </div>
-        </div>
-        <div class="main-content">
-            <div class="container-fluid">
-                <div class="page-header">
-                    <div class="row align-items-end">
-                        <div class="col-lg-8">
-                            <div class="page-header-title">
-                                @yield('iconHeader')
-                                <div class="d-inline">
-                                    <h5>@yield('titleHeader')</h5>
-                                    <span>@yield('subtitleHeader')</span>
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="page-header">
+                        <div class="row align-items-end">
+                            <div class="col-lg-8">
+                                <div class="page-header-title">
+                                    @yield('iconHeader')
+                                    <div class="d-inline">
+                                        <h5>@yield('titleHeader')</h5>
+                                        <span>@yield('subtitleHeader')</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <nav class="breadcrumb-container" aria-label="breadcrumb">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <i class="ik ik-home"></i><a href="{{route('dashboard')}}"> Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active" aria-current="page">@yield('breadcrumb')</li>
-                                </ol>
-                            </nav>
+                            <div class="col-lg-4">
+                                <nav class="breadcrumb-container" aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <i class="ik ik-home"></i><a href="{{route('dashboard')}}"> Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">@yield('breadcrumb')</li>
+                                    </ol>
+                                </nav>
+                            </div>
                         </div>
                     </div>
+                    @yield('content-wrapper')
                 </div>
-                @yield('content-wrapper')
             </div>
-        </div>
 
-        <div class='footer-buttons'>
-            @yield('fixedButton')
-        </div>
+            <div class='footer-buttons'>
+                @yield('fixedButton')
+            </div>
 
-        <footer class="footer">
-            <div class="w-100 clearfix"><span class="text-center text-sm-left d-md-inline-block">Copyright ©
-                    2021 </span></div>
-        </footer>
-    </div>
+            <footer class="footer">
+                <div class="w-100 clearfix"><span class="text-center text-sm-left d-md-inline-block">Copyright ©
+                        2021 </span></div>
+            </footer>
+        </div>
     </div>
 
 
