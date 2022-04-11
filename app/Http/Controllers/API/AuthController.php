@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Level;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserLevel;
+use App\Models\UserSession;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth as Auth;
 use Illuminate\Support\Facades\Validator as Validator;
@@ -49,9 +51,11 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        $level = Level::orderBy('point', 'asc')->first();
+
         $user_level = new UserLevel();
         $user_level->id = Str::random(10);
-        $user_level->level_id = '70SFBb1pje';
+        $user_level->level_id = $level->id;
         $user_level->user_id = $user->id;
         $user_level->save();
 

@@ -42,7 +42,7 @@ class CategoriesController extends Controller
                 ->rawColumns(['action', 'image'])
                 ->make(true);
         }
-        return view('admin.categories.index');
+        return view('admin.materi.index');
     }
 
     /**
@@ -52,7 +52,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.add');
+        //
     }
 
     /**
@@ -85,8 +85,6 @@ class CategoriesController extends Controller
         }
 
         if ($table->save()) {
-            // return redirect()->route('categories.index')
-            //     ->with('success', 'Category created successfully.');
             return response()->json($table, 200);
         }
     }
@@ -141,8 +139,6 @@ class CategoriesController extends Controller
         $table->level = $table->level;
         if ($table->save()) {
             return response()->json($table, 200);
-            // return redirect()->route('categories.index')
-            //     ->with('success', 'Category created successfully.');
         }
     }
 

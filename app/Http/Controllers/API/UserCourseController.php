@@ -12,6 +12,7 @@ use App\Models\Score;
 use App\Models\SubCategory;
 use App\Models\UserCourse;
 use App\Models\UserLevel;
+use App\Models\UserSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

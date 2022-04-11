@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use App\Models\UserSession;
 use App\Models\UserTutorial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -47,6 +48,7 @@ class UsersController extends Controller
     public function tutorialCheck(Request $request)
     {
         $data = UserTutorial::where('page', $request->page)->where('user_id', Auth::user()->id)->count();
+
         if ($data > 0) {
             return response()->json(['is_done' => true], 200);
         } else {
@@ -58,5 +60,15 @@ class UsersController extends Controller
             $tutorial->save();
             return response()->json(['is_done' => false], 200);
         }
+    }
+
+    public function addSession()
+    {
+        $user_session = new UserSession();
+        $user_session->id = Str::random(10);
+        $user_session->user_id = Auth::user()->id;
+        $user_session->save();
+
+        return response()->json(['data' => $user_session], 200);
     }
 }

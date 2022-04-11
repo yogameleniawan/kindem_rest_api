@@ -474,6 +474,21 @@ Materi
                                 </div>
                             </div>
                         </div>
+
+                        <img id="output_ujian" width="30%" />
+
+                        <div id="image_course">
+                            <div class="form-group">
+                                <label>Gambar Ujian</label>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                    </span>
+                                    <input accept="image/*" onchange="loadFileUjian(event)" type="file" class="form-control  "
+                                        placeholder="Image" id="image_course" name="image_course">
+                                </div>
+                            </div>
+                        </div>
                     <div id="voice">
                         <div class="form-group">
                             <label for="">Soal Voice Recognition </label> <small>*Apabila tidak aktif maka soal akan menjadi pilihan ganda</small><br>
@@ -513,7 +528,8 @@ Materi
                                                 <th>Materi</th>
                                                 <th>Bahasa Indonesia</th>
                                                 <th>Bahasa Inggris</th>
-                                                <th>Gambar</th>
+                                                <th>Gambar Materi</th>
+                                                <th>Gambar Ujian</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -522,6 +538,7 @@ Materi
                                                 <th>Materi</th>
                                                 <th>Bahasa Indonesia</th>
                                                 <th>Bahasa Inggris</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -694,6 +711,7 @@ Materi
                     name: 'courses.english_text '
                 },
                 {data: 'image', name: 'image', orderable: false, searchable: false},
+                {data: 'image_course', name: 'image_course', orderable: false, searchable: false},
             ]
         });
 
@@ -779,10 +797,12 @@ Materi
         $('#is_voice').prop('checked',false)
         var output = document.getElementById('output_materi');
         output.src = '';
+        var output_ujian = document.getElementById('output_ujian');
+        output_ujian.src = '';
         $('#select_materi option[value=""]').attr('selected', 'selected');
     }
 
-    function editCoursePage(id, sub_category_id, indonesia_text, english_text, image,is_voice)
+    function editCoursePage(id, sub_category_id, indonesia_text, english_text, image,image_course,is_voice)
     {
         $('#course-btn-add').addClass('d-none')
         $('#course-btn-edit').removeClass('d-none')
@@ -800,12 +820,16 @@ Materi
         }else{
             $('#is_voice').prop('checked',false)
         }
+
         var output = document.getElementById('output_materi');
         output.src = image;
+
+        var output_ujian = document.getElementById('output_ujian');
+        output_ujian.src = image_course;
         $('#select_materi option[value="'+sub_category_id+'"]').attr('selected', 'selected');
     }
 
-    function deleteCoursePage(id, sub_category_id, indonesia_text, english_text, image,is_voice)
+    function deleteCoursePage(id, sub_category_id, indonesia_text, english_text, image,image_course,is_voice)
     {
         $('#course-btn-add').addClass('d-none')
         $('#course-btn-edit').addClass('d-none')
@@ -821,6 +845,8 @@ Materi
 
         var output = document.getElementById('output_materi');
         output.src = image;
+        var output_ujian = document.getElementById('output_ujian');
+        output_ujian.src = image;
     }
 
     function addCourse()
@@ -1445,6 +1471,14 @@ Materi
 
     var loadFileMateri = function (event) {
         var output = document.getElementById('output_materi');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function () {
+            URL.revokeObjectURL(output.src)
+        }
+    };
+
+    var loadFileUjian = function (event) {
+        var output = document.getElementById('output_ujian');
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function () {
             URL.revokeObjectURL(output.src)

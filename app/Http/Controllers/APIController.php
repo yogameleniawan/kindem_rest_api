@@ -92,6 +92,19 @@ class APIController extends Controller
         } else {
             $table->image = $table->image;
         }
+        if ($request->file('image_course')) {
+            $image_course = $request->file('image_course');
+            $file_image_course = $image_course->getContent();
+            $filename_image_course = $image_course->getClientOriginalName();
+            $filename_image_course = Str::random(16) . $filename_image_course;
+            Storage::disk('google')->put($filename_image_course, $file_image_course);
+            $listContents_image_course = Storage::disk('google')->listContents();
+            $drive_image_course = new GDrive();
+            $id_image_course = $drive_image_course->getDrivePath($listContents_image_course, 'name', $filename_image_course);
+            $table->image_course = "https://drive.google.com/uc?id=" . $id_image_course['path'] . "&export=media";
+        } else {
+            $table->image_course = $table->image_course;
+        }
         if ($request->is_voice == 'true') {
             $table->is_voice = true;
         } else {
