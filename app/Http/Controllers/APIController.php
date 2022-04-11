@@ -11,7 +11,9 @@ use App\Models\SubCategory;
 use App\Models\User;
 use App\Models\UserCourse;
 use App\Models\UserLevel;
+use App\Models\UserSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -230,6 +232,18 @@ class APIController extends Controller
                 'nama_materi_tidak_dikuasai' => $nama_materi_tidak_dikuasai,
             ]
         );
+        return response()->json(['data' => $data], 200);
+    }
+
+    public function chart(Request $request)
+    {
+        $data = UserSession::select(DB::raw("COUNT(*) as count"), 'created_at', 'user_id', DB::raw("DAY(created_at) as day"), DB::raw('WEEKDAY(created_at) as week_day'))->where('user_id', $request->user_id)->groupBy(DB::raw('DAY(created_at)'))->get()->groupBy(function ($date) {
+            $created_at = Carbon::parse($date->created_at);
+            $start = $created_at->startOfWeek()->format('d-m-Y');
+            $end = $created_at->endOfWeek()->format('d-m-Y');
+            return "{$start} - {$end}";
+        });
+
         return response()->json(['data' => $data], 200);
     }
 }

@@ -46,6 +46,7 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
         Route::post('updateUser', [APIController::class, 'updateUser'])->name('updateUser');
     });
     Route::get('userStatistic', [APIController::class, 'userStatistic'])->name('userStatistic');
+    Route::get('chart', [APIController::class, 'chart'])->name('chart');
 });
 
 

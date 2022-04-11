@@ -268,7 +268,20 @@ Users
                                 </div>
                             </div>
                         </div>
+
+
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Chart</h2>
+    <select name="" id="date_chart"></select>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <canvas id="chLine" height="100"></canvas>
                 </div>
             </div>
         </div>
@@ -310,10 +323,126 @@ Users
 <script src="{{ url('assets/admin/dynamictable/dynamitable.jquery.min.js') }}"></script>
 
 <script type="text/javascript">
+
     $(document).on('click', '.delete', function () {
         let id = $(this).attr('data-id');
         $('#id').val(id);
     });
+    $(document).ready(function () {
+        initSelectChart()
+        initChart()
+    })
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+<script>
+var myChart
+$('#date_chart').change(function(){
+    myChart.destroy()
+    initChart()
+})
+
+function initSelectChart()
+{
+    $.ajax({
+            async: false,
+            url: `{{url("/chart?user_id=`+3+`")}}`,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function(jqXHR, settings) {
+                console.log(settings.url);
+            },
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                jQuery.each(data.data, function(value) {
+                    $('#date_chart').append(`<option value='${value}'>${value}</option>`)
+                });
+            }
+        });
+}
+function initChart(){
+    var result_item = ""
+    var minggu = ''
+    var senin = ''
+    var selasa = ''
+    var rabu = ''
+    var kamis = ''
+    var jumat = ''
+    var sabtu = ''
+    $.ajax({
+            async: false,
+            url: `{{url("/chart?user_id=`+3+`")}}`,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function(jqXHR, settings) {
+                console.log(settings.url);
+            },
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                result_item = data.data[$('#date_chart').val()]
+                senin = result_item.find(o => o.week_day === 0) == null ? '0' : result_item.find(o => o.week_day === 0).count
+                selasa = result_item.find(o => o.week_day === 1) == null ? '0' : result_item.find(o => o.week_day === 1).count
+                rabu = result_item.find(o => o.week_day === 2) == null ? '0' : result_item.find(o => o.week_day === 2).count
+                kamis = result_item.find(o => o.week_day === 3) == null ? '0' : result_item.find(o => o.week_day === 3).count
+                jumat = result_item.find(o => o.week_day === 4) == null ? '0' : result_item.find(o => o.week_day === 4).count
+                sabtu = result_item.find(o => o.week_day === 5) == null ? '0' : result_item.find(o => o.week_day === 5).count
+                minggu = result_item.find(o => o.week_day === 6) == null ? '0' : result_item.find(o => o.week_day === 6).count
+            }
+        });
+
+
+    var data_chart = [senin,selasa,rabu,kamis,jumat,sabtu,minggu]
+    console.log(data_chart)
+    var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+
+    var chartData = {
+    labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
+    datasets: [{
+        label: 'Total Membuka Aplikasi',
+        data: data_chart,
+        backgroundColor: 'transparent',
+        borderColor: colors[0],
+        borderWidth: 4,
+        pointBackgroundColor: colors[0]
+    }]
+    };
+
+    if (chLine) {
+    myChart = new Chart(chLine, {
+    type: 'line',
+    data: chartData,
+    options: {
+        scales: {
+        yAxes: [{
+            ticks: {
+            beginAtZero: false
+            }
+        }]
+        },
+        legend: {
+        display: false
+        }
+    }
+    });
+    }
+}
 
 </script>
 
@@ -574,5 +703,11 @@ var table = $('#data-table').DataTable({
             }
         });
     }
+
+    function chart()
+    {
+
+    }
 </script>
+
 @endsection
