@@ -8,6 +8,15 @@ Dashboard
         cursor: pointer;
     }
 
+    .fa {
+        background-color: #007bff;
+        color: white;
+        padding: 15px;
+        font-size: 55px;
+        border-radius: 15px;
+        margin-right: 5px
+    }
+
     #trHover:hover {
         background-color: #e6e6e6;
     }
@@ -40,6 +49,7 @@ Dashboard
         padding: 20px;
         font-size: 18px;
     }
+
     .gridmore {
         color: #000;
         opacity: 50%;
@@ -49,87 +59,139 @@ Dashboard
 </style>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card-body">
-                        <div class="dt-responsive">
-                            <div class="wrapper">
-                                <div class="grid">
-                                    Categories
-                                    <hr>
-                                    <div class="gridmore">
-                                        <a href="{{route('materi.index')}}">More ...</a>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    Sub Categories
-                                    <hr>
-                                    <div class="gridmore">
-                                        <a href="{{route('sub_categories.index')}}">More ...</a>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    Courses
-                                    <hr>
-                                    <div class="gridmore">
-                                        <a href="{{route('courses.index')}}">More ...</a>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    User
-                                    <hr>
-                                    <div class="gridmore">
-                                        <a href="{{route('users.index')}}">More ...</a>
-                                    </div>
-                                </div>
-                                <div class="grid">
-                                    User Courses
-                                    <hr>
-                                    <div class="gridmore">
-                                        <a href="{{route('user_courses.index')}}">More ...</a>
-                                    </div>
-                                </div>
-                            </div>
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-6">
+            <div class="card">
+                <div class="p-3">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <h5 class="mb-0">Chapter</h5>
+                            <h2 class="mb-0 mt-0" style="font-size: 50px;"> <b> {{$countChapter}} </b></h2>
+                        </div>
+                        <div class="col-auto">
+                            <h1><i class="fa fa-th-large"></i></h1>
                         </div>
                     </div>
-                    <!-- /.box-body -->
                 </div>
-                <!-- /.box -->
             </div>
-            <!-- /.col -->
         </div>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Confirm to delete
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <div class="col-xl-3 col-lg-6 col-6">
+            <div class="card">
+                <div class="p-3">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <h5 class="mb-0">Materi</h5>
+                            <h2 class="mb-0 mt-0" style="font-size: 50px;"> <b> {{$countMateri}} </b></h2>
+                        </div>
+                        <div class="col-auto">
+                            <h1><i class="fa fa-book-open"></i></h1>
+                        </div>
                     </div>
-                    <form action="{{ route('sub_categories.destroy', 'id') }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <div class="modal-body">
-                            <input id="id" name="id" type="hidden">
-                            You want to delete?
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-6">
+            <div class="card">
+                <div class="p-3">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <h5 class="mb-0">Soal</h5>
+                            <h2 class="mb-0 mt-0" style="font-size: 50px;"> <b> {{$countSoal}} </b></h2>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-danger">Yes</button>
+                        <div class="col-auto">
+                            <h1><i class="fa fa-list"></i></h1>
                         </div>
-                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-6">
+            <div class="card">
+                <div class="p-3">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <h5 class="mb-0">User</h5>
+                            <h2 class="mb-0 mt-0" style="font-size: 50px;"> <b> {{$countUser}}</b></h2>
+                        </div>
+                        <div class="col-auto">
+                            <h1><i class="fa fa-user"></i></h1>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
+    <div class="row">
+        <div class="col-xl-4 col-lg-12 col-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h4> <b>Jumlah Rank User </b></h4>
+                </div>
+                <div class="card-body">
+                    @foreach ($levels as $level)
+                    <div class="row d-flex justify-content-between align-items-center ">
+                        <div class="col">
+                            <h5 class="mb-3"> {{$level->name}}</h5>
+                        </div>
+                        <div class="col">
+                            <?php
+                            $countLevel = DB::table('user_levels')->where('level_id', $level->id)->count();
+                            ?>
+                            <p class="mb-3"><b>{{$countLevel}}</b></p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-12 col-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h5><b>Materi Yang Telah Diselesaikan</b></h5>
+                </div>
+                <div class="card-body">
+                    <div class="row d-flex justify-content-between align-items-center ">
+                        <div class="col">
+                            <h5 class="mb-0"> </h5>
+                        </div>
+                        <div class="col">
+                            <p class="mb-0"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-12 col-12">
+            <div class="card" style="min-height: 42vh;">
+                <div class="card-header pb-0">
+                    <h4> <b>Top 5 User</b></h4>
+                </div>
+                <div class="card-body">
+                    @foreach ($levels as $level)
+                    <div class="row d-flex justify-content-between align-items-center mb-3">
+                        <div class="col-6">
+                            <p class="mb-0">Murid Kesayangannn</p>
+                        </div>
+                        <div class="col-3">
+                            <p class="mb-0"> {{$level->name}}</p>
+                        </div>
+                        <div class="col-3">
+                            <?php
+                            $countLevel = DB::table('user_levels')->where('level_id', $level->id)->count();
+                            ?>
+                            <p class="mb-0">111{{$countLevel}}</p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 <!-- /.content-wrapper -->
 @endsection
