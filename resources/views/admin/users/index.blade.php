@@ -273,7 +273,29 @@ Users
                                 <div class="loader"></div>
                             </div>
                         </div>
-                        <select class="form-control select2" name="" id="date_chart"></select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p style="background-color: #007bff;color: white;text-align: center;padding: 7px;">Total Membuka Aplikasi Pada : </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control select2" name="" id="date_chart"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p style="background-color: #28a745;color: white;text-align: center;padding: 7px;">Total Mengerjakan Materi Pada : </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control select2" name="" id="materi_chart_select"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row" id="chart-data">
                             <div class="col-md-12">
                                 <div class="card shadow-sm">
@@ -334,6 +356,11 @@ $('#date_chart').change(function(){
     initChart()
 })
 
+$('#materi_chart_select').change(function(){
+    myChart.destroy()
+    initChart()
+})
+
 function initSelectChart()
 {
     var id = $('#id').val()
@@ -356,13 +383,24 @@ function initSelectChart()
             },
             success: function (data) {
                 var html = ``
+                var materi = ``
                 jQuery.each(data.data, function(value) {
                     html += `<option value='${value}'>${value}</option>`
                 });
+                jQuery.each(data.materi, function(value) {
+                    materi += `<option value='${value}'>${value}</option>`
+                });
+
                 if(html == ''){
                     $('#date_chart').html('<option selected disabled>Data tidak tersedia</option>')
                 }else{
                     $('#date_chart').html(html)
+                }
+
+                if(materi == ''){
+                    $('#materi_chart_select').html('<option selected disabled>Data tidak tersedia</option>')
+                }else{
+                    $('#materi_chart_select').html(materi)
                 }
             }
         });
@@ -379,6 +417,15 @@ function initChart(){
     var kamis = ''
     var jumat = ''
     var sabtu = ''
+
+    var result_item_materi = ""
+    var minggu_materi = ''
+    var senin_materi = ''
+    var selasa_materi = ''
+    var rabu_materi = ''
+    var kamis_materi = ''
+    var jumat_materi = ''
+    var sabtu_materi = ''
 
     var id = $('#id').val()
     // console.log(id)
@@ -403,6 +450,7 @@ function initChart(){
                 $('#chart-loader').addClass('d-none')
                 $('#date_chart').removeClass('d-none')
                 $('#chart-data').removeClass('d-none')
+
                 result_item = data.data[$('#date_chart').val()]
                 senin = result_item.find(o => o.week_day === 0) == null ? '0' : result_item.find(o => o.week_day === 0).count
                 selasa = result_item.find(o => o.week_day === 1) == null ? '0' : result_item.find(o => o.week_day === 1).count
@@ -411,22 +459,40 @@ function initChart(){
                 jumat = result_item.find(o => o.week_day === 4) == null ? '0' : result_item.find(o => o.week_day === 4).count
                 sabtu = result_item.find(o => o.week_day === 5) == null ? '0' : result_item.find(o => o.week_day === 5).count
                 minggu = result_item.find(o => o.week_day === 6) == null ? '0' : result_item.find(o => o.week_day === 6).count
+
+                result_item_materi = data.materi[$('#materi_chart_select').val()]
+                senin_materi = result_item_materi.find(o => o.week_day === 0) == null ? '0' : result_item_materi.find(o => o.week_day === 0).count
+                selasa_materi = result_item_materi.find(o => o.week_day === 1) == null ? '0' : result_item_materi.find(o => o.week_day === 1).count
+                rabu_materi = result_item_materi.find(o => o.week_day === 2) == null ? '0' : result_item_materi.find(o => o.week_day === 2).count
+                kamis_materi = result_item_materi.find(o => o.week_day === 3) == null ? '0' : result_item_materi.find(o => o.week_day === 3).count
+                jumat_materi = result_item_materi.find(o => o.week_day === 4) == null ? '0' : result_item_materi.find(o => o.week_day === 4).count
+                sabtu_materi = result_item_materi.find(o => o.week_day === 5) == null ? '0' : result_item_materi.find(o => o.week_day === 5).count
+                minggu_materi = result_item_materi.find(o => o.week_day === 6) == null ? '0' : result_item_materi.find(o => o.week_day === 6).count
             }
         });
 
 
     var data_chart = [senin,selasa,rabu,kamis,jumat,sabtu,minggu]
+    var data_materi = [senin_materi,selasa_materi,rabu_materi,kamis_materi,jumat_materi,sabtu_materi,minggu_materi]
     var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
-
+    var session = $('#date_chart').val()
+    var materi = $('#materi_chart_select').val()
     var chartData = {
     labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
     datasets: [{
-        label: 'Total Membuka Aplikasi',
+        label: ["Total Membuka Aplikasi (" + session + ")"],
         data: data_chart,
-        backgroundColor: 'transparent',
+        backgroundColor:  colors[0],
         borderColor: colors[0],
         borderWidth: 4,
         pointBackgroundColor: colors[0]
+    },{
+        label: ["Total Mengerjakan Materi (" + materi + ")"],
+        data: data_materi,
+        backgroundColor: colors[1],
+        borderColor: colors[1],
+        borderWidth: 4,
+        pointBackgroundColor: colors[1]
     }]
     };
 

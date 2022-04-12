@@ -244,6 +244,13 @@ class APIController extends Controller
             return "{$start} - {$end}";
         });
 
-        return response()->json(['data' => $data], 200);
+        $materi = UserCourse::select(DB::raw("COUNT(*) as count"), 'created_at', 'user_id', 'sub_category_id', DB::raw("DAY(created_at) as day"), DB::raw('WEEKDAY(created_at) as week_day'))->where('user_id', $request->user_id)->where('checked', true)->groupBy(DB::raw('DAY(created_at)'))->get()->groupBy(function ($date) {
+            $created_at = Carbon::parse($date->created_at);
+            $start = $created_at->startOfWeek()->format('d-m-Y');
+            $end = $created_at->endOfWeek()->format('d-m-Y');
+            return "{$start} - {$end}";
+        });
+
+        return response()->json(['data' => $data, 'materi' => $materi], 200);
     }
 }
