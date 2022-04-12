@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2022 at 02:33 PM
+-- Generation Time: Apr 12, 2022 at 07:42 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -421,7 +421,7 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (3, 'App\\Models\\User', 3, 'auth_token', '5d86f38535c14beba0223b55ac59859d3556097b19c77209a520b69c7c4ca2c0', '[\"*\"]', '2022-03-16 07:43:34', '2022-03-16 07:42:55', '2022-03-16 07:43:34'),
 (4, 'App\\Models\\User', 3, 'auth_token', '45711c08ade7854b85d13688f1bd916552fa51ef57bf1f479fabc6e4bd589003', '[\"*\"]', '2022-03-19 23:51:35', '2022-03-19 05:20:02', '2022-03-19 23:51:35'),
 (5, 'App\\Models\\User', 3, 'auth_token', '389d8f3e87621b8d19ed64b496afad822d0962ff08b1dffdfde6d1f4439ee714', '[\"*\"]', '2022-03-20 01:39:23', '2022-03-19 23:53:23', '2022-03-20 01:39:23'),
-(6, 'App\\Models\\User', 3, '585053919c602d1b', '065613437b29a43a095b3128e8b4c2e345299861174512042cfa5ace23a26f27', '[\"*\"]', '2022-04-11 05:31:35', '2022-03-20 03:29:51', '2022-04-11 05:31:35'),
+(6, 'App\\Models\\User', 3, '585053919c602d1b', '065613437b29a43a095b3128e8b4c2e345299861174512042cfa5ace23a26f27', '[\"*\"]', '2022-04-11 07:49:40', '2022-03-20 03:29:51', '2022-04-11 07:49:40'),
 (7, 'App\\Models\\User', 3, 'auth_token', '03200caff05aa2b75cfdd06d41d06ccd1cb187f8aed3309eb7a74e0d3bdbc9a7', '[\"*\"]', '2022-03-20 04:04:34', '2022-03-20 03:58:43', '2022-03-20 04:04:34'),
 (8, 'App\\Models\\User', 3, 'auth_token', '80bcc067d43ae6f7f562cd614a10580151a815dd1b8e8945614e01ba856e5072', '[\"*\"]', '2022-03-29 06:48:18', '2022-03-29 05:20:35', '2022-03-29 06:48:18'),
 (9, 'App\\Models\\User', 3, 'auth_token', '55ee6c978f8ca476ae34b1176f98de23f28ac9eb640caea31951851cc15ee3d1', '[\"*\"]', '2022-04-03 05:33:39', '2022-04-03 00:37:52', '2022-04-03 05:33:39'),
@@ -463,8 +463,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('PentYQAGzxY0LmJKXJafIn86I95RH8kKNJMzyryJ', 1, '192.168.1.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiY3VqYUROandFRnRENGFXcGVwdU9GQWNabmtsWFhUSGRuaTBZZUtqayI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xOTIuMTY4LjEuNTI6ODAwMC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkNHZDLnNtMjREYU1TWmJPL21Hc2dJLlB3Z2IvSXRVeE9qdW1LNTA5ekF1eDB2TDdBWDlDUS4iO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJDR2Qy5zbTI0RGFNU1piTy9tR3NnSS5Qd2diL0l0VXhPanVtSzUwOXpBdXgwdkw3QVg5Q1EuIjt9', 1649680362),
-('QHUr2rrQ5B9Go5Ao4MuAWEPEkJ08JuMTgt1f5q9N', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZVpsS2ZaVHRXZk1MOWhjNWpJTElaQlV1Sk5CY2lQT29jd1B5T2xlUyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9tYXRlcmkiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MTc6InBhc3N3b3JkX2hhc2hfd2ViIjtzOjYwOiIkMnkkMTAkNHZDLnNtMjREYU1TWmJPL21Hc2dJLlB3Z2IvSXRVeE9qdW1LNTA5ekF1eDB2TDdBWDlDUS4iO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEwJDR2Qy5zbTI0RGFNU1piTy9tR3NnSS5Qd2diL0l0VXhPanVtSzUwOXpBdXgwdkw3QVg5Q1EuIjt9', 1649670891);
+('5Q9gNQgH9fSulHBJ5tKXdYAxY9x2HoFCC4ltXbuj', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiYm5YV0lQclo2eUF4Zk5pV1RQR1RicnI1Y3RHZGtxZEI1WkJPbkZSMyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi91c2VycyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCQ0dkMuc20yNERhTVNaYk8vbUdzZ0kuUHdnYi9JdFV4T2p1bUs1MDl6QXV4MHZMN0FYOUNRLiI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkNHZDLnNtMjREYU1TWmJPL21Hc2dJLlB3Z2IvSXRVeE9qdW1LNTA5ekF1eDB2TDdBWDlDUS4iO30=', 1649742154);
 
 -- --------------------------------------------------------
 
@@ -576,7 +575,7 @@ INSERT INTO `user_courses` (`id`, `answer`, `checked`, `is_true`, `course_id`, `
 ('e6GX7T5xbZ', '____________', 0, 0, '6PXkZ58QOz', 'lIlykI7yix', 3, '2022-04-03 05:27:08', '2022-04-03 05:48:25'),
 ('EJSihQjFWV', '', 0, 0, '9eirKxxjtJ', 'nAA9EvuWY1', 3, '2022-04-03 05:27:08', '2022-04-03 05:27:08'),
 ('EqjM5eXUFI', 'Q', 1, 0, 'aeoescB7Xu', 'nAA9EvuWY1', 3, '2022-04-03 05:27:08', '2022-04-04 02:59:14'),
-('fExGoPbihR', '____________', 1, 0, 'a7WqzS57Tv', 'lIlykI7yix', 3, '2022-04-03 05:27:08', '2022-04-03 05:48:26'),
+('fExGoPbihR', '____________', 1, 0, 'a7WqzS57Tv', 'lIlykI7yix', 3, '2022-04-11 05:27:08', '2022-04-03 05:48:26'),
 ('gtdrxvJIvM', '', 0, 0, 'eBmbw188GS', 'kd4oos26tl', 3, '2022-04-05 01:47:19', '2022-04-05 01:47:19'),
 ('iPJWE6qu8L', '', 1, 1, '6LShPoNxwp', 'lIlykI7yix', 3, '2022-04-03 05:27:08', '2022-04-03 05:49:27'),
 ('IvWlzwQzi2', '', 0, 0, 'VOxlbP7QNq', 'kd4oos26tl', 3, '2022-04-05 01:47:19', '2022-04-05 01:47:19'),
@@ -643,7 +642,14 @@ CREATE TABLE `user_sessions` (
 --
 
 INSERT INTO `user_sessions` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
-('7p9r2gNCiT', 3, '2022-04-11 05:15:56', '2022-04-11 05:15:56');
+('7p9r2gNCiT', 3, '2022-04-17 05:15:56', '2022-04-11 05:15:56'),
+('GlTqGZxgTm', 3, '2022-04-13 06:33:58', '2022-04-11 06:33:58'),
+('jKcIWbMkbI', 3, '2022-04-14 06:34:27', '2022-04-11 06:34:27'),
+('lnZxjIfq1l', 3, '2022-04-12 06:34:13', '2022-04-11 06:34:13'),
+('oj97TxOeSz', 3, '2022-04-11 06:39:35', '2022-04-11 06:39:35'),
+('sVOVTbeeWE', 3, '2022-04-11 07:49:40', '2022-04-11 07:49:40'),
+('V8PpPZCpCq', 3, '2022-04-11 06:39:23', '2022-04-11 06:39:23'),
+('yAtsKusQ5F', 3, '2022-04-19 06:39:48', '2022-04-11 06:39:48');
 
 -- --------------------------------------------------------
 
