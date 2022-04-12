@@ -176,9 +176,6 @@ class APIController extends Controller
         // Materi Card
 
         // Benar
-        $jumlah_benar = UserCourse::where('user_id', $user_id)
-            ->where('is_true', true)
-            ->count();
 
         $materi_dikuasai = UserCourse::leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
             ->select('user_courses.sub_category_id as sub_category_id', 'user_courses.checked as checked', 'user_courses.user_id as user_id', 'user_courses.is_true as is_true', 'sub_categories.name as name', DB::raw('COUNT(user_courses.is_true) as total_true'))
@@ -189,16 +186,14 @@ class APIController extends Controller
             ->first();
         if ($materi_dikuasai == null) {
             $nama_materi_dikuasai = "Belum ada";
+            $jumlah_benar = 0;
         } else {
             $nama_materi_dikuasai = $materi_dikuasai->name;
+            $jumlah_benar = $materi_dikuasai->total_true;
         }
         // Benar
 
         // Salah
-        $jumlah_salah = UserCourse::where('user_id', $user_id)
-            ->where('is_true', false)
-            ->where('checked', true)
-            ->count();
 
         $materi_tidak_dikuasai = UserCourse::leftJoin('sub_categories', 'user_courses.sub_category_id', '=', 'sub_categories.id')
             ->select('user_courses.sub_category_id as sub_category_id', 'user_courses.checked as checked', 'user_courses.user_id as user_id', 'user_courses.is_true as is_true', 'sub_categories.name as name', DB::raw('COUNT(user_courses.is_true) as total_false'))
@@ -211,8 +206,10 @@ class APIController extends Controller
 
         if ($materi_tidak_dikuasai == null) {
             $nama_materi_tidak_dikuasai = "Belum ada";
+            $jumlah_salah = 0;
         } else {
             $nama_materi_tidak_dikuasai = $materi_tidak_dikuasai->name;
+            $jumlah_salah = $materi_tidak_dikuasai->total_false;
         }
         // Salah
 

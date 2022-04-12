@@ -287,7 +287,7 @@ Users
                             <div class="col-md-6">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p style="background-color: #28a745;color: white;text-align: center;padding: 7px;">Total Mengerjakan Materi Pada : </p>
+                                        <p style="background-color: #28a745;color: white;text-align: center;padding: 7px;">Total Mengerjakan Soal Pada : </p>
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control select2" name="" id="materi_chart_select"></select>
@@ -487,7 +487,7 @@ function initChart(){
         borderWidth: 4,
         pointBackgroundColor: colors[0]
     },{
-        label: ["Total Mengerjakan Materi (" + materi + ")"],
+        label: ["Total Mengerjakan Soal (" + materi + ")"],
         data: data_materi,
         backgroundColor: colors[1],
         borderColor: colors[1],
