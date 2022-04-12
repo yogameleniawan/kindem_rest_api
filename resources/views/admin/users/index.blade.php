@@ -268,24 +268,28 @@ Users
                                 </div>
                             </div>
                         </div>
-
+                        <div id="chart-loader" class="row d-none" style="text-align: -webkit-center;margin-top:20px">
+                            <div class="col-md-12">
+                                <div class="loader"></div>
+                            </div>
+                        </div>
+                        <select class="form-control select2" name="" id="date_chart"></select>
+                        <div class="row" id="chart-data">
+                            <div class="col-md-12">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <canvas id="chLine" height="100"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <h2>Chart</h2>
-    <select name="" id="date_chart"></select>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <canvas id="chLine" height="100"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="card">
         <div class="card-body">
@@ -322,20 +326,6 @@ Users
 @section('footer')
 <script src="{{ url('assets/admin/dynamictable/dynamitable.jquery.min.js') }}"></script>
 
-<script type="text/javascript">
-
-    $(document).on('click', '.delete', function () {
-        let id = $(this).attr('data-id');
-        $('#id').val(id);
-    });
-    $(document).ready(function () {
-        initSelectChart()
-        initChart()
-    })
-
-
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script>
 var myChart
@@ -346,16 +336,18 @@ $('#date_chart').change(function(){
 
 function initSelectChart()
 {
+    var id = $('#id').val()
+    $('#date_chart').html('')
     $.ajax({
             async: false,
-            url: `{{url("/chart?user_id=`+3+`")}}`,
+            url: `{{url("/chart?user_id=`+id+`")}}`,
             type: "GET",
             dataType: "json",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function(jqXHR, settings) {
-                console.log(settings.url);
+                // console.log(settings.url);
             },
             statusCode: {
                 500: function (response) {
@@ -363,13 +355,22 @@ function initSelectChart()
                 },
             },
             success: function (data) {
+                var html = ``
                 jQuery.each(data.data, function(value) {
-                    $('#date_chart').append(`<option value='${value}'>${value}</option>`)
+                    html += `<option value='${value}'>${value}</option>`
                 });
+                if(html == ''){
+                    $('#date_chart').html('<option selected disabled>Data tidak tersedia</option>')
+                }else{
+                    $('#date_chart').html(html)
+                }
             }
         });
 }
 function initChart(){
+    $('#chart-loader').removeClass('d-none')
+    $('#date_chart').addClass('d-none')
+    $('#chart-data').addClass('d-none')
     var result_item = ""
     var minggu = ''
     var senin = ''
@@ -378,16 +379,19 @@ function initChart(){
     var kamis = ''
     var jumat = ''
     var sabtu = ''
+
+    var id = $('#id').val()
+    // console.log(id)
     $.ajax({
             async: false,
-            url: `{{url("/chart?user_id=`+3+`")}}`,
+            url: `{{url("/chart?user_id=`+id+`")}}`,
             type: "GET",
             dataType: "json",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             beforeSend: function(jqXHR, settings) {
-                console.log(settings.url);
+                // console.log(settings.url);
             },
             statusCode: {
                 500: function (response) {
@@ -395,6 +399,10 @@ function initChart(){
                 },
             },
             success: function (data) {
+                console.log(data.data)
+                $('#chart-loader').addClass('d-none')
+                $('#date_chart').removeClass('d-none')
+                $('#chart-data').removeClass('d-none')
                 result_item = data.data[$('#date_chart').val()]
                 senin = result_item.find(o => o.week_day === 0) == null ? '0' : result_item.find(o => o.week_day === 0).count
                 selasa = result_item.find(o => o.week_day === 1) == null ? '0' : result_item.find(o => o.week_day === 1).count
@@ -408,9 +416,7 @@ function initChart(){
 
 
     var data_chart = [senin,selasa,rabu,kamis,jumat,sabtu,minggu]
-    console.log(data_chart)
     var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
-
 
     var chartData = {
     labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
@@ -502,6 +508,11 @@ var table = $('#data-table').DataTable({
 <script>
     function addUserPage()
     {
+        if(myChart){
+            myChart.destroy()
+        }else{
+            // console.log('kosong')
+        }
         $('#user-btn-add').removeClass('d-none')
         $('#user-btn-edit').addClass('d-none')
         $('#user-btn-delete').addClass('d-none')
@@ -516,6 +527,11 @@ var table = $('#data-table').DataTable({
 
     function editUserPage(id,email,name)
     {
+        if(myChart){
+            myChart.destroy()
+        }else{
+            // console.log('kosong')
+        }
         $('#user-btn-add').addClass('d-none')
         $('#user-btn-edit').removeClass('d-none')
         $('#user-btn-delete').addClass('d-none')
@@ -530,6 +546,11 @@ var table = $('#data-table').DataTable({
 
     function deleteUserPage(id,email,name)
     {
+        if(myChart){
+            myChart.destroy()
+        }else{
+            // console.log('kosong')
+        }
         $('#user-btn-add').addClass('d-none')
         $('#user-btn-edit').addClass('d-none')
         $('#user-btn-delete').removeClass('d-none')
@@ -697,16 +718,13 @@ var table = $('#data-table').DataTable({
                 var percent_level = `<div class="radial-bar radial-bar-${data.data[0].percent} radial-bar-lg radial-bar-danger">
                     <img src="{{url('assets/admin/img/user.png')}}" alt="User-Image">
                     </div>`
-                console.log(percent_level)
                 $('#percent-level').html(percent_level)
                 $('#stats-loader').addClass('d-none')
+
+                initSelectChart()
+                initChart()
             }
         });
-    }
-
-    function chart()
-    {
-
     }
 </script>
 
