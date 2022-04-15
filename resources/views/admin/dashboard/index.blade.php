@@ -110,7 +110,7 @@ Dashboard
                 <div class="p-3">
                     <div class="row d-flex justify-content-between align-items-center">
                         <div class="col-auto">
-                            <h5 class="mb-0">User</h5>
+                            <h5 class="mb-0">User (Siswa)</h5>
                             <h2 class="mb-0 mt-0" style="font-size: 50px;"> <b> {{$countUser}}</b></h2>
                         </div>
                         <div class="col-auto">
@@ -149,17 +149,25 @@ Dashboard
         <div class="col-xl-4 col-lg-12 col-12">
             <div class="card">
                 <div class="card-header pb-0">
-                    <h5><b>Materi Yang Telah Diselesaikan</b></h5>
+                    <h5><b>Chapter Yang Telah Diselesaikan</b></h5>
                 </div>
                 <div class="card-body">
+                    @foreach ($categories as $cat)
                     <div class="row d-flex justify-content-between align-items-center ">
-                        <div class="col">
-                            <h5 class="mb-0"> </h5>
+                        <div class="col-8">
+                            <p class="mb-2"> {{$cat->name}}</p>
                         </div>
-                        <div class="col">
-                            <p class="mb-0"></p>
+                        <div class="col-4">
+                            <?php
+                            $countComplete = DB::table('complete_categories')
+                                ->where('category_id', $cat->id)
+                                ->where('is_complete', true)
+                                ->count();
+                            ?>
+                            <p class="mb-2"><b>{{$countComplete}}</b></p>
                         </div>
                     </div>
+                    @endforeach
 
                 </div>
             </div>
