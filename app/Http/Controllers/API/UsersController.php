@@ -19,10 +19,12 @@ class UsersController extends Controller
     {
         $data = DB::table('users')
             ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
-            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
-            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level')
+            ->join('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->join('scores', 'scores.user_id', '=', 'users.id')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('SUM(scores.score) AS score'), DB::raw('COUNT(scores.user_id) as complete_sub_category'))
+            ->groupBy('scores.user_id')
+            // ->having('users.role', 'student')
             ->orderBy('levels.point', 'DESC')
-            ->where('users.role', 'student')
             ->get();
         return response()->json(['data' => $data], 200);
     }
