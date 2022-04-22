@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('title')
-Add Categories
+Materi
 @endsection
 @section('header')
 <style>

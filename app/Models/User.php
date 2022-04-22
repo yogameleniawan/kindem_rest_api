@@ -18,6 +18,8 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public $incrementing = true;
+
     /**
      * The attributes that are mass assignable.
      *

@@ -37,6 +37,7 @@ Route::prefix('v1')->group(function () {
         });
         Route::get('/addSession', [UsersController::class, 'addSession']);
         Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
+        Route::get('/getRankingUsers', [UsersController::class, 'getRankingUsers']);
         Route::post('/updateProfile', [UsersController::class, 'updateProfile']);
         Route::post('/tutorialCheck', [UsersController::class, 'tutorialCheck']);
         Route::get('/getAllCategories', [CategoriesController::class, 'getAllCategories']);
