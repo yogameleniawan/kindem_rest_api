@@ -32,9 +32,10 @@ Route::post('/requestToken', [AuthController::class, 'requestToken']);
 Route::prefix('v1')->group(function () {
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::get('/user', function (Request $request) {
-            return $request->user();
-        });
+        // Route::get('/user', function (Request $request) {
+        //     return $request->user();
+        // });
+        Route::get('/user', [UsersController::class, 'getUser']);
         Route::get('/addSession', [UsersController::class, 'addSession']);
         Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
         Route::get('/getRankingUsers', [UsersController::class, 'getRankingUsers']);

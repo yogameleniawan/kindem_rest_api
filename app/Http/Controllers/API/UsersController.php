@@ -15,18 +15,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
-    public function getAllUsers()
-    {
-        $data = DB::table('users')
-            ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
-            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
-            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level')
-            ->where('users.role', 'student')
-            ->get();
-        return response()->json(['data' => $data], 200);
-    }
-
-    public function getRankingUsers()
+    public function getUser()
     {
         $data = DB::table('users')
             ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
@@ -34,9 +23,7 @@ class UsersController extends Controller
             ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level')
             ->orderBy('levels.point', 'DESC')
             ->where('users.role', 'student')
-            ->get()
-            ->take(10);
-
+            ->get();
         $current_position = 1;
         $current = false;
         foreach ($data as $d) {
@@ -52,20 +39,51 @@ class UsersController extends Controller
         $user = DB::table('users')
             ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
             ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
-            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level')
+            ->leftJoin('complete_categories', 'complete_categories.user_id', '=', 'users.id')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('COUNT(complete_categories.is_complete) as complete_sub_category'), 'levels.point as point')
             ->orderBy('levels.point', 'DESC')
             ->where('users.role', 'student')
             ->where('users.id', Auth::user()->id)->first();
-        $ranking = collect([
+        $ranking = collect(
             (object) [
                 'id' => $user->id,
                 'name' => $user->name,
+                'email' => $user->email,
                 'profile_photo_path' => $user->profile_photo_path,
                 'level' => $user->level,
-                'ranking' => $current_position
+                'ranking' => $current_position,
+                'complete_sub_category' => $user->complete_sub_category,
+                'point' => $user->point
             ],
-        ]);
-        return response()->json(['ranking' => $ranking, 'data' => $data], 200);
+        );
+        return $ranking;
+    }
+    public function getAllUsers()
+    {
+        $data = DB::table('users')
+            ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
+            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->leftJoin('complete_categories', 'complete_categories.user_id', '=', 'users.id')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('COUNT(complete_categories.is_complete) as complete_sub_category'), 'levels.point as point')
+            ->groupBy('users.id')
+            ->where('users.role', 'student')
+            ->get();
+        return response()->json(['data' => $data], 200);
+    }
+
+    public function getRankingUsers()
+    {
+        $datas = DB::table('users')
+            ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
+            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->leftJoin('complete_categories', 'complete_categories.user_id', '=', 'users.id')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('COUNT(complete_categories.is_complete) as complete_sub_category'), 'levels.point as point')
+            ->groupBy('users.id')
+            ->orderBy('levels.point', 'DESC')
+            ->where('users.role', 'student')
+            ->get()
+            ->take(10);
+        return response()->json(['data' => $datas], 200);
     }
 
     public function updateProfile(Request $request)
