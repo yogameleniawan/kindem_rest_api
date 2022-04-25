@@ -148,8 +148,14 @@ class APIController extends Controller
         $user_point = UserCourse::where('user_id', $user_id)
             ->where('is_true', true)
             ->count();
-        $sisa_point = $next_level->point - $user_point;
-        $percent =   number_format(round(($user_point / $next_level->point) * 10) * 10, 0);
+        $next_level_point = 0;
+        if ($next_level == null) {
+            $next_level_point = 0;
+        } else {
+            $next_level_point = $next_level->point;
+        }
+        $sisa_point = $next_level_point - $user_point;
+        $percent =   $next_level_point == 0 ? number_format(round($user_point) * 10, 0) : number_format(round(($user_point / $next_level_point) * 10) * 10, 0);
 
         // Chapter Card
         $chapter_complete = CompleteCategory::where('user_id', $user_id)

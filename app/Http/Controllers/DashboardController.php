@@ -16,14 +16,20 @@ class DashboardController extends Controller
         $countChapter = DB::table('categories')->count();
         $countMateri = DB::table('sub_categories')->count();
         $countSoal = DB::table('courses')->count();
-        $levels = Level::all();
+        $levels = Level::orderBy('point', 'desc')->get();
 
-        $categories = Category::all();
-        // $completeMateri = DB::table('complete_categories')
-        //     ->where('is_complete', true)
-        //     ->distinct()->get(['category_id']);
-        // dd($completeMateri);
+        $categories = Category::orderBy('level', 'asc')->get();
 
-        return view('admin.dashboard.index', compact('levels', 'countUser', 'countChapter', 'countMateri', 'countSoal', 'categories'));
+        $topRank = DB::table('users')
+            ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
+            ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
+            ->leftJoin('complete_categories', 'complete_categories.user_id', '=', 'users.id')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('COUNT(complete_categories.is_complete) as complete_sub_category'), 'levels.point as point')
+            ->groupBy('users.id')
+            ->orderBy('levels.point', 'DESC')
+            ->where('users.role', 'student')
+            ->get()
+            ->take(10);
+        return view('admin.dashboard.index', compact('levels', 'countUser', 'countChapter', 'countMateri', 'countSoal', 'categories', 'topRank'));
     }
 }
