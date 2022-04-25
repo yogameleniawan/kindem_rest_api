@@ -428,7 +428,7 @@ Dashboard
 
             </div>
         </div>
-        <div class="col-xl-5 col-lg-12 col-12">
+        <div class="col-xl-8 col-lg-12 col-12">
             <div class="card">
                 <div class="card-header pb-0">
                     <h6><b style="background-color: #f5a720;color: white;padding: 7px;border-top-left-radius: 10px;">Chapter
@@ -477,7 +477,7 @@ Dashboard
                 </div>
             </div>
         </div>
-        <div class="col-xl-3 col-lg-12 col-12">
+        {{-- <div class="col-xl-3 col-lg-12 col-12">
             <div class="card">
                 <div class="card-header pb-0">
                     <h6><b style="background-color: #f5a720;color: white;padding: 7px;border-top-left-radius: 10px;">Informasi
@@ -487,7 +487,7 @@ Dashboard
 
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <div class="row">
         <div class="col-xl-4 col-lg-12 col-12">
