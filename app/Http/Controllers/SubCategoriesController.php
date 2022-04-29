@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\GDrive;
+use App\Imports\SubCategoryImport;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class SubCategoriesController extends Controller
@@ -65,6 +67,17 @@ class SubCategoriesController extends Controller
             return redirect()->route('sub_categories.index')
                 ->with('success', 'Sub Category created successfully.');
         }
+    }
+
+    public function import(Request $request) 
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        Excel::import(new SubCategoryImport, request()->file('file'));
+
+        return redirect()->route('materi.index')->with('success', 'Materi berhasil diimport.');
     }
 
     /**

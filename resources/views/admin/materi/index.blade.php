@@ -76,74 +76,73 @@ Materi
 
     }
 
-    .edit-table:hover{
+    .edit-table:hover {
         cursor: pointer;
     }
 
-    .delete:hover{
+    .delete:hover {
         cursor: pointer;
     }
-
 </style>
 <style>
     .switch {
-      position: relative;
-      display: inline-block;
-      width: 60px;
-      height: 34px;
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
     }
 
     .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
+        opacity: 0;
+        width: 0;
+        height: 0;
     }
 
     .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      -webkit-transition: .4s;
-      transition: .4s;
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
     }
 
     .slider:before {
-      position: absolute;
-      content: "";
-      height: 26px;
-      width: 26px;
-      left: 4px;
-      bottom: 4px;
-      background-color: white;
-      -webkit-transition: .4s;
-      transition: .4s;
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
     }
 
-    input:checked + .slider {
-      background-color: #2196F3;
+    input:checked+.slider {
+        background-color: #2196F3;
     }
 
-    input:focus + .slider {
-      box-shadow: 0 0 1px #2196F3;
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
     }
 
-    input:checked + .slider:before {
-      -webkit-transform: translateX(26px);
-      -ms-transform: translateX(26px);
-      transform: translateX(26px);
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
     }
 
     /* Rounded sliders */
     .slider.round {
-      border-radius: 34px;
+        border-radius: 34px;
     }
 
     .slider.round:before {
-      border-radius: 50%;
+        border-radius: 50%;
     }
 </style>
 @endsection
@@ -167,11 +166,34 @@ Materi
             <div class="box-body">
                 <div class="card-header">
                     <i class="ik ik-plus-square" onclick="addChapterPage()"></i>
+                    <button type="button" class="btn btn-primary ml-3" onclick="importChapterPage()">Import Data</button>
                 </div>
-
+                <div id="import_chapter" class="d-none">
+                    <form id="form-chapter-import" method="POST" class="text-left border border-light p-5" action="{{route('materi.import')}}" enctype="multipart/form-data" style="padding-bottom: 50px;">
+                    @csrf
+                    <!-- <form id="form-chapter-import" class="text-left border border-light p-5" enctype="multipart/form-data" style="padding-bottom: 50px;"> -->
+                    <a href="" class="btn btn-primary mb-3">Download Template</a>
+                        <div class="form-group">
+                            <label>Upload File Excel</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="file" class="form-control" placeholder="File Excel" name="file">
+                            </div>
+                        </div>
+                        <div class="footer-buttons">
+                            <br>
+                            <div id="chapter-loader-import" class="loader d-none"></div>
+                            <button id="btn-chapter-import" type="submit" class="btn btn-primary">
+                            <!-- <button id="btn-chapter-import" type="submit" class="btn btn-primary" onclick="importChapter()"> -->
+                                Import
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <div id="add_chapter">
                     <form class="text-left border border-light p-5" id="form-chapter" enctype="multipart/form-data">
-
                         <div class="form-group">
                             <label>Nama Chapter</label>
                             <div class="input-group">
@@ -190,8 +212,7 @@ Materi
                                 <span class="input-group-prepend">
                                     <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                                 </span>
-                                <input accept="image/*" onchange="loadFile(event)" type="file" class="form-control  "
-                                    placeholder="Image" id="image" name="image">
+                                <input accept="image/*" onchange="loadFile(event)" type="file" class="form-control  " placeholder="Image" id="image" name="image">
                             </div>
                         </div>
 
@@ -227,8 +248,7 @@ Materi
                                 <span class="input-group-prepend">
                                     <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                                 </span>
-                                <input accept="image/*" onchange="loadFileEdit(event)" type="file" class="form-control  "
-                                    placeholder="Image" id="image" name="image">
+                                <input accept="image/*" onchange="loadFileEdit(event)" type="file" class="form-control  " placeholder="Image" id="image" name="image">
                             </div>
                         </div>
 
@@ -304,35 +324,58 @@ Materi
         <div class="card">
             <div class="card-header">
                 <i class="ik ik-plus-square" onclick="addMateriPage()"></i>
+                <button type="button" id="materi-btn-import" class="btn btn-primary ml-3" onclick="importMateriPage()">Import Data</button>
             </div>
             <div class="box-body">
-                <div id="add_materi">
-                <form class="sample-form text-left border border-light p-5" id="form-add-materi" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="">Nama Chapter </label>
-                        <select class="form-control select2" id="select_chapter" name="category_id">
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Materi</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input type="text" class="form-control  " placeholder="Nama Materi" id="materi"
-                                name="name" required>
+                <div id="import_materi" class="d-none">
+                    <form id="form-import-materi" action="{{route('sub_categories.import')}}" class="text-left border border-light p-5" method="POST" enctype="multipart/form-data" style="padding-bottom: 50px;">
+                    @csrf
+                        <a href="" class="btn btn-primary mb-3">Download Template</a>
+                        <div class="form-group">
+                            <label>Upload File Excel</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="file" class="form-control" placeholder="File Excel" name="file">
+                            </div>
                         </div>
-                    </div>
+                        <div class="footer-buttons">
+                            <br>
+                            <div id="materi-loader-import" class="loader d-none"></div>
+                            <button id="materi-btn-import" type="submit" class="btn btn-primary">
+                            <!-- <button id="materi-btn-import" type="submit" class="btn btn-primary" onclick="importMateri()"> -->
+                                Import
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div id="add_materi">
+                    <form class="sample-form text-left border border-light p-5" id="form-add-materi" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="">Nama Chapter </label>
+                            <select class="form-control select2" id="select_chapter" name="category_id">
 
-                    <div class="footer-buttons">
-                        <div id="materi-loader" class="loader d-none"></div>
-                        <button id="materi-btn" type="button" class="btn btn-primary" onclick="addMateri()">
-                            Tambah
-                        </button>
-                    </div>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Materi</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control  " placeholder="Nama Materi" id="materi" name="name" required>
+                            </div>
+                        </div>
 
-                </form>
+                        <div class="footer-buttons">
+                            <div id="materi-loader" class="loader d-none"></div>
+                            <button id="materi-btn" type="button" class="btn btn-primary" onclick="addMateri()">
+                                Tambah
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
                 <div id="edit_materi" class="d-none">
                     <form class="sample-form text-left border border-light p-5" id="form-materi-edit" enctype="multipart/form-data">
@@ -349,8 +392,7 @@ Materi
                                 <span class="input-group-prepend">
                                     <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                                 </span>
-                                <input type="text" class="form-control  " placeholder="Nama Materi" id="materi_edit"
-                                    name="name" required>
+                                <input type="text" class="form-control  " placeholder="Nama Materi" id="materi_edit" name="name" required>
                             </div>
                         </div>
 
@@ -362,55 +404,55 @@ Materi
                         </div>
 
                     </form>
-                    </div>
-                    <div id="remove_materi" class="d-none">
-                        <form class="sample-form text-left border border-light p-5" id="form-add-sub" enctype="multipart/form-data">
-                            <input type="hidden" id="id_materi" name="id_materi">
-                            <div class="form-group">
-                                <label>Nama Materi</label>
-                                <div class="input-group">
-                                    <span class="input-group-prepend">
-                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                                    </span>
-                                    <input type="text" class="form-control  " placeholder="Nama Materi" id="name_materi">
-                                </div>
+                </div>
+                <div id="remove_materi" class="d-none">
+                    <form class="sample-form text-left border border-light p-5" id="form-add-sub" enctype="multipart/form-data">
+                        <input type="hidden" id="id_materi" name="id_materi">
+                        <div class="form-group">
+                            <label>Nama Materi</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control  " placeholder="Nama Materi" id="name_materi">
                             </div>
-
-                            <div class="footer-buttons">
-                                <div id="materi-loader-delete" class="loader d-none"></div>
-                                <button id="materi-btn-delete" type="button" class="btn btn-danger" onclick="deleteMateri()">
-                                    Hapus
-                                </button>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card-body">
-                                <div class="dt-responsive">
-                                    <table class="table table-bordered" id="data-table-materi" style="width: 102%">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 3%"></th>
-                                                <th>Chapter</th>
-                                                <th>Nama</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <td style="width: 3%"></td>
-                                                <th>Chapter</th>
-                                                <th>Nama</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box -->
+
+                        <div class="footer-buttons">
+                            <div id="materi-loader-delete" class="loader d-none"></div>
+                            <button id="materi-btn-delete" type="button" class="btn btn-danger" onclick="deleteMateri()">
+                                Hapus
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered" id="data-table-materi" style="width: 102%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th>Chapter</th>
+                                            <th>Nama</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="width: 3%"></td>
+                                            <th>Chapter</th>
+                                            <th>Nama</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
                     </div>
+                    <!-- /.box -->
+                </div>
             </div>
             <!-- /.box-body -->
         </div>
@@ -424,43 +466,65 @@ Materi
         <div class="card">
             <div class="card-header">
                 <i class="ik ik-plus-square" onclick="addCoursePage()"></i>
+                <button type="button" id="course-btn-import" class="btn btn-primary ml-3" onclick="importCoursePage()">Import Data</button>
             </div>
             <div class="box-body">
-                <div id="add_course">
-                <form class="sample-form text-left border border-light p-5" id="form-course" enctype="multipart/form-data">
-                    <input type="hidden" id="id_course" name="id_course">
-                    <div id="materi_select">
+                <div id="import_course" class="d-none">
+                    <form id="form-import-course" action="{{route('courses.import')}}" class="text-left border border-light p-5" method="POST" enctype="multipart/form-data" style="padding-bottom: 50px;">
+                    @csrf
+                        <a href="" class="btn btn-primary mb-3">Download Template</a>
                         <div class="form-group">
-                            <label for="">Nama Materi </label>
-                            <select class="form-control select2" id="select_materi" name="sub_category_id" required>
-
-                            </select>
+                            <label>Upload File Excel</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="file" class="form-control" placeholder="File Excel" name="file">
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Bahasa Indonesia</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Bahasa Indonesia" id="indonesia_text"
-                                name="indonesia_text" required>
+                        <div class="footer-buttons">
+                            <br>
+                            <div id="course-loader-import" class="loader d-none"></div>
+                            <button id="course-btn-import" type="submit" class="btn btn-primary">
+                            <!-- <button id="course-btn-import" type="submit" class="btn btn-primary" onclick="importCourse()"> -->
+                                Import
+                            </button>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div id="add_course">
+                    <form class="sample-form text-left border border-light p-5" id="form-course" enctype="multipart/form-data">
+                        <input type="hidden" id="id_course" name="id_course">
+                        <div id="materi_select">
+                            <div class="form-group">
+                                <label for="">Nama Materi </label>
+                                <select class="form-control select2" id="select_materi" name="sub_category_id" required>
 
-                    <div class="form-group">
-                        <label>Bahasa Inggris</label>
-                        <div class="input-group">
-                            <span class="input-group-prepend">
-                                <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                            </span>
-                            <input type="text" class="form-control" placeholder="Bahasa Inggris" id="english_text"
-                                name="english_text" required>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <img id="output_materi" width="30%" />
+                        <div class="form-group">
+                            <label>Bahasa Indonesia</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Bahasa Indonesia" id="indonesia_text" name="indonesia_text" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Bahasa Inggris</label>
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                </span>
+                                <input type="text" class="form-control" placeholder="Bahasa Inggris" id="english_text" name="english_text" required>
+                            </div>
+                        </div>
+
+                        <img id="output_materi" width="30%" />
 
                         <div id="image_course">
                             <div class="form-group">
@@ -469,8 +533,7 @@ Materi
                                     <span class="input-group-prepend">
                                         <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                                     </span>
-                                    <input accept="image/*" onchange="loadFileMateri(event)" type="file" class="form-control  "
-                                        placeholder="Image" id="image" name="image">
+                                    <input accept="image/*" onchange="loadFileMateri(event)" type="file" class="form-control  " placeholder="Image" id="image" name="image">
                                 </div>
                             </div>
                         </div>
@@ -484,71 +547,70 @@ Materi
                                     <span class="input-group-prepend">
                                         <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
                                     </span>
-                                    <input accept="image/*" onchange="loadFileUjian(event)" type="file" class="form-control  "
-                                        placeholder="Image" id="image_course" name="image_course">
+                                    <input accept="image/*" onchange="loadFileUjian(event)" type="file" class="form-control  " placeholder="Image" id="image_course" name="image_course">
                                 </div>
                             </div>
                         </div>
-                    <div id="voice">
-                        <div class="form-group">
-                            <label for="">Soal Voice Recognition </label> <small>*Apabila tidak aktif maka soal akan menjadi pilihan ganda</small><br>
-                            <label class="switch">
-                                <input type="checkbox" id="is_voice" name="is_voice" value="true" >
-                                <span class="slider round"></span>
-                              </label>
+                        <div id="voice">
+                            <div class="form-group">
+                                <label for="">Soal Voice Recognition </label> <small>*Apabila tidak aktif maka soal akan menjadi pilihan ganda</small><br>
+                                <label class="switch">
+                                    <input type="checkbox" id="is_voice" name="is_voice" value="true">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="footer-buttons">
-                        <br>
-                        <div id="course-loader" class="loader d-none"></div>
-                        <button id="course-btn-add" type="button" class="btn btn-primary" onclick="addCourse()">
-                            Tambah
-                        </button>
-                        <button id="course-btn-edit" type="button" class="btn btn-success d-none" onclick="updateCourse()">
-                            Update
-                        </button>
+                        <div class="footer-buttons">
+                            <br>
+                            <div id="course-loader" class="loader d-none"></div>
+                            <button id="course-btn-add" type="button" class="btn btn-primary" onclick="addCourse()">
+                                Tambah
+                            </button>
+                            <button id="course-btn-edit" type="button" class="btn btn-success d-none" onclick="updateCourse()">
+                                Update
+                            </button>
 
-                        <button id="course-btn-delete" type="button" class="btn btn-danger d-none" onclick="deleteCourse()">
-                            Delete
-                        </button>
-                    </div>
+                            <button id="course-btn-delete" type="button" class="btn btn-danger d-none" onclick="deleteCourse()">
+                                Delete
+                            </button>
+                        </div>
 
-                </form>
+                    </form>
                 </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card-body">
-                                <div class="dt-responsive">
-                                    <table class="table table-bordered" id="data-table-course" style="width: 102%">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 3%"></th>
-                                                <th>Materi</th>
-                                                <th>Bahasa Indonesia</th>
-                                                <th>Bahasa Inggris</th>
-                                                <th>Gambar Materi</th>
-                                                <th>Gambar Ujian</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <td style="width: 3%"></td>
-                                                <th>Materi</th>
-                                                <th>Bahasa Indonesia</th>
-                                                <th>Bahasa Inggris</th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered" id="data-table-course" style="width: 102%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th>Materi</th>
+                                            <th>Bahasa Indonesia</th>
+                                            <th>Bahasa Inggris</th>
+                                            <th>Gambar Materi</th>
+                                            <th>Gambar Ujian</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="width: 3%"></td>
+                                            <th>Materi</th>
+                                            <th>Bahasa Indonesia</th>
+                                            <th>Bahasa Inggris</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
-                            <!-- /.box-body -->
                         </div>
-                        <!-- /.box -->
+                        <!-- /.box-body -->
                     </div>
+                    <!-- /.box -->
+                </div>
             </div>
             <!-- /.box-body -->
         </div>
@@ -561,22 +623,21 @@ Materi
 @section('footer')
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         fetchChapter()
     });
 
-    function fetchChapter(){
+    function fetchChapter() {
         selectChapterTable()
         selectChapterMateri()
         selectChapterMateriEdit()
         selectMateri()
         selectMateriTable()
     }
-
 </script>
 
 <script>
-    successToast = function () {
+    successToast = function() {
         'use strict';
         resetToastPosition();
         $.toast({
@@ -588,7 +649,7 @@ Materi
             loaderBg: '#f96868'
         })
     }
-    errorToast = function () {
+    errorToast = function() {
         'use strict';
         resetToastPosition();
         $.toast({
@@ -600,7 +661,7 @@ Materi
             position: 'bottom-right'
         })
     };
-    warningToast = function () {
+    warningToast = function() {
         'use strict';
         resetToastPosition();
         $.toast({
@@ -612,138 +673,166 @@ Materi
             position: 'bottom-right'
         })
     };
-
 </script>
 
 <script type="text/javascript">
-   $(document).ready(function () {
+    $(document).ready(function() {
         initTableChapter()
         initTableMateri()
         initTableCourse()
-   });
+    });
 
-   var tableChapter = $('#data-table').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    searching: true,
-                    "initComplete": function (settings, json) {
-                        $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
-                    },
-                    ajax: "{{ route('materi.index') }}",
-                    columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {data: 'image', name: 'image', orderable: false, searchable: false},
-                    ]
-                });
+    var tableChapter = $('#data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        searching: true,
+        "initComplete": function(settings, json) {
+            $("#data-table").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+        },
+        ajax: "{{ route('materi.index') }}",
+        columns: [{
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'image',
+                name: 'image',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    });
 
     var tableMateri = $('#data-table-materi').DataTable({
-            processing: true,
-            serverSide: true,
-            searching: true,
-            "initComplete": function (settings, json) {
-                $("#data-table-materi").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
-                this.api().columns([1]).every( function () {
+        processing: true,
+        serverSide: true,
+        searching: true,
+        "initComplete": function(settings, json) {
+            $("#data-table-materi").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+            this.api().columns([1]).every(function() {
                 var column = this;
                 var select = $('<select class="form-control select2" id="select_chapter_table"><option value="">Cari Chapter</option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
 
                         column
-                            .search( val ? '^'+val+'$' : '', true, false )
+                            .search(val ? '^' + val + '$' : '', true, false)
                             .draw();
-                    } );
-            } );
+                    });
+            });
+        },
+        ajax: "{{ route('sub_categories.index') }}",
+        columns: [{
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
             },
-            ajax: "{{ route('sub_categories.index') }}",
-            columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
-                {
-                    data: 'category_name',
-                    name: 'categories.name'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-            ]
-        });
+            {
+                data: 'category_name',
+                name: 'categories.name'
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+        ]
+    });
 
     var tableCourse = $('#data-table-course').DataTable({
-            processing: true,
-            serverSide: true,
-            searching: true,
-            "bFilter": true,
-            "sDom":"lrtip",
-            "initComplete": function (settings, json) {
-                $("#data-table-course").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
-                this.api().columns([1]).every( function () {
+        processing: true,
+        serverSide: true,
+        searching: true,
+        "bFilter": true,
+        "sDom": "lrtip",
+        "initComplete": function(settings, json) {
+            $("#data-table-course").wrap("<div class='scroll' style='overflow:auto; width:100%;position:relative;padding-left:20px;padding-bottom:20px'></div>");
+            this.api().columns([1]).every(function() {
                 var column = this;
                 var select = $('<select class="form-control select2" id="select_course_table"><option value="">Cari Materi</option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
+                    .appendTo($(column.footer()).empty())
+                    .on('change', function() {
                         var val = $.fn.dataTable.util.escapeRegex(
                             $(this).val()
                         );
 
                         column
-                            .search( val ? '^'+val+'$' : '', true, false )
+                            .search(val ? '^' + val + '$' : '', true, false)
                             .draw();
-                    } );
-            } );
+                    });
+            });
+        },
+        ajax: "{{ route('courses.index') }}",
+        columns: [{
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
             },
-            ajax: "{{ route('courses.index') }}",
-            columns: [{data: 'action', name: 'action', orderable: false, searchable: false},
-                {
-                    data: 'name',
-                    name: 'sub_categories.name'
-                },
-                {
-                    data: 'indonesia_text',
-                    name: 'courses.indonesia_text'
-                },
-                {
-                    data: 'english_text',
-                    name: 'courses.english_text '
-                },
-                {data: 'image', name: 'image', orderable: false, searchable: false},
-                {data: 'image_course', name: 'image_course', orderable: false, searchable: false},
-            ]
+            {
+                data: 'name',
+                name: 'sub_categories.name'
+            },
+            {
+                data: 'indonesia_text',
+                name: 'courses.indonesia_text'
+            },
+            {
+                data: 'english_text',
+                name: 'courses.english_text '
+            },
+            {
+                data: 'image',
+                name: 'image',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'image_course',
+                name: 'image_course',
+                orderable: false,
+                searchable: false
+            },
+        ]
+    });
+
+    function initTableChapter() {
+        $('#data-table tfoot th').each(function() {
+            var title = $('#data-table thead th').eq($(this).index()).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
         });
 
-   function initTableChapter(){
-                $('#data-table tfoot th').each(function() {
-                    var title = $('#data-table thead th').eq($(this).index()).text();
-                    $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-                });
+        $('tfoot').each(function() {
+            $(this).insertAfter($(this).siblings('thead'));
+        });
 
-                $('tfoot').each(function () {
-                    $(this).insertAfter($(this).siblings('thead'));
-                });
+        tableChapter.columns().eq(0).each(function(colIdx) {
+            $('input', tableChapter.column(colIdx).footer()).on('keyup change', function() {
+                console.log(colIdx + '-' + this.value);
+                tableChapter
+                    .column(colIdx)
+                    .search(this.value)
+                    .draw();
+            });
+        });
+    }
 
-                tableChapter.columns().eq(0).each(function(colIdx) {
-                    $('input', tableChapter.column(colIdx).footer()).on('keyup change', function() {
-                        console.log(colIdx + '-' + this.value);
-                        tableChapter
-                                .column(colIdx)
-                                .search(this.value)
-                                .draw();
-                    });
-                });
-        }
-
-    function initTableMateri()
-    {
+    function initTableMateri() {
         $('#data-table-materi tfoot th').each(function() {
             var title = $('#data-table-materi thead th').eq($(this).index()).text();
             $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
         });
 
-        $('tfoot').each(function () {
+        $('tfoot').each(function() {
             $(this).insertAfter($(this).siblings('thead'));
         });
 
@@ -751,21 +840,20 @@ Materi
             $('input', tableMateri.column(colIdx).footer()).on('keyup change', function() {
                 console.log(colIdx + '-' + this.value);
                 tableMateri
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
+                    .column(colIdx)
+                    .search(this.value)
+                    .draw();
             });
         });
     }
 
-    function initTableCourse()
-    {
+    function initTableCourse() {
         $('#data-table-course tfoot th').each(function() {
             var title = $('#data-table-course thead th').eq($(this).index()).text();
             $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
         });
 
-        $('tfoot').each(function () {
+        $('tfoot').each(function() {
             $(this).insertAfter($(this).siblings('thead'));
         });
 
@@ -773,17 +861,18 @@ Materi
             $('input', tableCourse.column(colIdx).footer()).on('keyup change', function() {
                 console.log(colIdx + '-' + this.value);
                 tableCourse
-                        .column(colIdx)
-                        .search(this.value)
-                        .draw();
+                    .column(colIdx)
+                    .search(this.value)
+                    .draw();
             });
         });
     }
 </script>
 
 <script>
-    function addCoursePage()
-    {
+    function addCoursePage() {
+        $('#import_course').addClass('d-none')
+        $('#add_course').removeClass('d-none')
         $('#course-btn-add').removeClass('d-none')
         $('#course-btn-edit').addClass('d-none')
         $('#course-btn-delete').addClass('d-none')
@@ -794,7 +883,7 @@ Materi
 
         $('#indonesia_text').val('')
         $('#english_text').val('')
-        $('#is_voice').prop('checked',false)
+        $('#is_voice').prop('checked', false)
         var output = document.getElementById('output_materi');
         output.src = '';
         var output_ujian = document.getElementById('output_ujian');
@@ -802,8 +891,9 @@ Materi
         $('#select_materi option[value=""]').attr('selected', 'selected');
     }
 
-    function editCoursePage(id, sub_category_id, indonesia_text, english_text, image,image_course,is_voice)
-    {
+    function editCoursePage(id, sub_category_id, indonesia_text, english_text, image, image_course, is_voice) {
+        $('#import_course').addClass('d-none')
+        $('#add_course').removeClass('d-none')
         $('#course-btn-add').addClass('d-none')
         $('#course-btn-edit').removeClass('d-none')
         $('#course-btn-delete').addClass('d-none')
@@ -815,10 +905,10 @@ Materi
         $('#id_course').val(id)
         $('#indonesia_text').val(indonesia_text)
         $('#english_text').val(english_text)
-        if(is_voice == 1){
-            $('#is_voice').prop('checked',true)
-        }else{
-            $('#is_voice').prop('checked',false)
+        if (is_voice == 1) {
+            $('#is_voice').prop('checked', true)
+        } else {
+            $('#is_voice').prop('checked', false)
         }
 
         var output = document.getElementById('output_materi');
@@ -826,11 +916,12 @@ Materi
 
         var output_ujian = document.getElementById('output_ujian');
         output_ujian.src = image_course;
-        $('#select_materi option[value="'+sub_category_id+'"]').attr('selected', 'selected');
+        $('#select_materi option[value="' + sub_category_id + '"]').attr('selected', 'selected');
     }
 
-    function deleteCoursePage(id, sub_category_id, indonesia_text, english_text, image,image_course,is_voice)
-    {
+    function deleteCoursePage(id, sub_category_id, indonesia_text, english_text, image, image_course, is_voice) {
+        $('#import_course').addClass('d-none')
+        $('#add_course').removeClass('d-none')
         $('#course-btn-add').addClass('d-none')
         $('#course-btn-edit').addClass('d-none')
         $('#course-btn-delete').removeClass('d-none')
@@ -849,8 +940,13 @@ Materi
         output_ujian.src = image;
     }
 
-    function addCourse()
-    {
+    function importCoursePage() {
+        $('#import_course').removeClass('d-none')
+        $('#add_course').addClass('d-none')
+    }
+    
+
+    function addCourse() {
         $('#course-loader').removeClass('d-none')
         $('#course-btn-add').addClass('d-none')
         var data = new FormData($('#form-course')[0]);
@@ -867,7 +963,7 @@ Materi
             },
             data: data,
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                     $.toast({
                         heading: 'Error',
@@ -881,7 +977,7 @@ Materi
                     $('#course-btn-add').removeClass('d-none')
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 $("#form-course")[0].reset()
                 $.toast({
                     heading: 'Soal Ditambahkan',
@@ -914,7 +1010,7 @@ Materi
             },
             data: data,
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                     $.toast({
                         heading: 'Error',
@@ -928,7 +1024,7 @@ Materi
                     $('#course-btn-edit').removeClass('d-none')
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 $("#form-course")[0].reset()
                 $.toast({
                     heading: 'Soal Diperbarui',
@@ -945,8 +1041,7 @@ Materi
         });
     }
 
-    function deleteCourse()
-    {
+    function deleteCourse() {
         $('#course-loader').removeClass('d-none')
         $('#course-btn-delete').addClass('d-none')
         $.ajax({
@@ -960,54 +1055,59 @@ Materi
                 'id': $('#id_course').val(),
             },
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
-                    $.toast({
-                        heading: 'Soal Dihapus',
-                        text: 'Data soal berhasil dihapus',
-                        position: 'bottom-right',
-                        icon: 'success',
-                        stack: false,
-                        loaderBg: '#f96868'
-                    })
-                    $('#course-loader').addClass('d-none')
+            success: function(data) {
+                $.toast({
+                    heading: 'Soal Dihapus',
+                    text: 'Data soal berhasil dihapus',
+                    position: 'bottom-right',
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#f96868'
+                })
+                $('#course-loader').addClass('d-none')
                 addCoursePage()
                 tableCourse.ajax.reload()
             }
         });
     }
-
 </script>
 
 <script>
-    function addMateriPage()
-    {
+    function addMateriPage() {
         $('#add_materi').removeClass('d-none')
         $('#edit_materi').addClass('d-none')
         $('#remove_materi').addClass('d-none')
+        $('#import_materi').addClass('d-none')
     }
 
-    function editMateriPage(id, id_chapter, name)
-    {
+    function editMateriPage(id, id_chapter, name) {
         $('#add_materi').addClass('d-none')
         $('#edit_materi').removeClass('d-none')
         $('#remove_materi').addClass('d-none')
+        $('#import_materi').addClass('d-none')
         $('#id_materi_edit').val(id)
         $('#materi_edit').val(name)
-        $('#select_chapter_edit option[value="'+id_chapter+'"]').attr('selected', 'selected');
+        $('#select_chapter_edit option[value="' + id_chapter + '"]').attr('selected', 'selected');
     }
 
-    function deleteMateriPage(id, name)
-    {
+    function deleteMateriPage(id, name) {
         $('#add_materi').addClass('d-none')
         $('#edit_materi').addClass('d-none')
         $('#remove_materi').removeClass('d-none')
+        $('#import_materi').addClass('d-none')
 
         $('#id_materi').val(id)
         $('#name_materi').val(name)
+    }
+    function importMateriPage() {
+        $('#import_materi').removeClass('d-none')
+        $('#add_materi').addClass('d-none')
+        $('#edit_materi').addClass('d-none')
+        $('#remove_materi').addClass('d-none')
     }
 
     function selectChapterTable() {
@@ -1017,11 +1117,11 @@ Materi
             type: "GET",
             dataType: "json",
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 var html = ''
                 data.data.forEach(item => {
                     html = `<option name='category_id' value='${item.name}'>${item.name}</option>`
@@ -1038,11 +1138,11 @@ Materi
             type: "GET",
             dataType: "json",
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 var html = ''
                 data.data.forEach(item => {
                     html = `<option name='category_id' value='${item.id}'>${item.name}</option>`
@@ -1052,19 +1152,18 @@ Materi
         });
     }
 
-    function selectMateri()
-    {
+    function selectMateri() {
         $('#select_materi').html('<option disabled selected>Pilih Nama Materi</option>')
         $.ajax({
             url: '{{route('getAllMateri')}}',
             type: "GET",
             dataType: "json",
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 var html = ''
                 data.data.forEach(item => {
                     html = `<option name='sub_category_id' value='${item.id}'>${item.name}</option>`
@@ -1074,19 +1173,18 @@ Materi
         });
     }
 
-    function selectMateriTable()
-    {
+    function selectMateriTable() {
         $('#select_course_table').html('<option disabled selected>Pilih Nama Materi</option>')
         $.ajax({
             url: '{{route('getAllMateri')}}',
             type: "GET",
             dataType: "json",
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 var html = ''
                 data.data.forEach(item => {
                     html = `<option name='sub_category_id' value='${item.name}'>${item.name}</option>`
@@ -1103,11 +1201,11 @@ Materi
             type: "GET",
             dataType: "json",
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 var html = ''
                 data.data.forEach(item => {
                     html = `<option name='category_id' value='${item.id}'>${item.name}</option>`
@@ -1134,7 +1232,7 @@ Materi
             },
             data: data,
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                     $.toast({
                         heading: 'Error',
@@ -1148,10 +1246,58 @@ Materi
                     $('#materi-btn').removeClass('d-none')
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 $('#materi-loader').addClass('d-none')
                 $('#materi-btn').removeClass('d-none')
                 $("#form-add-materi")[0].reset()
+                $.toast({
+                    heading: 'Materi Ditambahkan',
+                    text: 'Data materi berhasil ditambahkan',
+                    position: 'bottom-right',
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#f96868'
+                })
+                fetchChapter()
+                tableMateri.ajax.reload()
+            }
+        });
+    }
+    function importMateri() {
+        $('#materi-loader-import').removeClass('d-none')
+        $('#materi-btn-import').addClass('d-none')
+        var data = new FormData($('#form-import-materi')[0]);
+        console.log(data)
+        $.ajax({
+            url: '{{route('sub_categories.import')}}',
+            type: "POST",
+            dataType: "json",
+            cache: false,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: data,
+            statusCode: {
+                500: function(response) {
+                    console.log(response)
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Pastikan data sudah diisi semua dan tidak ada yang kosong',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                        position: 'bottom-right'
+                    })
+                    $('#materi-loader-import').addClass('d-none')
+                    $('#materi-btn-import').removeClass('d-none')
+                },
+            },
+            success: function(data) {
+                $('#materi-loader-import').addClass('d-none')
+                $('#materi-btn-import').removeClass('d-none')
+                $("#form-import-materi")[0].reset()
                 $.toast({
                     heading: 'Materi Ditambahkan',
                     text: 'Data materi berhasil ditambahkan',
@@ -1182,11 +1328,11 @@ Materi
             },
             data: data,
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 $('#materi-loader-update').addClass('d-none')
                 $('#materi-btn-update').removeClass('d-none')
                 $("#form-materi-edit")[0].reset()
@@ -1205,8 +1351,7 @@ Materi
         });
     }
 
-    function deleteMateri()
-    {
+    function deleteMateri() {
         console.log($('#id_materi').val())
         $('#materi-loader-delete').removeClass('d-none')
         $('#materi-btn-delete').addClass('d-none')
@@ -1221,19 +1366,19 @@ Materi
                 'id': $('#id_materi').val(),
             },
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
-                    $.toast({
-                        heading: 'Materi Dihapus',
-                        text: 'Data materi berhasil dihapus',
-                        position: 'bottom-right',
-                        icon: 'success',
-                        stack: false,
-                        loaderBg: '#f96868'
-                    })
+            success: function(data) {
+                $.toast({
+                    heading: 'Materi Dihapus',
+                    text: 'Data materi berhasil dihapus',
+                    position: 'bottom-right',
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#f96868'
+                })
 
                 fetchChapter()
                 $('#materi-loader-delete').addClass('d-none')
@@ -1249,30 +1394,37 @@ Materi
 </script>
 
 <script>
-
-    function addChapterPage()
-    {
+    function addChapterPage() {
+        $('#import_chapter').addClass('d-none')
         $('#add_chapter').removeClass('d-none')
         $('#edit_chapter').addClass('d-none')
         $('#remove_chapter').addClass('d-none')
     }
 
-    function editChapterPage(id_chapter)
-    {
+    function editChapterPage(id_chapter) {
+        $('#import_chapter').addClass('d-none')
         $('#add_chapter').addClass('d-none')
         $('#edit_chapter').removeClass('d-none')
         $('#remove_chapter').addClass('d-none')
         getChapterById(id_chapter)
     }
 
-    function deleteChapterPage(id_chapter, name)
-    {
+    function deleteChapterPage(id_chapter, name) {
+        $('#import_chapter').addClass('d-none')
         $('#add_chapter').addClass('d-none')
         $('#edit_chapter').addClass('d-none')
         $('#remove_chapter').removeClass('d-none')
         $('#id_chapter_delete').val(id_chapter)
         $('#name_chapter_delete').val(name)
     }
+
+    function importChapterPage() {
+        $('#import_chapter').removeClass('d-none')
+        $('#add_chapter').addClass('d-none')
+        $('#edit_chapter').addClass('d-none')
+        $('#remove_chapter').addClass('d-none')
+    }
+    
 
     function addChapter() {
         $('#chapter-loader').removeClass('d-none')
@@ -1291,7 +1443,7 @@ Materi
             },
             data: data,
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                     $.toast({
                         heading: 'Error',
@@ -1305,7 +1457,7 @@ Materi
                     $('#btn-chapter').removeClass('d-none')
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 $('#chapter-loader').addClass('d-none')
                 $('#btn-chapter').removeClass('d-none')
                 var output = document.getElementById('output');
@@ -1316,6 +1468,52 @@ Materi
                 tableChapter.ajax.reload()
             }
         });
+    }
+    function importChapter() {
+        $('#chapter-loader-import').removeClass('d-none')
+        $('#btn-chapter-import').addClass('d-none')
+        var data = new FormData($('#form-chapter-import')[0]);
+        console.log(data)
+        $.ajax({
+            url: '{{route('materi.import')}}',
+            type: "POST",
+            enctype: 'multipart/form-data',
+            cache: false,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': '{{csrf_token()}}'
+            },
+            data: data,
+            statusCode: {
+                500: function(response) {
+                    console.log(response)
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Pastikan data sudah diisi semua dan tidak ada yang kosong',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                        position: 'bottom-right'
+                    })
+                    $('#chapter-loader-import').addClass('d-none')
+                    $('#btn-chapter-import').removeClass('d-none')
+                },
+            },
+            success: function(data) {
+                $('#chapter-loader-import').addClass('d-none')
+                $('#btn-chapter-import').removeClass('d-none')
+                var output = document.getElementById('output');
+                output.src = '';
+                $("#form-chapter-import")[0].reset()
+                successToast()
+                fetchChapter()
+                tableChapter.ajax.reload()
+            }
+        });
+    }
+    function importChapterTemplate(){
+        
     }
 
     function updateChapter() {
@@ -1334,11 +1532,11 @@ Materi
             },
             data: data,
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
                 $('#chapter-loader-update').addClass('d-none')
                 $('#btn-chapter-update').removeClass('d-none')
                 var output = document.getElementById('output_chapter_edit');
@@ -1360,8 +1558,7 @@ Materi
         });
     }
 
-    function getChapterById(id)
-    {
+    function getChapterById(id) {
         $.ajax({
             url: '{{route('getCategoryById')}}',
             type: "POST",
@@ -1373,11 +1570,11 @@ Materi
                 'id': id
             },
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data)  {
+            success: function(data) {
                 $('#name_chapter_edit').val(data.data.name)
                 $('#id-edit-chapter').val(data.data.id)
                 var output = document.getElementById('output_chapter_edit');
@@ -1386,8 +1583,7 @@ Materi
         });
     }
 
-    function removeChapter()
-    {
+    function removeChapter() {
         $('#chapter-loader-delete').removeClass('d-none')
         $('#btn-chapter-delete').addClass('d-none')
         $.ajax({
@@ -1401,19 +1597,19 @@ Materi
                 'id': $('#id_chapter_delete').val(),
             },
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
-                    $.toast({
-                        heading: 'Chapter Dihapus',
-                        text: 'Data chapter berhasil dihapus',
-                        position: 'bottom-right',
-                        icon: 'success',
-                        stack: false,
-                        loaderBg: '#f96868'
-                    })
+            success: function(data) {
+                $.toast({
+                    heading: 'Chapter Dihapus',
+                    text: 'Data chapter berhasil dihapus',
+                    position: 'bottom-right',
+                    icon: 'success',
+                    stack: false,
+                    loaderBg: '#f96868'
+                })
 
                 fetchChapter()
                 $('#chapter-loader-delete').addClass('d-none')
@@ -1427,8 +1623,7 @@ Materi
         });
     }
 
-    function getCategoryById(id)
-    {
+    function getCategoryById(id) {
         $.ajax({
             url: '{{route('getCategoryById')}}',
             type: "POST",
@@ -1440,51 +1635,49 @@ Materi
                 'id': id,
             },
             statusCode: {
-                500: function (response) {
+                500: function(response) {
                     console.log(response)
                 },
             },
-            success: function (data) {
+            success: function(data) {
 
             }
         });
     }
-
 </script>
 
 <script>
-    var loadFile = function (event) {
+    var loadFile = function(event) {
         var output = document.getElementById('output');
         output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function () {
+        output.onload = function() {
             URL.revokeObjectURL(output.src)
         }
     };
 
-    var loadFileEdit = function (event) {
+    var loadFileEdit = function(event) {
         var output = document.getElementById('output_chapter_edit');
         output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function () {
+        output.onload = function() {
             URL.revokeObjectURL(output.src)
         }
     };
 
-    var loadFileMateri = function (event) {
+    var loadFileMateri = function(event) {
         var output = document.getElementById('output_materi');
         output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function () {
+        output.onload = function() {
             URL.revokeObjectURL(output.src)
         }
     };
 
-    var loadFileUjian = function (event) {
+    var loadFileUjian = function(event) {
         var output = document.getElementById('output_ujian');
         output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function () {
+        output.onload = function() {
             URL.revokeObjectURL(output.src)
         }
     };
-
 </script>
 
 
@@ -1496,7 +1689,7 @@ Materi
         $form.find('input:file').val('');
     }
 
-    $('input').on('change', function () {
+    $('input').on('change', function() {
         var extension = this.files[0].type.split('/')[1]
         console.log(this.files[0].type)
         if (validExt.indexOf(extension) == -1) {
@@ -1504,20 +1697,20 @@ Materi
             resetForm($('#fileUploadForm'));
         }
     });
-    $(function () {
-        $(document).ready(function () {
+    $(function() {
+        $(document).ready(function() {
             $('#fileUploadForm').ajaxForm({
-                beforeSend: function () {
+                beforeSend: function() {
                     var percentage = '0';
                 },
-                uploadProgress: function (event, position, total, percentComplete) {
+                uploadProgress: function(event, position, total, percentComplete) {
                     var percentage = percentComplete;
                     $('.progress .progress-bar').css("width", percentage + '%',
-                        function () {
+                        function() {
                             return $(this).attr("aria-valuenow", percentage) + "%";
                         });
                 },
-                complete: function (xhr) {
+                complete: function(xhr) {
                     console.log('File has uploaded');
                     var percentage = '0';
                     alert("Upload Success");
@@ -1526,6 +1719,5 @@ Materi
             });
         });
     });
-
 </script>
 @endsection

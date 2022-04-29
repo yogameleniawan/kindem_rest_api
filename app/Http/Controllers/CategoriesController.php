@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\GDrive;
+use App\Imports\CategoryImport;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoriesController extends Controller
@@ -87,6 +89,22 @@ class CategoriesController extends Controller
         if ($table->save()) {
             return response()->json($table, 200);
         }
+    }
+
+    public function import(Request $request) 
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        Excel::import(new CategoryImport, request()->file('file'));
+
+        return redirect()->route('materi.index')->with('success', 'Materi berhasil diimport.');
+    }
+
+    public function template()
+    {
+        # code...
     }
 
     /**

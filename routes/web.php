@@ -26,6 +26,16 @@ Route::get('/', function () {
 });
 Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('chapter/import', [CategoriesController::class, 'import'])->name('materi.import');
+    Route::post('chapter/template', [CategoriesController::class, 'template'])->name('materi.template');
+
+    Route::post('sub_categories/import', [SubCategoriesController::class, 'import'])->name('sub_categories.import');
+    Route::post('sub_categories/template', [SubCategoriesController::class, 'template'])->name('sub_categories.template');
+    
+    Route::post('courses/import', [CoursesController::class, 'import'])->name('courses.import');
+    Route::post('courses/template', [CoursesController::class, 'template'])->name('courses.template');
+
     Route::prefix('admin')->group(function () {
         Route::resources([
             'materi' => CategoriesController::class,
