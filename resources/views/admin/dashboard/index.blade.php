@@ -265,6 +265,10 @@ Dashboard
         }
     }
 
+    .bg-red {
+        background-color: #F5A720 !important;
+    }
+
 </style>
 @endsection
 @section('iconHeader')
