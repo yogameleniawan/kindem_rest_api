@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\GDrive;
+use App\Imports\CourseImport;
 use App\Models\Course;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 
 class CoursesController extends Controller
@@ -110,6 +112,20 @@ class CoursesController extends Controller
         if ($table->save()) {
             return response()->json(['data' => $table], 200);
         }
+    }
+    public function template()
+    {
+        return response()->download(public_path('pipeline/pipeline soal.xlsx'));
+    }
+    public function import(Request $request) 
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        Excel::import(new CourseImport, request()->file('file'));
+
+        return redirect()->route('materi.index')->with('success', 'Materi berhasil diimport.');
     }
 
     /**

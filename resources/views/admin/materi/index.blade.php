@@ -472,7 +472,7 @@ Materi
                 <div id="import_course" class="d-none">
                     <form id="form-import-course" action="{{route('courses.import')}}" class="text-left border border-light p-5" method="POST" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
-                        <a href="" class="btn btn-primary mb-3">Download Template</a>
+                        <a href="{{route('courses.template')}}" class="btn btn-primary mb-3">Download Template</a>
                         <div class="form-group">
                             <label>Upload File Excel</label>
                             <div class="input-group">
