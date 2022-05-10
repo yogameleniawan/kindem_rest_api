@@ -91,7 +91,7 @@ class CategoriesController extends Controller
         }
     }
 
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
@@ -104,7 +104,7 @@ class CategoriesController extends Controller
 
     public function template()
     {
-        # code...
+        return response()->download(public_path('pipeline/pipeline chapter.xlsx'));
     }
 
     /**

@@ -172,7 +172,7 @@ Materi
                     <form id="form-chapter-import" method="POST" class="text-left border border-light p-5" action="{{route('materi.import')}}" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
                     <!-- <form id="form-chapter-import" class="text-left border border-light p-5" enctype="multipart/form-data" style="padding-bottom: 50px;"> -->
-                    <a href="" class="btn btn-primary mb-3">Download Template</a>
+                    <a href="{{route('materi.template')}}" class="btn btn-primary mb-3">Download Template</a>
                         <div class="form-group">
                             <label>Upload File Excel</label>
                             <div class="input-group">
@@ -330,7 +330,7 @@ Materi
                 <div id="import_materi" class="d-none">
                     <form id="form-import-materi" action="{{route('sub_categories.import')}}" class="text-left border border-light p-5" method="POST" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
-                        <a href="" class="btn btn-primary mb-3">Download Template</a>
+                        <a href="{{route('sub_categories.template')}}" class="btn btn-primary mb-3">Download Template</a>
                         <div class="form-group">
                             <label>Upload File Excel</label>
                             <div class="input-group">

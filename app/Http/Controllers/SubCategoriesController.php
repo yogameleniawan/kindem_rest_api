@@ -80,6 +80,11 @@ class SubCategoriesController extends Controller
         return redirect()->route('materi.index')->with('success', 'Materi berhasil diimport.');
     }
 
+    public function template()
+    {
+        return response()->download(public_path('pipeline/pipeline materi.xlsx'));
+    }
+
     /**
      * Display the specified resource.
      *
