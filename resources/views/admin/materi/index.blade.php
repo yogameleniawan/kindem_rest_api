@@ -944,7 +944,7 @@ Materi
         $('#import_course').removeClass('d-none')
         $('#add_course').addClass('d-none')
     }
-    
+
 
     function addCourse() {
         $('#course-loader').removeClass('d-none')
@@ -1424,7 +1424,7 @@ Materi
         $('#edit_chapter').addClass('d-none')
         $('#remove_chapter').addClass('d-none')
     }
-    
+
 
     function addChapter() {
         $('#chapter-loader').removeClass('d-none')
@@ -1513,7 +1513,7 @@ Materi
         });
     }
     function importChapterTemplate(){
-        
+
     }
 
     function updateChapter() {
@@ -1689,14 +1689,14 @@ Materi
         $form.find('input:file').val('');
     }
 
-    $('input').on('change', function() {
-        var extension = this.files[0].type.split('/')[1]
-        console.log(this.files[0].type)
-        if (validExt.indexOf(extension) == -1) {
-            alert('Video extensions are allowed is jpg/png/jpeg');
-            resetForm($('#fileUploadForm'));
-        }
-    });
+    // $('input').on('change', function() {
+    //     var extension = this.files[0].type.split('/')[1]
+    //     console.log(this.files[0].type)
+    //     if (validExt.indexOf(extension) == -1) {
+    //         alert('Video extensions are allowed is jpg/png/jpeg');
+    //         resetForm($('#fileUploadForm'));
+    //     }
+    // });
     $(function() {
         $(document).ready(function() {
             $('#fileUploadForm').ajaxForm({

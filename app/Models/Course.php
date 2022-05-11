@@ -10,7 +10,7 @@ class Course extends Model
     use HasFactory;
 
     protected $table = "courses";
-    protected $fillable = ['id', 'sub_category_id', 'indonesia_text', 'english_text', 'image', 'image_course'];
+    protected $fillable = ['id', 'sub_category_id', 'indonesia_text', 'english_text', 'image', 'image_course', 'is_voice'];
     public $timestamps = true;
     public $incrementing = false;
     public $keyType = 'char';

@@ -26,9 +26,9 @@ class CourseImport implements ToModel, WithHeadingRow
         //     $this->errors2 = "Mohon isi kolom Soal Voice Recognition hanya dengan 'YA' dan 'TIDAK'";
         // }
         if ($row['soal_voice_recognition'] == 'YA') {
-            $vr = 1;
+            $vr = true;
         } else if ($row['soal_voice_recognition'] == 'TIDAK') {
-            $vr = 0;
+            $vr = false;
         }
         // dd($this->errors);
         if (empty($this->errors) && empty($this->errors2)) {
