@@ -72,9 +72,9 @@ class UserCourseController extends Controller
             }
         }
 
-        if ($total_complete == $total_sub) {
+        if ($total_complete == $total_sub) { // check total soal yang dikerjakan == total soal yang disediakan
             $table = CompleteCategory::where('category_id', $sub->category_id)->first();
-            $table->is_complete = true;
+            $table->is_complete = true; // maka materi sudah dikerjakan
             $table->save();
         }
 
@@ -114,7 +114,7 @@ class UserCourseController extends Controller
 
         $courses = Course::where('sub_category_id', '=', $request->sub_category_id)->inRandomOrder()->take(10)->get();
 
-        $available_course = UserCourse::where('sub_category_id', '=', $request->sub_category_id)->first();
+        $available_course = UserCourse::where('sub_category_id', '=', $request->sub_category_id)->where('user_id', '=', Auth::user()->id)->first();
         if ($available_course == null) {
             foreach ($courses as $d) {
                 $table = new UserCourse();

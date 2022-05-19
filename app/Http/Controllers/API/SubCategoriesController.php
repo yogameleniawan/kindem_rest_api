@@ -26,7 +26,7 @@ class SubCategoriesController extends Controller
         foreach ($sub_categories as $s) {
             $courses = Course::where('sub_category_id', '=', $s->id)->inRandomOrder()->take(10)->get();
 
-            $available_course = UserCourse::where('sub_category_id', '=', $s->id)->first();
+            $available_course = UserCourse::where('sub_category_id', '=', $s->id)->where('user_id', Auth::user()->id)->first();
             if ($available_course == null) {
                 foreach ($courses as $d) {
                     $table = new UserCourse();
