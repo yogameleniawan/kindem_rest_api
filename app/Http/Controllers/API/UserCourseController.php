@@ -51,6 +51,16 @@ class UserCourseController extends Controller
             ->where('user_id', '=', Auth::user()->id)
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
 
+        // Count Total Point User
+        $total_point = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
+            ->where('is_true', '=', true)->count();
+
+        $point = UserLevel::where('user_id', Auth::user()->id)->first();
+        $point->user_point = $total_point;
+        $point->save();
+        // Count Total Point User
+
         $sub = SubCategory::find($request->sub_category_id);
         $category = Category::find($sub->category_id);
 

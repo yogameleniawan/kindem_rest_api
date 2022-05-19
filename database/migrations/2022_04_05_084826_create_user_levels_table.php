@@ -17,6 +17,7 @@ class CreateUserLevelsTable extends Migration
             $table->char('id', 10)->primary();
             $table->bigInteger('user_id');
             $table->char('level_id', 10);
+            $table->integer('user_point');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreign('level_id')->references('id')->on('levels')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
