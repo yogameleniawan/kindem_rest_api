@@ -52,13 +52,13 @@ class UserCourseController extends Controller
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
 
         // Count Total Point User
-        $total_point = DB::table('user_courses')
-            ->where('user_id', '=', Auth::user()->id)
-            ->where('is_true', '=', true)->count();
+        // $total_point = DB::table('user_courses')
+        //     ->where('user_id', '=', Auth::user()->id)
+        //     ->where('is_true', '=', true)->count();
 
-        $point = UserLevel::where('user_id', Auth::user()->id)->first();
-        $point->user_point = $total_point;
-        $point->save();
+        // $point = UserLevel::where('user_id', Auth::user()->id)->first();
+        // $point->user_point = $total_point;
+        // $point->save();
         // Count Total Point User
 
         $sub = SubCategory::find($request->sub_category_id);
@@ -107,7 +107,7 @@ class UserCourseController extends Controller
         return response()->json([
             'user_level' => $user_level->name,
             'next_level' => $next_level != null ? $next_level->name : 'MAX',
-            'next_point_level' => $next_level != null ? $next_level->point : 'MAX',
+            'next_point_level' => $next_level != null ? $next_level->point : 100,
             'total_score' => $total_score,
             'is_true' => $is_true,
             'total_test' => $total_test,
