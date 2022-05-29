@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2022 at 01:54 PM
+-- Generation Time: May 29, 2022 at 03:10 PM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -41,17 +41,12 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `image`, `level`, `created_at`, `updated_at`) VALUES
-('8plSIjT7Jq', 'ANIMAL', 'https://drive.google.com/uc?id=1fuYCltcjffFwDRxF06ojepEEx04gy1h1&export=media', 3, '2021-10-27 09:44:53', '2021-10-28 07:19:50'),
-('agkha0rF1Z', 'NEEDS', 'https://drive.google.com/uc?id=1iLuJaVEovwDZ6nSjgxn3oEXbX4_7sSO1&export=media', 2, '2021-10-27 09:44:29', '2021-10-28 07:16:32'),
-('dVpFFDlkVs', 'PROFESSION', 'https://drive.google.com/uc?id=1oQJ8yG5MCYM6ERHOwDkjGwk6GgkJ8beM&export=media', 6, '2021-10-27 09:45:47', '2021-10-28 07:25:11'),
-('EnPbsNYv30', 'UNIVERSE', 'https://drive.google.com/uc?id=1EMi7H3WugxY0DccN0Ea0pmO-hXKMPuDI&export=media', 10, '2021-10-27 09:47:07', '2021-10-28 07:29:22'),
-('gwZXhPEkNQ', 'ENVIRONMENT', 'https://drive.google.com/uc?id=1tFWGsBKSwp3pzoMLGbXuyhG1BMD0R7wI&export=media', 11, '2021-10-27 09:44:08', '2021-10-28 07:15:43'),
-('iTDaqkOaIf', 'MY SELF', 'https://drive.google.com/uc?id=11K7GA4TjUryd1MK0tfbgMav_35DVrVph&export=media', 1, '2021-10-27 09:39:41', '2021-11-03 06:52:46'),
-('l8qS5IT1Q9', 'RECREATION', 'https://drive.google.com/uc?id=1yivSwmbKiSezUVy2lqyzJWkpT0EeHBZL&export=media', 5, '2021-10-27 09:45:35', '2021-10-28 07:24:19'),
-('NDztn6Aec1', 'COMMUNICATION TOOL', 'https://drive.google.com/uc?id=13W-BF_ERKunse2xhMZZtZLb_usn2ZI2j&export=media', 8, '2021-10-27 09:46:34', '2021-10-28 07:27:27'),
-('QC4B3q0XGj', 'PLANT', 'https://drive.google.com/uc?id=1E1Sm9VxN1BOyQPl0Don1bYuRar0zamo-&export=media', 4, '2021-10-27 09:45:09', '2021-10-28 07:23:23'),
-('rlddYB56KX', 'NATIVE LAND', 'https://drive.google.com/uc?id=1KitRIJiwG6MI8CUuSfqv3Lvf46-74JxX&export=media', 9, '2021-10-27 09:46:50', '2021-10-28 07:28:29'),
-('uOxGSRQRZF', 'AIR WATER FIRE', 'https://drive.google.com/uc?id=1FNs_9vkaf0ytBwLC_7TX2ElQvenJcPXR&export=media', 7, '2021-10-27 09:46:09', '2021-10-28 07:26:42');
+('8plSIjT7Jq', 'BARRACKS', 'https://drive.google.com/uc?id=1aSWy1xZLTVuCr94JuJLcbS5PFgdEBLXp&export=media', 3, '2021-10-27 09:44:53', '2021-10-28 07:19:50'),
+('agkha0rF1Z', 'TWO TOWERS', 'https://drive.google.com/uc?id=1tOP9Tcz89Ny_E3uRx1xMSIxbEGnOiyMh&export=media', 2, '2021-10-27 09:44:29', '2021-10-28 07:16:32'),
+('dVpFFDlkVs', 'KINDEM CASTLE', 'https://drive.google.com/uc?id=1oqEyl4Dldc8n2EALyEQlJpuZxUXkqSK_&export=media', 6, '2021-10-27 09:45:47', '2021-10-28 07:25:11'),
+('iTDaqkOaIf', 'TOWER', 'https://drive.google.com/uc?id=1tvF3ppsyOJT8dvgP9UVh7uFvN7CWQIL8&export=media', 1, '2021-10-27 09:39:41', '2021-11-03 06:52:46'),
+('l8qS5IT1Q9', 'CAPITAL', 'https://drive.google.com/uc?id=1ShoEIp5sWcFCUGaLAYqK6KiuNpxaWspA&export=media', 5, '2021-10-27 09:45:35', '2021-10-28 07:24:19'),
+('QC4B3q0XGj', 'FACTORY', 'https://drive.google.com/uc?id=1z697mwdxHDoNLGBUjOcP3A3p33msdy3J&export=media', 4, '2021-10-27 09:45:09', '2021-10-28 07:23:23');
 
 -- --------------------------------------------------------
 
@@ -67,23 +62,6 @@ CREATE TABLE `complete_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `complete_categories`
---
-
-INSERT INTO `complete_categories` (`id`, `category_id`, `user_id`, `is_complete`, `created_at`, `updated_at`) VALUES
-('6jbMe3TEt7', 'agkha0rF1Z', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('7pDVm3MwOb', 'l8qS5IT1Q9', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('eeTO7MK0ed', 'uOxGSRQRZF', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('etC2RrWBfW', 'NDztn6Aec1', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('PWaLXZCzWX', 'dVpFFDlkVs', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('QD1mTe6rNu', 'gwZXhPEkNQ', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('qGZpe6Du95', 'iTDaqkOaIf', 3, 0, '2022-05-19 03:24:06', '2022-05-19 03:24:06'),
-('RUN3B1b6Zo', 'EnPbsNYv30', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('Tpx2naDeQK', '8plSIjT7Jq', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('WiJwWR8I79', 'rlddYB56KX', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07'),
-('Z99a9TbMoF', 'QC4B3q0XGj', 3, 0, '2022-05-19 03:24:07', '2022-05-19 03:24:07');
 
 -- --------------------------------------------------------
 
@@ -468,8 +446,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('NKPYSWjAOe8GiCQsgdDBScFooMntjNZu7LE2Db1O', 1, '192.168.1.5', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZ0Rrc3VRc29TR2tuaTBHNnpDQkdtOHpBUkJDbzFYenBKMm0xU21INyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xOTIuMTY4LjEuNTo4MDAwL2Rhc2hib2FyZCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjA6IiQyeSQxMCQ0dkMuc20yNERhTVNaYk8vbUdzZ0kuUHdnYi9JdFV4T2p1bUs1MDl6QXV4MHZMN0FYOUNRLiI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTAkNHZDLnNtMjREYU1TWmJPL21Hc2dJLlB3Z2IvSXRVeE9qdW1LNTA5ekF1eDB2TDdBWDlDUS4iO30=', 1652957468),
-('UsoIYQcyqoU5NXfRpPlDQwaWT109RNSNi6pqktST', NULL, '192.168.1.207', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.67 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT1BPSWlDTENzUkxuNTZ3SE16QTdMbjRndWZ4c0lRTHZCYTVZRGxLVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjk6Imh0dHA6Ly8xOTIuMTY4LjEuMjA3OjgwMDAvdGVzIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1652960653);
+('BE6uQVi5eRDefDoMjFpcm4zyMOLTH6YmIBpizbig', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.5005.62 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiQVFoSEpkbVZkZmRnYlphR2kzeWU1RnBKOG16STJDaUNzdzJwR1RjdSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM0OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vbWF0ZXJpIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2MDoiJDJ5JDEwJDR2Qy5zbTI0RGFNU1piTy9tR3NnSS5Qd2diL0l0VXhPanVtSzUwOXpBdXgwdkw3QVg5Q1EuIjtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMCQ0dkMuc20yNERhTVNaYk8vbUdzZ0kuUHdnYi9JdFV4T2p1bUs1MDl6QXV4MHZMN0FYOUNRLiI7fQ==', 1653829786);
 
 -- --------------------------------------------------------
 
@@ -491,16 +468,16 @@ CREATE TABLE `sub_categories` (
 --
 
 INSERT INTO `sub_categories` (`id`, `name`, `image`, `category_id`, `created_at`, `updated_at`) VALUES
-('4ZMJBI87Ii', 'MODERN COMMUNICATION TOOL', 'https://drive.google.com/uc?id=1h79DGw5PZSG-psNWd_WUbd5Doit8alcn&export=media', 'NDztn6Aec1', '2021-10-27 10:15:35', '2021-11-04 08:44:26'),
-('5tqy8Q0anH', 'AIR WATER FIRE', 'https://drive.google.com/uc?id=1Fiw-28jGhtHPcteE9JUexOXeEj9ZQ2n0&export=media', 'uOxGSRQRZF', '2021-10-27 10:15:19', '2021-10-29 06:25:39'),
+('4ZMJBI87Ii', 'MODERN COMMUNICATION TOOL', 'https://drive.google.com/uc?id=1h79DGw5PZSG-psNWd_WUbd5Doit8alcn&export=media', '8plSIjT7Jq', '2021-10-27 10:15:35', '2022-05-29 05:08:07'),
+('5tqy8Q0anH', 'AIR WATER FIRE', 'https://drive.google.com/uc?id=1Fiw-28jGhtHPcteE9JUexOXeEj9ZQ2n0&export=media', 'agkha0rF1Z', '2021-10-27 10:15:19', '2022-05-29 05:07:53'),
 ('9PMo2pGpX6', 'PROFESSION', 'https://drive.google.com/uc?id=1TvTTWvPHD-UQvC1lhMI6CO5oUx5cC_-5&export=media', 'dVpFFDlkVs', '2021-10-27 10:15:02', '2021-10-29 06:24:10'),
-('d6HV0jwtEZ', 'TRADITIONAL COMMUNICATION TOOL', 'https://drive.google.com/uc?id=1MS1AvoDNV5S-9w8gGtLlDaYaOSq6U3OV&export=media', 'NDztn6Aec1', '2021-11-04 08:42:55', '2021-11-04 08:42:55'),
-('e4iJNgm6Ca', 'SCHOOL', 'https://drive.google.com/uc?id=19jaraqfuwwse86lI5jjPjJLQkSy64ELd&export=media', 'gwZXhPEkNQ', '2021-10-27 09:48:58', '2021-10-29 05:42:42'),
-('G4bbWyjO99', 'PLANET', 'https://drive.google.com/uc?id=1iO-Di_2-DOCRzcjpwNEdcCX0FIFk-EEO&export=media', 'EnPbsNYv30', '2021-10-27 10:16:21', '2021-10-29 06:31:12'),
-('iQrnJmYOoG', 'FAMILY', 'https://drive.google.com/uc?id=1kia0qDk-2rIWHxUSquHsk2ms0-morqGv&export=media', 'gwZXhPEkNQ', '2021-10-27 09:49:38', '2021-10-29 05:46:41'),
+('d6HV0jwtEZ', 'TRADITIONAL COMMUNICATION TOOL', 'https://drive.google.com/uc?id=1MS1AvoDNV5S-9w8gGtLlDaYaOSq6U3OV&export=media', '8plSIjT7Jq', '2021-11-04 08:42:55', '2022-05-29 05:08:12'),
+('e4iJNgm6Ca', 'SCHOOL', 'https://drive.google.com/uc?id=19jaraqfuwwse86lI5jjPjJLQkSy64ELd&export=media', 'dVpFFDlkVs', '2021-10-27 09:48:58', '2022-05-29 05:08:55'),
+('G4bbWyjO99', 'PLANET', 'https://drive.google.com/uc?id=1iO-Di_2-DOCRzcjpwNEdcCX0FIFk-EEO&export=media', 'l8qS5IT1Q9', '2021-10-27 10:16:21', '2022-05-29 05:08:36'),
+('iQrnJmYOoG', 'FAMILY', 'https://drive.google.com/uc?id=1kia0qDk-2rIWHxUSquHsk2ms0-morqGv&export=media', 'dVpFFDlkVs', '2021-10-27 09:49:38', '2022-05-29 05:09:00'),
 ('jsDsCkdOPZ', 'RECREATION', 'https://drive.google.com/uc?id=1nknVRDHgCAp8DcCTcEPFDMe6shtrZxAL&export=media', 'l8qS5IT1Q9', '2021-10-27 10:13:22', '2021-10-29 06:21:33'),
 ('kd4oos26tl', 'PART OF MY BODY', 'https://drive.google.com/uc?id=1aMWOet3V4OAOnowvJ63El_ZHRmF6DVO4&export=media', 'iTDaqkOaIf', '2021-10-27 09:47:33', '2021-10-28 22:46:51'),
-('kvI4kxbK8U', 'UNIVERSE', 'https://drive.google.com/uc?id=1KFTcBQBZuOcwgM357EqNrr3J2KaVSAi4&export=media', 'EnPbsNYv30', '2021-10-27 10:16:06', '2021-10-29 06:29:56'),
+('kvI4kxbK8U', 'UNIVERSE', 'https://drive.google.com/uc?id=1KFTcBQBZuOcwgM357EqNrr3J2KaVSAi4&export=media', 'l8qS5IT1Q9', '2021-10-27 10:16:06', '2022-05-29 05:08:45'),
 ('Kx3nrVcSeN', 'PET', 'https://drive.google.com/uc?id=1m-_IRHFQZu8XEsyleVMyvZoAA2V5ZzYq&export=media', '8plSIjT7Jq', '2021-10-27 09:52:18', '2021-11-04 02:59:36'),
 ('lIlykI7yix', 'COLOR', 'https://drive.google.com/uc?id=1RB8e60QXHfXJ09LZSr2LIt5LQ575Davc&export=media', 'iTDaqkOaIf', '2021-10-27 09:48:25', '2021-10-29 05:41:32'),
 ('LkcMVU9fBL', 'TREE & FLOWER', 'https://drive.google.com/uc?id=1fZDXokjfoWkN1tmOp3_iMge8Kp1hAZiC&export=media', 'QC4B3q0XGj', '2021-10-27 10:12:38', '2021-10-29 05:56:22'),
@@ -511,11 +488,11 @@ INSERT INTO `sub_categories` (`id`, `name`, `image`, `category_id`, `created_at`
 ('uMq6cenpUS', 'COMMON INSECTS', 'https://drive.google.com/uc?id=1i-K_S6n8ly2b_TROaVFr8x82-CbwUNdO&export=media', '8plSIjT7Jq', '2021-10-27 09:55:35', '2021-10-29 05:54:29'),
 ('Uv1CjrXSOF', 'WORKPLACE', 'https://drive.google.com/uc?id=1aFrewxZnXU-fqcqQMJko1pbYuFqPv2nH&export=media', 'dVpFFDlkVs', '2021-11-04 08:37:37', '2021-11-04 08:37:37'),
 ('UXogDXaamX', 'FOODS & DRINKS', 'https://drive.google.com/uc?id=11LsdvKr_Pgfev6cPSLhXcDBlcsPgCCWd&export=media', 'agkha0rF1Z', '2021-10-27 09:50:23', '2021-10-29 05:49:52'),
-('xaUv9NLBUB', 'NATIVE LAND', 'https://drive.google.com/uc?id=1xkMTXNJULLrGpcUJaResiHOTi3F4KB35&export=media', 'rlddYB56KX', '2021-10-27 10:15:49', '2021-10-29 06:28:05'),
-('xRADaFn1It', 'HOUSE', 'https://drive.google.com/uc?id=1SNB0nTzHZ_vX9_gnPMs1Kpd7oErDMATo&export=media', 'gwZXhPEkNQ', '2021-10-27 09:49:12', '2021-10-29 05:45:02'),
+('xaUv9NLBUB', 'NATIVE LAND', 'https://drive.google.com/uc?id=1xkMTXNJULLrGpcUJaResiHOTi3F4KB35&export=media', 'QC4B3q0XGj', '2021-10-27 10:15:49', '2022-05-29 05:08:23'),
+('xRADaFn1It', 'HOUSE', 'https://drive.google.com/uc?id=1SNB0nTzHZ_vX9_gnPMs1Kpd7oErDMATo&export=media', 'dVpFFDlkVs', '2021-10-27 09:49:12', '2022-05-29 05:09:06'),
 ('xsF19TMhoZ', 'VEHICLE', 'https://drive.google.com/uc?id=1rR-P9JiqermEjyivNrGuZYa-Mbho0Yzt&export=media', 'l8qS5IT1Q9', '2021-10-27 10:14:24', '2021-10-29 06:22:36'),
 ('ygubUyqQoN', 'WILD ANIMAL', 'https://drive.google.com/uc?id=1LtP-RW3ryPteCmjuO-nKIQ_QkOsX64VQ&export=media', '8plSIjT7Jq', '2021-10-27 09:50:50', '2021-10-29 05:51:37'),
-('ZR8Oom877B', 'INCIDENT', 'https://drive.google.com/uc?id=104QnGZDylZQdV8obRSoGZg_pNb39pN1a&export=media', 'uOxGSRQRZF', '2021-11-04 08:38:33', '2021-11-04 08:38:33');
+('ZR8Oom877B', 'INCIDENT', 'https://drive.google.com/uc?id=104QnGZDylZQdV8obRSoGZg_pNb39pN1a&export=media', 'agkha0rF1Z', '2021-11-04 08:38:33', '2022-05-29 05:07:58');
 
 -- --------------------------------------------------------
 
@@ -544,30 +521,67 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `role`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(0, 'Roel Hermiston', 'ubaldo.baumbach@example.org', '2022-04-21 22:59:27', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'opovkeju7M', NULL, NULL, '2022-04-21 22:59:27', '2022-04-21 22:59:27'),
 (1, 'admin', 'admin@gmail.com', NULL, '$2y$10$4vC.sm24DaMSZbO/mGsgI.Pwgb/ItUxOjumK509zAux0vL7AX9CQ.', NULL, NULL, 'admin', NULL, NULL, NULL, '2021-10-26 22:12:51', '2021-10-26 22:12:51'),
 (3, 'Murid Kesayangan', 'murid@gmail.com', NULL, '$2y$10$XpQYoSpM2WamUP8x6.is/.EiyiLdYAQ.Fz3ZavTLs3QabxFH3nKlS', NULL, NULL, 'student', NULL, NULL, 'assets/images/avatar-5.jpg', '2021-11-17 06:27:18', '2022-04-11 03:26:48'),
 (5, 'Yoga Meleniawan Pamungkas', 'yogameleniawan@gmail.com', NULL, '$2y$10$tZbikFRYh7.mSILMotw9AON4D0u8ugQcInBjavzsMkYsaIRRQ8oLW', NULL, NULL, 'student', NULL, NULL, NULL, '2022-04-10 02:22:18', '2022-04-10 02:22:18'),
-(6, 'Natalia Gleichner', 'adams.newton@example.net', '2022-04-21 23:01:50', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'AhXInF6bOf', NULL, NULL, '2022-04-21 23:01:50', '2022-04-21 23:01:50'),
-(7, 'Otilia Bruen', 'padberg.jazlyn@example.com', '2022-04-21 23:03:03', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', '5haVgDeY0R', NULL, NULL, '2022-04-21 23:03:03', '2022-04-21 23:03:03'),
-(17, 'Avery Bergnaum', 'moses26@example.com', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'zQqOeGgYCN', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43'),
-(19, 'Larue Jast', 'pacocha.marley@example.com', '2022-04-21 23:04:55', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'WB9PSOx4Dg', NULL, NULL, '2022-04-21 23:04:55', '2022-04-21 23:04:55'),
-(20, 'Sabina Dietrich', 'waelchi.mia@example.com', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'I5UvrRAvLz', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43'),
-(22, 'Ivah Corkery', 'jedidiah10@example.net', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'NxpHhVaokJ', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43'),
-(23, 'Kenya Treutel', 'marilyne.glover@example.net', '2022-04-21 23:04:55', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'pAX3YZW4Hh', NULL, NULL, '2022-04-21 23:04:55', '2022-04-21 23:04:55'),
-(24, 'Prof. Dock Schamberger PhD', 'toy.alexandro@example.org', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'ZDEeBj29Xr', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43'),
-(29, 'Henriette Schneider', 'ivory27@example.net', '2022-04-21 23:04:35', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'YtcI0iwg7k', NULL, NULL, '2022-04-21 23:04:35', '2022-04-21 23:04:35'),
-(48, 'Maureen Spinka', 'kali.herman@example.com', '2022-04-21 23:04:35', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'Y3Yk1MinON', NULL, NULL, '2022-04-21 23:04:35', '2022-04-21 23:04:35'),
-(50, 'Mr. Candelario Paucek', 'ortiz.vincent@example.com', '2022-04-21 23:04:55', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'sU8aF0xtNw', NULL, NULL, '2022-04-21 23:04:55', '2022-04-21 23:04:55'),
-(56, 'Murl Rolfson', 'timmy.strosin@example.org', '2022-04-21 23:04:35', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'JWuqW2TMlU', NULL, NULL, '2022-04-21 23:04:35', '2022-04-21 23:04:35'),
-(62, 'Mrs. Katarina Powlowski', 'tromp.moises@example.com', '2022-04-21 23:04:35', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'RJeVCZPamB', NULL, NULL, '2022-04-21 23:04:35', '2022-04-21 23:04:35'),
-(70, 'Joe Harvey', 'delfina.nienow@example.com', '2022-04-21 23:04:35', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', '6G2w2nQQdy', NULL, NULL, '2022-04-21 23:04:35', '2022-04-21 23:04:35'),
-(75, 'Berniece Witting', 'ibaumbach@example.org', '2022-04-21 23:04:35', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'kovAStbSBh', NULL, NULL, '2022-04-21 23:04:35', '2022-04-21 23:04:35'),
-(77, 'Shayna Romaguera', 'ckerluke@example.org', '2022-04-21 23:04:55', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'zslYJsLl1C', NULL, NULL, '2022-04-21 23:04:55', '2022-04-21 23:04:55'),
-(82, 'Eldon Koepp IV', 'zaria94@example.com', '2022-04-21 23:04:55', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', '07ej9LW2NN', NULL, NULL, '2022-04-21 23:04:55', '2022-04-21 23:04:55'),
-(92, 'Irma O\'Keefe', 'adriel11@example.org', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', '9aPfUnVGMz', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43'),
-(94, 'Teresa Tillman', 'dhickle@example.org', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'Zxp6jPXKoL', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43'),
-(97, 'Katrina Strosin', 'meaghan56@example.org', '2022-04-21 23:04:43', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', NULL, NULL, 'student', 'qC53uZKLg2', NULL, NULL, '2022-04-21 23:04:43', '2022-04-21 23:04:43');
+(6, 'NAFIZA NADIM AL AMOEDY', 'nafizanadim@kindem.online', NULL, '$2y$10$OK4lG./Q4U8gIn0gG1oMsuMaGDJ0RdGp1KVhjHJEMtWxf9SkJ3mkm', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:42:12', '2022-05-29 05:42:12'),
+(7, 'NAURA NADIM AL AMOEDY', 'nauranadim@kindem.online', NULL, '$2y$10$fOFpZ0cZlAyxPjh1kFfUAeYzUfmjDQiKjfehc0dDLQ9HaJfKSBTmO', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:43:17', '2022-05-29 05:43:17'),
+(8, 'MUHAMMAD IHSANUDDIN Z.P', 'muhammadihsanuddin@kindem.online', NULL, '$2y$10$VvQtsvcAT/mbUF6dPK4a2.SY8QsySMivVrxqi06DvL.0jkSGdMDpq', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:45:33', '2022-05-29 05:45:33'),
+(9, 'SYAKILLA BILQIS AULIA', 'syakillabilqis@kindem.online', NULL, '$2y$10$9B7s02/YB.mJaGG3GNLXi.LvfjX/qfHIOZ1wvOz92Zcs0vt0lGjYW', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:46:09', '2022-05-29 05:46:09'),
+(10, 'KALYA YURI PRASETYA', 'kaylayuri@kindem.online', NULL, '$2y$10$1UpaAh3KuNTkq/0gepTDyeqRU7oeCVLVRh8eaH9c7Eyl/NM3erREa', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:46:27', '2022-05-29 05:46:27'),
+(11, 'AYUNDA DEWI HUMAIROH', 'ayundadewi@kindem.online', NULL, '$2y$10$H/dlgJHYMl.a6t8MYC4qeOehIpEAHL.MaH47C/bhkzye/G4FtM.4a', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:46:53', '2022-05-29 05:46:53'),
+(12, 'BAGUS KURNIAWAN FITRANDANA', 'baguskurniawan@kindem.online', NULL, '$2y$10$3sgao9suVrxbcj/PZ/Wia.5uFStfWILJO4gWJwTtSl4u0tkGC7tzm', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:47:20', '2022-05-29 05:47:20'),
+(13, 'NADYA FIRLIGA', 'nadyafirliga@kindem.online', NULL, '$2y$10$ErbA5xq383xEkbl4ihA5.utC1fDrbkfQLFxZRl91h1FjDSSR5Oqdu', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:47:42', '2022-05-29 05:47:42'),
+(14, 'CAHAYA ADELIA WAHYU PUTRI', 'cahayaadelia@kindem.online', NULL, '$2y$10$GdCPcTA8gJcDpRRSV4/eX.zHBB/hGwjqD4WH3uZlCXj0COkid/piC', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:48:09', '2022-05-29 05:48:09'),
+(15, 'ALARIC SAVA HILMI ALVARO', 'alaricsava@kindem.online', NULL, '$2y$10$keY/fSgbM2ZgwMCR.KWI8eCD0PCfX7sLH1Qmz1Kd227bOs7uznfsa', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:48:32', '2022-05-29 05:48:32'),
+(16, 'AHMAD IRAWAN', 'ahmadirawan@kindem.online', NULL, '$2y$10$8MILKHYiT2LqJmsdCQ/Zg.kRIeu.l5C93JFhmhWmvOSHAStFgxVQi', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:48:58', '2022-05-29 05:48:58'),
+(17, 'AFIFA FITRIA ZAHRA', 'afifafitria@kindem.online', NULL, '$2y$10$weQ3pbp2PBGWLUI4Bzjlz.OQprjAyz7aGGl3f00SnKKmr5RoXuAue', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:49:16', '2022-05-29 05:49:16'),
+(18, 'ARIMBI SEKARWANGI A.', 'arimbisekarwangi@kindem.online', NULL, '$2y$10$qblQk6P7QUGxLYzdGC8nCeFJwMDUe5J/juC17s6R1iCT0Xd/Fp.GW', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:49:39', '2022-05-29 05:49:39'),
+(19, 'KELVIN OKTA RADITYA', 'kelvinokta@kindem.online', NULL, '$2y$10$onsE9Uc7I8C.2thdigwokerl9Bli.QYV6KE9i.WFmvU8NkDbBOqla', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:50:05', '2022-05-29 05:50:05'),
+(20, 'NAYLA VIDYASYIFA', 'naylavidyasyifa@kindem.online', NULL, '$2y$10$798uV5BVQmsSJoii/cm8WuopDo3o5CpJ1EOzbGtGNoEVCWegV7epe', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:50:30', '2022-05-29 05:50:30'),
+(21, 'SITI AISYAH', 'sitiaisyah@kindem.online', NULL, '$2y$10$bvbgu08gl47DsJMYill4ou5bOhrSmX.I9OGqVuzIY6Rpvfif5sCwu', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:50:57', '2022-05-29 05:50:57'),
+(22, 'SHINTA RADYA ALLUNA', 'shintaradya@kindem.online', NULL, '$2y$10$LdNAia/dBD3XlN.8Cu9dHuwIj4Z6nmrNVbirz/6H7nyz.M3zECxti', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:51:16', '2022-05-29 05:51:16'),
+(23, 'AVORISMA CETTA NISMARA', 'avorismacetta@kindem.online', NULL, '$2y$10$8fUfTu3LFUAI.2GlevZJPuY5jfmL62EHgNPmyor7LxgCla9iW2cHO', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:52:39', '2022-05-29 05:52:39'),
+(24, 'ATHIFAH LAILA FITRI RAMADHANI', 'athifahlaila@kindem.online', NULL, '$2y$10$6toVPNXduUxi1y9BAFzcHOx7McQQWJ4jCXBKD19DBVhD9gCyNjQxW', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:53:04', '2022-05-29 05:53:04'),
+(25, 'ALMEERA VIOLA DELISHA ZAKARIA', 'almeeraviola@kindem.online', NULL, '$2y$10$lm/jiup6Wrqicfyk7H/tteH1bCIaILexLFbhK5SgnS4DeZto8K1lq', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:53:30', '2022-05-29 05:53:30'),
+(26, 'FARZAN SAKHA ARGANI', 'farzansakha@kindem.online', NULL, '$2y$10$3Z1ea6MSxNLQ7iReUAQDIe4nci1ooSU.Jif9UL2sZTvNSfc5a0SfS', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:53:46', '2022-05-29 05:53:46'),
+(27, 'INTAN JANEETA FIRYA', 'intanjaneeta@kindem.online', NULL, '$2y$10$YaNMC1Ma2GBk.zrqa0tNOegW.RJrHUYxl2AlawYWPZKZ9ZDTQN9oi', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:54:04', '2022-05-29 05:54:04'),
+(28, 'MUCHAMMAD WAHYUDI', 'muchammadwahyudi@kindem.online', NULL, '$2y$10$oCa4pJ0nbS06o9b/jNI3meTkLIz2r9dFxca7jj/0X.iJQQhJXMP0O', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:54:23', '2022-05-29 05:54:23'),
+(29, 'MUHAMMAD IRSAD D.S', 'muhammadirsad@kindem.online', NULL, '$2y$10$taxu1QnUjrQIxLWpS3/EY.VPJ53b7eUcaKi3MwQ8HOM4MT7raZwTK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:54:52', '2022-05-29 05:54:52'),
+(30, 'MUHAMMAD FARID A. R', 'muhammadfarid@kindem.online', NULL, '$2y$10$ie7uP/APUSuLf9ZjaO/0Fuk9WvUE0nfDFsKNmKJb4hm.MrUKjtKKK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:55:11', '2022-05-29 05:55:11'),
+(31, 'RAISYAH KURNIA PUTRI', 'raisyahkurnia@kindem.online', NULL, '$2y$10$GWPjEcg3DY.K.n8jk8HZP.lpjuOzPIOn9KmiG45mULj3V0jdsaG72', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:55:40', '2022-05-29 05:55:40'),
+(32, 'RINO PRATAMA', 'rinopratama@kindem.online', NULL, '$2y$10$N5nfg/pOSDXVHPEARI89.e5c7/782IgTyQZiMSMS/9nr9RiWqHUPa', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:55:52', '2022-05-29 05:55:52'),
+(33, 'MUHAMMAD VASRIL AKBAR', 'muhammadvasril@kindem.online', NULL, '$2y$10$3Re2z6VoulwMnicKgxTp1uKSki8smZRMphsoa2M4Uh2R1R/kVR2EC', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:56:10', '2022-05-29 05:56:10'),
+(34, 'ALIA ADILLA NIKEISHA W', 'aliaadilla@kindem.online', NULL, '$2y$10$GUKHKbK42NzhEZz/aW.a.OSMF6HQ5135Orh2Qsx8zAa/mRcaWIcTq', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:56:34', '2022-05-29 05:56:34'),
+(35, 'JULYAMI', 'julyami@kindem.online', NULL, '$2y$10$volu8EXp7iMMnHCb.DmY0u.f6TvkEhvGnd6g6E4bIF4mQ1GJqIG1u', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:56:57', '2022-05-29 05:56:57'),
+(36, 'HIMA ZUHROTUS SANGADAH', 'himazuhrotus@kindem.online', NULL, '$2y$10$JbsSW0g6rvyceSGYQcgMCedb46ae6tNfOp0SeWg63E4zQ1GzgGgV2', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:57:25', '2022-05-29 05:57:25'),
+(37, 'FARIZA AYU FEBRIYANTI', 'farizaayu@kindem.online', NULL, '$2y$10$DICUa5rZWl4gh6uu0xI4keqXWjvyrIZlS2FD7OmFX1JFv5.ipb9VK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:57:42', '2022-05-29 05:57:42'),
+(38, 'MOCHAMMAD SYAM A. K', 'mochammadsyam@kindem.online', NULL, '$2y$10$GnWdDlXlnN1B0unh6IQ30.5qrMU/Us3X6rj22EwBG6naCzw.NA40K', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:58:08', '2022-05-29 05:58:08'),
+(39, 'AGATHA FILLAFIL LATIEF', 'agathafillafil@kindem.online', NULL, '$2y$10$FeLycWcuyp2WCJLx9AoBNuAVpDhjavPza3gyMjfQKuA4A3u7fEwKy', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:58:30', '2022-05-29 05:58:30'),
+(40, 'AZZA APRILIA ARIFAH', 'azzaaprilia@kindem.online', NULL, '$2y$10$Qr69UREBhki3ZgQL788qxuy0bSCHo7poadLaA66GHrN5XO9k37LIe', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:58:47', '2022-05-29 05:58:47'),
+(41, 'RAKA ACHMAD FIRDAUS', 'rakaachmad@kindem.online', NULL, '$2y$10$L7Fd2FWUUIvz9PHKNX4bhe2KyiSNz0DTueRF3isIMMHSJnTRupcJm', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:59:05', '2022-05-29 05:59:05'),
+(42, 'MOCHAMMAD MAHFUD', 'mochammadmahfud@kindem.online', NULL, '$2y$10$SMlSvBOyjVTZ26HMfGIEMeHzRrnbFoulm6a2xIn7WUnCno8zyRHZO', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:59:22', '2022-05-29 05:59:22'),
+(43, 'AISA KUSUMA HATI', 'aisakusuma@kindem.online', NULL, '$2y$10$KAao40YReU7fOCDspoLjuuAeWi/HRRwIexJe5ixAiyKzQv7mZ5P2i', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:59:39', '2022-05-29 05:59:39'),
+(44, 'TSAMARA VIONANDA', 'tsamaravionanda@kindem.online', NULL, '$2y$10$.JQ1PlDXIJSzZ1FmO3fb7ekfKPZu1zJyBr2RlkgCc/7ui/KeZHHEK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 05:59:57', '2022-05-29 05:59:57'),
+(45, 'RADEN SYAHRAFI A. P', 'radensyahrafi@kindem.online', NULL, '$2y$10$ntIkTtpy5CZvwoM0G5eYmOREU3Q/Z./PvTw7j/uLhmWlJ8hsdFdMa', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:00:17', '2022-05-29 06:00:17'),
+(46, 'DIO FIRNANDA RAMADHANI', 'diofirnanda@kindem.online', NULL, '$2y$10$m1d/f2p0JIscAhT.F2HaROBGKpOLjKaBEnmXC2gbY2ChDstVxlYci', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:00:35', '2022-05-29 06:00:35'),
+(47, 'MUHAMMAD ANAM', 'muhammadanam@kindem.online', NULL, '$2y$10$mBmrINJtyE.UFEbg6pPEAeaIcEHJgfJ4Tc5is24hMdk..ysZJOMr2', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:00:53', '2022-05-29 06:00:53'),
+(48, 'MAYYUKI KIREINA MUZDALIFAH', 'mayyukikireina@kindem.online', NULL, '$2y$10$cg0chLjVYaDo/Sjtv8RMqerdm1ONOAqpcln/orB70vQNuvfFDqNUu', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:01:14', '2022-05-29 06:01:14'),
+(49, 'ANANDA RADIT SETIAWAN', 'anandaradit@kindem.online', NULL, '$2y$10$AqPZCmncZRk1Le//M2wmgecxK0vbAs/q4M2q.B4kT3eq3mNvYhTDi', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:01:33', '2022-05-29 06:01:33'),
+(50, 'ADAM ALMUNAJAT', 'adamalmunajat@kindem.online', NULL, '$2y$10$wz1oAqm54527q2rvgjNATO/cw3Dy3hKOstQWIj0Np1v5Ev1hdeNfK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:01:53', '2022-05-29 06:01:53'),
+(51, 'ADITYA PRATAMA', 'adityapratama@kindem.online', NULL, '$2y$10$kHuypZuxVTBOxCuixzqLiedC8wmScOzskitXQ.ALhj/UV1b9Jt5Ae', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:02:08', '2022-05-29 06:02:08'),
+(52, 'AKBAR PUTRA PRATAMA', 'akbarputra@kindem.online', NULL, '$2y$10$cww8TIHmOMLrRElN4YqGa.L8k.De.tnDmkuGK5G636ArXk0pE0m4G', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:02:26', '2022-05-29 06:02:26'),
+(53, 'AISYAH ISAHABILAH', 'aisyahisahabilah@kindem.online', NULL, '$2y$10$1Ft5fepM0kzZmyejzD4Zfe9AMwR2t42V8WvylApBZDuIOWmchH1JK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:02:45', '2022-05-29 06:02:45'),
+(54, 'DELVIAN PUTRA MIRANDO', 'delvianputra@kindem.online', NULL, '$2y$10$jSIIZzFtCoKGHsMzuvRnBOOpd5n88d50JKmOJCgLIG7N52Oir5fpO', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:03:05', '2022-05-29 06:03:05'),
+(55, 'DHIMAS RISQY YASA S.', 'dhimasrisqy@kindem.online', NULL, '$2y$10$4ZnSdBQqHnbKa0bC4KSFTer18ilJPKGH2wDT3cskhUtMNUtbmY6FW', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:03:29', '2022-05-29 06:03:29'),
+(56, 'KARINA SETIA NUR ANDYNI', 'karinasetia@kindem.online', NULL, '$2y$10$RxTyFPngBA36zqJoo6wooeSdTZFc0hal2mqZNmXrdMhaHhk/DUxUu', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:03:50', '2022-05-29 06:03:50'),
+(57, 'KAILA RAHMAH', 'kailarahmah@kindem.online', NULL, '$2y$10$tHHfAWOK04apDhpEr934perWadkiZgRhiJ32DrYKfA5qMp8wMkZvC', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:04:12', '2022-05-29 06:04:12'),
+(58, 'MUHAMMAD ISYA D. R', 'muhammadisya@kindem.online', NULL, '$2y$10$Xk3erPO1HuA/Bx2YIZjq5e7zLHDQtOCm8O.cassN8WK78sGE81Mr.', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:04:34', '2022-05-29 06:04:34'),
+(59, 'R. ERICH TRYSTAN JAVANA', 'erichtrystan@kindem.online', NULL, '$2y$10$GM1Ik5b1uMBceVFTi/Hrr.YSGa9RIt2zaFBHYChLSzfMp.F2E3EHK', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:04:57', '2022-05-29 06:04:57'),
+(60, 'SHENDY AMELLIA PUTRI NANURU', 'shendyamellia@kindem.online', NULL, '$2y$10$MN50cjQA5kN2JnVr8nHcm.Os3247KFIWClc3bvch8kM1gTmMVi/ou', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:05:18', '2022-05-29 06:05:18'),
+(61, 'AIKO JUNIOR KOERNIAWAN', 'aikojunior@kindem.online', NULL, '$2y$10$jgezCYTiHpwNSjl7e5eNFOOf8UqS3GNH5cFTVmopCzYR9qBECtEFG', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:05:33', '2022-05-29 06:05:33'),
+(62, 'AHMAD DEWANDRA F.', 'ahmaddewandra@kindem.online', NULL, '$2y$10$bi5UsC3TuPO6y67XCD1DNuRMRoUllLux0XJs.Tvw47.rmx4UB7WOa', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:05:58', '2022-05-29 06:05:58'),
+(63, 'MUHAMMAD DANISH F. W', 'muhammaddanish@kindem.online', NULL, '$2y$10$AAW.P9Z4EePyn/xcWMtw5Of5GUa8XOUagBrbnAZ7YxYZjBzWWmaSO', NULL, NULL, 'student', NULL, NULL, NULL, '2022-05-29 06:06:23', '2022-05-29 06:06:23');
 
 -- --------------------------------------------------------
 
@@ -649,30 +663,67 @@ CREATE TABLE `user_levels` (
 --
 
 INSERT INTO `user_levels` (`id`, `user_id`, `level_id`, `user_point`, `created_at`, `updated_at`) VALUES
-('222VBbsdd', 17, '1PkJ2SfK62', 0, '2022-04-05 01:47:19', '2021-08-16 21:08:22'),
-('2zeJ56xPUP', 48, '1PkJ0wp22f', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('6gunEwGm8h', 94, '1PkJ2SfK62', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('aIt0PqP3aI', 62, '70SFBb1pje', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
+('2CQfzeTdqg', 59, '70SFBb1pje', 0, '2022-05-29 06:04:57', '2022-05-29 06:04:57'),
+('2iKcC9p3AM', 17, '70SFBb1pje', 0, '2022-05-29 05:49:16', '2022-05-29 05:49:16'),
+('2naWkHUs6C', 58, '70SFBb1pje', 0, '2022-05-29 06:04:34', '2022-05-29 06:04:34'),
+('2vRq6eylul', 6, '70SFBb1pje', 0, '2022-05-29 05:42:12', '2022-05-29 05:42:12'),
+('2VzHqk6RxQ', 20, '70SFBb1pje', 0, '2022-05-29 05:50:30', '2022-05-29 05:50:30'),
+('3LHkN63n1m', 51, '70SFBb1pje', 0, '2022-05-29 06:02:08', '2022-05-29 06:02:08'),
+('4rrKOvzlkz', 40, '70SFBb1pje', 0, '2022-05-29 05:58:47', '2022-05-29 05:58:47'),
+('55QxJ0OwZO', 54, '70SFBb1pje', 0, '2022-05-29 06:03:05', '2022-05-29 06:03:05'),
+('5Rl3SvZHFu', 11, '70SFBb1pje', 0, '2022-05-29 05:46:53', '2022-05-29 05:46:53'),
+('7Z4ppA3S34', 31, '70SFBb1pje', 0, '2022-05-29 05:55:40', '2022-05-29 05:55:40'),
+('be2v59EiRu', 19, '70SFBb1pje', 0, '2022-05-29 05:50:05', '2022-05-29 05:50:05'),
+('bzjuKBu8aS', 62, '70SFBb1pje', 0, '2022-05-29 06:05:58', '2022-05-29 06:05:58'),
+('cM4ZyUDXQt', 7, '70SFBb1pje', 0, '2022-05-29 05:43:17', '2022-05-29 05:43:17'),
+('cX2UCrAPxK', 9, '70SFBb1pje', 0, '2022-05-29 05:46:09', '2022-05-29 05:46:09'),
+('D9N1rwhlFC', 61, '70SFBb1pje', 0, '2022-05-29 06:05:33', '2022-05-29 06:05:33'),
+('DB1qAUC7S1', 37, '70SFBb1pje', 0, '2022-05-29 05:57:42', '2022-05-29 05:57:42'),
 ('dhtOU9em8c', 1, '1PkJ2SfK62', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('EA4xp1T9DG', 20, '22FVBb1pje', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('effQkKBIQA', 6, 'nr9cSfxK8L', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('Es8t7DmGMb', 0, '1PkJ0wp22f', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('ewkQvKsOw1', 97, '1PkJ2SfK62', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('gpMJ3R19Lg', 29, '22FVBb1pje', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('gw45vrFzUg', 70, 'nr9cSfxK8L', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('hH7vulaAgE', 23, '70SFBb1pje', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
+('EumVXOWhHk', 28, '70SFBb1pje', 0, '2022-05-29 05:54:23', '2022-05-29 05:54:23'),
+('GEGT6WN8AZ', 27, '70SFBb1pje', 0, '2022-05-29 05:54:04', '2022-05-29 05:54:04'),
+('gfPJhYMSVu', 35, '70SFBb1pje', 0, '2022-05-29 05:56:57', '2022-05-29 05:56:57'),
+('GTUY0SFrtJ', 26, '70SFBb1pje', 0, '2022-05-29 05:53:46', '2022-05-29 05:53:46'),
 ('hhhUu6oZjK', 5, '70SFBb1pje', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('Kctb6dDySp', 24, 'nr9cSfxK8L', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('KN66n6Gst7', 77, '22FVBb1pje', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('M3p4t6bK9h', 92, 'asdaFFwr2S', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('mqyQwy7XWp', 56, '70SFBb1pje', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05'),
-('qweqwe221', 19, '1PkJ2SfK62', 0, '2022-04-05 01:47:19', '2021-08-16 21:08:22'),
+('hrDz9MBaOL', 45, '70SFBb1pje', 0, '2022-05-29 06:00:17', '2022-05-29 06:00:17'),
+('hSG4BwU7aM', 53, '70SFBb1pje', 0, '2022-05-29 06:02:45', '2022-05-29 06:02:45'),
+('IOzC5sp7vE', 14, '70SFBb1pje', 0, '2022-05-29 05:48:09', '2022-05-29 05:48:09'),
+('IYfww6hGDh', 25, '70SFBb1pje', 0, '2022-05-29 05:53:30', '2022-05-29 05:53:30'),
+('jy6beyOQrQ', 15, '70SFBb1pje', 0, '2022-05-29 05:48:32', '2022-05-29 05:48:32'),
+('k4xLMsWsGi', 60, '70SFBb1pje', 0, '2022-05-29 06:05:18', '2022-05-29 06:05:18'),
+('kz4nnH8uci', 34, '70SFBb1pje', 0, '2022-05-29 05:56:34', '2022-05-29 05:56:34'),
+('LrXEtB26v7', 48, '70SFBb1pje', 0, '2022-05-29 06:01:14', '2022-05-29 06:01:14'),
+('Myvzyog5gN', 21, '70SFBb1pje', 0, '2022-05-29 05:50:57', '2022-05-29 05:50:57'),
+('ngSF99wEFN', 38, '70SFBb1pje', 0, '2022-05-29 05:58:08', '2022-05-29 05:58:08'),
+('Nyejp9P5Ky', 57, '70SFBb1pje', 0, '2022-05-29 06:04:12', '2022-05-29 06:04:12'),
+('o0EZZ5qjwK', 16, '70SFBb1pje', 0, '2022-05-29 05:48:58', '2022-05-29 05:48:58'),
+('oDON1MZ3zq', 56, '70SFBb1pje', 0, '2022-05-29 06:03:50', '2022-05-29 06:03:50'),
+('odXGUvllgC', 49, '70SFBb1pje', 0, '2022-05-29 06:01:33', '2022-05-29 06:01:33'),
+('p2bC2voCkH', 33, '70SFBb1pje', 0, '2022-05-29 05:56:10', '2022-05-29 05:56:10'),
+('Pd6Rikt3kL', 52, '70SFBb1pje', 0, '2022-05-29 06:02:26', '2022-05-29 06:02:26'),
+('quCOB7m51C', 32, '70SFBb1pje', 0, '2022-05-29 05:55:52', '2022-05-29 05:55:52'),
 ('rrX6sErJHg', 3, '1PkJ0wp22f', 15, '2022-04-21 23:19:23', '2022-04-21 23:19:23'),
-('tqZe38PlKn', 50, '70SFBb1pje', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('w8uRbiiei9', 75, 'asdaFFwr2S', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('xG7B32R7vZ', 7, '1PkJ0wp22f', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('yLaWl8JP5Y', 22, 'asdaFFwr2S', 0, '2022-04-21 23:07:22', '2022-04-21 23:07:22'),
-('zByXXoSoBp', 82, '22FVBb1pje', 0, '2022-04-21 23:06:05', '2022-04-21 23:06:05');
+('S6ZZnXc3h7', 22, '70SFBb1pje', 0, '2022-05-29 05:51:16', '2022-05-29 05:51:16'),
+('skwE3kABaj', 46, '70SFBb1pje', 0, '2022-05-29 06:00:35', '2022-05-29 06:00:35'),
+('SnYFJrRaTm', 63, '70SFBb1pje', 0, '2022-05-29 06:06:23', '2022-05-29 06:06:23'),
+('sQr9rKpBeN', 42, '70SFBb1pje', 0, '2022-05-29 05:59:22', '2022-05-29 05:59:22'),
+('SSprfsdWlC', 36, '70SFBb1pje', 0, '2022-05-29 05:57:25', '2022-05-29 05:57:25'),
+('tlIRqWAf4N', 44, '70SFBb1pje', 0, '2022-05-29 05:59:57', '2022-05-29 05:59:57'),
+('TV3Xqr6VSI', 8, '70SFBb1pje', 0, '2022-05-29 05:45:33', '2022-05-29 05:45:33'),
+('uaDa45bwha', 39, '70SFBb1pje', 0, '2022-05-29 05:58:30', '2022-05-29 05:58:30'),
+('Ug6t5fcj2c', 47, '70SFBb1pje', 0, '2022-05-29 06:00:53', '2022-05-29 06:00:53'),
+('wlKUFFFdwZ', 24, '70SFBb1pje', 0, '2022-05-29 05:53:04', '2022-05-29 05:53:04'),
+('WM36v3Zv2M', 30, '70SFBb1pje', 0, '2022-05-29 05:55:11', '2022-05-29 05:55:11'),
+('wnkQRbyCQb', 23, '70SFBb1pje', 0, '2022-05-29 05:52:39', '2022-05-29 05:52:39'),
+('x5nJAOwXky', 43, '70SFBb1pje', 0, '2022-05-29 05:59:39', '2022-05-29 05:59:39'),
+('XdJzfdNe7n', 55, '70SFBb1pje', 0, '2022-05-29 06:03:29', '2022-05-29 06:03:29'),
+('YvOp8VqC32', 18, '70SFBb1pje', 0, '2022-05-29 05:49:39', '2022-05-29 05:49:39'),
+('yxQTvD1svu', 50, '70SFBb1pje', 0, '2022-05-29 06:01:53', '2022-05-29 06:01:53'),
+('z2JtO1tOq1', 13, '70SFBb1pje', 0, '2022-05-29 05:47:42', '2022-05-29 05:47:42'),
+('Z4px9xrrRk', 41, '70SFBb1pje', 0, '2022-05-29 05:59:05', '2022-05-29 05:59:05'),
+('zacgCnOIZF', 29, '70SFBb1pje', 0, '2022-05-29 05:54:52', '2022-05-29 05:54:52'),
+('zd21HyFME0', 10, '70SFBb1pje', 0, '2022-05-29 05:46:27', '2022-05-29 05:46:27'),
+('ZjoUU2NuOs', 12, '70SFBb1pje', 0, '2022-05-29 05:47:20', '2022-05-29 05:47:20');
 
 -- --------------------------------------------------------
 

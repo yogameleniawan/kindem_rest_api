@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Stulish | Login</title>
+        <title>Kindem | Login</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="{{url('images/kindem-logo-single.png')}}">
 
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
 
@@ -33,11 +33,9 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-7 my-auto p-0">
                         <div class="authentication-form mx-auto">
-                            <div class="logo-centered">
-                                <a href="../index.html"><img src="../src/img/brand.svg" alt=""></a>
-                            </div>
-                            <h3>Sign In to Stulish</h3>
-                            <p>Study English for Kindergarten</p>
+                                <a href="../index.html"><img src="{{url('images/kindem-logo.png')}}" style="width: 80%"></a>
+                            <h3>Data Management Kindem</h3>
+                            <p>Kindem Login</p>
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group">
@@ -48,7 +46,7 @@
                                     <input name="password" type="password" class="form-control" placeholder="Password" required="">
                                     <i class="ik ik-lock"></i>
                                 </div>
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col text-right">
                                         @if (Route::has('password.request'))
                                         <a href="{{ route('password.request') }}">
@@ -56,14 +54,14 @@
                                         </a>
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="sign-btn text-center">
                                     <button class="btn btn-theme">Sign In</button>
                                 </div>
                             </form>
-                            <div class="register">
+                            {{-- <div class="register">
                                 <p>Don't have an account? <a href="{{route('register')}}">Create an account</a></p>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

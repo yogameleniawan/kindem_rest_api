@@ -293,6 +293,7 @@ Materi
                                         <tr>
                                             <th style="width: 3%"></th>
                                             <th>Name</th>
+                                            <th>Level</th>
                                             <th>Image</th>
                                         </tr>
                                     </thead>
@@ -300,6 +301,7 @@ Materi
                                         <tr>
                                             <td style="width: 3%"></td>
                                             <th>Name</th>
+                                            <th>Level</th>
                                             <td></td>
                                         </tr>
                                     </tfoot>
@@ -701,6 +703,10 @@ Materi
                 name: 'name'
             },
             {
+                data: 'level',
+                name: 'level'
+            },
+            {
                 data: 'image',
                 name: 'image',
                 orderable: false,
@@ -1057,6 +1063,16 @@ Materi
             statusCode: {
                 500: function(response) {
                     console.log(response)
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Data soal tidak dapat dihapus',
+                        position: 'bottom-right',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                    })
+                    $('#course-loader').addClass('d-none')
+                    $('#course-btn-delete').removeClass('d-none')
                 },
             },
             success: function(data) {
@@ -1330,6 +1346,16 @@ Materi
             statusCode: {
                 500: function(response) {
                     console.log(response)
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Data materi tidak dapat diperbarui',
+                        position: 'bottom-right',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                    })
+                    $('#materi-loader-update').addClass('d-none')
+                    $('#materi-btn-update').removeClass('d-none')
                 },
             },
             success: function(data) {
@@ -1368,6 +1394,16 @@ Materi
             statusCode: {
                 500: function(response) {
                     console.log(response)
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Data materi tidak dapat dihapus',
+                        position: 'bottom-right',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                    })
+                    $('#materi-loader-delete').addClass('d-none')
+                    $('#materi-btn-delete').removeClass('d-none')
                 },
             },
             success: function(data) {
@@ -1534,6 +1570,16 @@ Materi
             statusCode: {
                 500: function(response) {
                     console.log(response)
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Data chapter tidak dapat diperbarui',
+                        position: 'bottom-right',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                    })
+                    $('#chapter-loader-update').addClass('d-none')
+                    $('#btn-chapter-update').removeClass('d-none')
                 },
             },
             success: function(data) {
@@ -1572,6 +1618,14 @@ Materi
             statusCode: {
                 500: function(response) {
                     console.log(response)
+                        $.toast({
+                        heading: 'Error',
+                        text: 'Data chapter tidak dapat diambil',
+                        position: 'bottom-right',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                    })
                 },
             },
             success: function(data) {
@@ -1599,6 +1653,16 @@ Materi
             statusCode: {
                 500: function(response) {
                     console.log(response)
+                        $.toast({
+                        heading: 'Error',
+                        text: 'Data chapter tidak dapat dihapus',
+                        position: 'bottom-right',
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        loaderBg: '#f2a654',
+                    })
+                    $('#chapter-loader-delete').addClass('d-none')
+                    $('#btn-chapter-delete').removeClass('d-none')
                 },
             },
             success: function(data) {

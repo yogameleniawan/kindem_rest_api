@@ -669,6 +669,7 @@ var table = $('#data-table').DataTable({
                     loaderBg: '#f96868'
                 })
                 $('#user-loader').addClass('d-none')
+                $('#user-btn-add').removeClass('d-none')
                 table.ajax.reload()
             }
         });

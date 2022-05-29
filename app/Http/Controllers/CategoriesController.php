@@ -23,7 +23,7 @@ class CategoriesController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('categories')
-                ->select(['categories.id AS id', 'categories.name AS name', 'categories.image AS image']);
+                ->select(['categories.id AS id', 'categories.name AS name', 'categories.image AS image', 'categories.level AS level'])->orderBy('categories.level', 'asc');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
