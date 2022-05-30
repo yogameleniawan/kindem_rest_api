@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
 
     Route::post('sub_categories/import', [SubCategoriesController::class, 'import'])->name('sub_categories.import');
     Route::get('sub_categories/template', [SubCategoriesController::class, 'template'])->name('sub_categories.template');
-    
+
     Route::post('courses/import', [CoursesController::class, 'import'])->name('courses.import');
     Route::get('courses/template', [CoursesController::class, 'template'])->name('courses.template');
 
@@ -57,6 +57,7 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
     });
     Route::get('userStatistic', [APIController::class, 'userStatistic'])->name('userStatistic');
     Route::get('chart', [APIController::class, 'chart'])->name('chart');
+    Route::get('allChartData', [APIController::class, 'allChartData'])->name('allChartData');
 });
 
 

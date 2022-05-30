@@ -540,7 +540,7 @@ Dashboard
                             <div class="col-md-4" style="padding-top: 20px;">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h5><b>{{$item->name}}</b></h5>
+                                        <p><b>{{$item->name}}</b></p>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -733,6 +733,53 @@ Dashboard
                 </div>
             </div>
         </div>
+        <div class="col-xl-12 col-lg-12 col-12">
+            <div class="card">
+                <div class="card-header pb-0">
+                    <h6><b style="background-color: #007bff;color: white;padding: 7px;border-top-left-radius: 10px;">Statistik Total Siswa Membuka Aplikasi & Total Soal yang Dikerjakan Siswa</b></h6>
+                </div>
+                <div id="stats-loader-all" class="row" style="text-align: -webkit-center;margin-top:20px">
+                    <div class="col-md-12">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="card-body d-none" id="stats-body-all">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="background-color: #007bff;color: white;text-align: center;padding: 7px;">Total Siswa Membuka Aplikasi Pada : </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control select2" name="" id="date_chart_all"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p style="background-color: #28a745;color: white;text-align: center;padding: 7px;">Total Siswa Mengerjakan Soal Pada : </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control select2" name="" id="materi_chart_select_all"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" id="chart-data-all">
+                        <div class="col-md-12">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <canvas id="chLine_all" height="100"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </div>
@@ -744,7 +791,14 @@ Dashboard
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script>
+$( document ).ready(function() {
+    initChartAll()
+    initSelectChartAll()
+});
+
+
 var myChart
+var chartAll
 $('#date_chart').change(function(){
     myChart.destroy()
     var id = $('#id').val()
@@ -755,6 +809,16 @@ $('#materi_chart_select').change(function(){
     myChart.destroy()
     var id = $('#id').val()
     initChart(id)
+})
+
+$('#date_chart_all').change(function(){
+    chartAll.destroy()
+    initChartAll()
+})
+
+$('#materi_chart_select').change(function(){
+    chartAll.destroy()
+    initChartAll()
 })
 
 function initSelectChart(user_id)
@@ -801,6 +865,7 @@ function initSelectChart(user_id)
             }
         });
 }
+
 function initChart(user_id){
     $('#chart-loader').removeClass('d-none')
     $('#date_chart').addClass('d-none')
@@ -896,6 +961,156 @@ function initChart(user_id){
     myChart = new Chart(chLine, {
     type: 'line',
     data: chartData,
+    options: {
+        scales: {
+        yAxes: [{
+            ticks: {
+            beginAtZero: false
+            }
+        }]
+        },
+        legend: {
+        display: false
+        }
+    }
+    });
+    }
+}
+
+function initSelectChartAll()
+{
+    $('#date_chart_all').html('')
+    $.ajax({
+            async: false,
+            url: `{{url("/allChartData")}}`,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function(jqXHR, settings) {
+                // console.log(settings.url);
+            },
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                var html = ``
+                var materi = ``
+                jQuery.each(data.data, function(value) {
+                    html += `<option value='${value}'>${value}</option>`
+                });
+                jQuery.each(data.materi, function(value) {
+                    materi += `<option value='${value}'>${value}</option>`
+                });
+
+                if(html == ''){
+                    $('#date_chart_all').html('<option selected disabled>Data tidak tersedia</option>')
+                }else{
+                    $('#date_chart_all').html(html)
+                }
+
+                if(materi == ''){
+                    $('#materi_chart_select_all').html('<option selected disabled>Data tidak tersedia</option>')
+                }else{
+                    $('#materi_chart_select_all').html(materi)
+                }
+            }
+        });
+}
+
+function initChartAll(){
+    var result_item_all = ""
+    var minggu_all = ''
+    var senin_all = ''
+    var selasa_all = ''
+    var rabu_all = ''
+    var kamis_all = ''
+    var jumat_all = ''
+    var sabtu_all = ''
+
+    var result_item_materi_all = ""
+    var minggu_materi_all = ''
+    var senin_materi_all = ''
+    var selasa_materi_all = ''
+    var rabu_materi_all = ''
+    var kamis_materi_all = ''
+    var jumat_materi_all = ''
+    var sabtu_materi_all = ''
+
+    $.ajax({
+            async: false,
+            url: `{{url("/allChartData")}}`,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            beforeSend: function(jqXHR, settings) {
+                // console.log(settings.url);
+            },
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                console.log(data.data)
+                $('#stats-loader-all').addClass('d-none')
+                $('#stats-body-all').removeClass('d-none')
+
+                result_item_all = data.data[$('#date_chart_all').val()]
+                console.log($('#date_chart_all').val())
+                senin_all = result_item_all.find(o => o.week_day === 0) == null ? '0' : result_item_all.find(o => o.week_day === 0).count
+                selasa_all = result_item_all.find(o => o.week_day === 1) == null ? '0' : result_item_all.find(o => o.week_day === 1).count
+                rabu_all = result_item_all.find(o => o.week_day === 2) == null ? '0' : result_item_all.find(o => o.week_day === 2).count
+                kamis_all = result_item_all.find(o => o.week_day === 3) == null ? '0' : result_item_all.find(o => o.week_day === 3).count
+                jumat_all = result_item_all.find(o => o.week_day === 4) == null ? '0' : result_item_all.find(o => o.week_day === 4).count
+                sabtu_all = result_item_all.find(o => o.week_day === 5) == null ? '0' : result_item_all.find(o => o.week_day === 5).count
+                minggu_all = result_item_all.find(o => o.week_day === 6) == null ? '0' : result_item_all.find(o => o.week_day === 6).count
+
+                result_item_materi_all = data.materi[$('#materi_chart_select_all').val()]
+                senin_materi_all = result_item_materi_all.find(o => o.week_day === 0) == null ? '0' : result_item_materi_all.find(o => o.week_day === 0).count
+                selasa_materi_all = result_item_materi_all.find(o => o.week_day === 1) == null ? '0' : result_item_materi_all.find(o => o.week_day === 1).count
+                rabu_materi_all = result_item_materi_all.find(o => o.week_day === 2) == null ? '0' : result_item_materi_all.find(o => o.week_day === 2).count
+                kamis_materi_all = result_item_materi_all.find(o => o.week_day === 3) == null ? '0' : result_item_materi_all.find(o => o.week_day === 3).count
+                jumat_materi_all = result_item_materi_all.find(o => o.week_day === 4) == null ? '0' : result_item_materi_all.find(o => o.week_day === 4).count
+                sabtu_materi_all = result_item_materi_all.find(o => o.week_day === 5) == null ? '0' : result_item_materi_all.find(o => o.week_day === 5).count
+                minggu_materi_all = result_item_materi_all.find(o => o.week_day === 6) == null ? '0' : result_item_materi_all.find(o => o.week_day === 6).count
+            }
+        });
+
+
+    var data_chart_all = [senin_all,selasa_all,rabu_all,kamis_all,jumat_all,sabtu_all,minggu_all]
+    var data_materi_all = [senin_materi_all,selasa_materi_all,rabu_materi_all,kamis_materi_all,jumat_materi_all,sabtu_materi_all,minggu_materi_all]
+    var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+    var session_all = $('#date_chart_all').val()
+    var materi_all = $('#materi_chart_select_all').val()
+    var chartData_all = {
+    labels: ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"],
+    datasets: [{
+        label: ["Total Siswa Membuka Aplikasi (" + session_all + ")"],
+        data: data_chart_all,
+        backgroundColor:  colors[0],
+        borderColor: colors[0],
+        borderWidth: 4,
+        pointBackgroundColor: colors[0]
+    },{
+        label: ["Total Soal yang Dikerjakan Siswa (" + materi_all + ")"],
+        data: data_materi_all,
+        backgroundColor: colors[1],
+        borderColor: colors[1],
+        borderWidth: 4,
+        pointBackgroundColor: colors[1]
+    }]
+    };
+
+    if (chLine_all) {
+    chartAll = new Chart(chLine_all, {
+    type: 'line',
+    data: chartData_all,
     options: {
         scales: {
         yAxes: [{
