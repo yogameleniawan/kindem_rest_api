@@ -293,7 +293,7 @@ Materi
                                         <tr>
                                             <th style="width: 3%"></th>
                                             <th>Name</th>
-                                            <th>Level</th>
+                                            <th>Chapter</th>
                                             <th>Image</th>
                                         </tr>
                                     </thead>
@@ -301,7 +301,7 @@ Materi
                                         <tr>
                                             <td style="width: 3%"></td>
                                             <th>Name</th>
-                                            <th>Level</th>
+                                            <th>Chapter</th>
                                             <td></td>
                                         </tr>
                                     </tfoot>

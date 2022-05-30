@@ -412,7 +412,7 @@ Dashboard
                         </div>
                         <div class="col-md-3" style="padding-top: 20px;">
                             <?php
-                            $countLevel = DB::table('user_levels')->where('level_id', $level->id)->count();
+                            $countLevel = DB::table('user_levels')->leftJoin('users','user_levels.user_id','=','users.id')->where('users.role','student')->where('level_id', $level->id)->count();
                             ?>
                             <div class="row">
                                 <div class="col-md-12">
