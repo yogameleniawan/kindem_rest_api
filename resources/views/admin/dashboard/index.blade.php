@@ -907,7 +907,7 @@ function getUserActivity()
                 },
             },
             success: function (data) {
-                console.log(data)
+                // console.log(data)
                 let html = ``;
                 let index = 0;
                 data.data.forEach(item => {
