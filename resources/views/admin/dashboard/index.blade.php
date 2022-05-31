@@ -914,6 +914,7 @@ function getUserActivity()
                     let profile_image = ''
                     let status = ''
                     let time = ''
+                    let text = ''
                     if(item.profile_photo_path == null){
                         profile_image = `{{url('assets/admin/img/user.png')}}`
                     }else{
@@ -923,30 +924,39 @@ function getUserActivity()
                     if(index == 0){
                         if(data.user_1 == 'Online'){
                             status = 'active'
+                            text = 'Siswa sedang membuka aplikasi'
                         }else{
+                            text = 'Siswa tidak sedang membuka aplikasi'
                             status = 'deactive'
                             time = '<i class="far fa-clock mr-10"></i>' + data.user_1
                         }
                     }else if(index == 1){
                         if(data.user_2 == 'Online'){
+                            text = 'Siswa sedang membuka aplikasi'
                             status = 'active'
                         }else{
+                            text = 'Siswa tidak sedang membuka aplikasi'
                             status = 'deactive'
                             time = '<i class="far fa-clock mr-10"></i>' + data.user_2
                         }
                     }
                     else if(index == 2){
                         if(data.user_3 == 'Online'){
+                            text = 'Siswa sedang membuka aplikasi'
                             status = 'active'
                         }else{
+                            text = 'Siswa tidak sedang membuka aplikasi'
                             status = 'deactive'
                             time = '<i class="far fa-clock mr-10"></i>' + data.user_3
                         }
                     }
                     else if(index == 3){
                         if(data.user_4 == 'Online'){
+                            text = 'Siswa sedang membuka aplikasi'
                             status = 'active'
                         }else{
+                            text = 'Siswa tidak sedang membuka aplikasi'
+                            status = 'deactive'
                             time = '<i class="far fa-clock mr-10"></i>' + data.user_4
                         }
                     }
@@ -955,7 +965,7 @@ function getUserActivity()
                         <img src="${profile_image}" alt="user image" class="rounded-circle img-40 align-top mr-15">
                         <div class="d-inline-block">
                             <a><h6>${item.name}</h6></a>
-                            <p class="text-muted mb-0"></p>
+                            <p class="text-muted mb-0">${text}</p>
                             <span class="status ${status}">${time}</span>
                         </div>
                     </div>`
