@@ -372,6 +372,82 @@ Dashboard
         </div>
     </div>
     <div class="row">
+        <div class="col-xl-8 col-md-8">
+            <div class="card new-cust-card">
+                <div class="card-header">
+                    <h3>Aktivitas Terakhir Siswa</h3>
+                </div>
+                <div id="user_activity" class="card-block" style="margin-bottom: 20px">
+                    <div class="align-middle mb-25">
+                        <img src="{{url('assets/admin/img/user.png')}}" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                        <div class="d-inline-block">
+                            <a href="#!"><h6>-</h6></a>
+                            <p class="text-muted mb-0">-</p>
+                            {{-- <span class="status active"></span> --}}
+                        </div>
+                    </div>
+                    <div class="align-middle mb-25">
+                        <img src="{{url('assets/admin/img/user.png')}}" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                        <div class="d-inline-block">
+                            <a href="#!"><h6>-</h6></a>
+                            <p class="text-muted mb-0">-</p>
+                            {{-- <span class="status active"></span> --}}
+                        </div>
+                    </div>
+                    <div class="align-middle mb-25">
+                        <img src="{{url('assets/admin/img/user.png')}}" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                        <div class="d-inline-block">
+                            <a href="#!"><h6>-</h6></a>
+                            <p class="text-muted mb-0">-</p>
+                            {{-- <span class="status deactive text-mute"><i class="far fa-clock mr-10"></i>30 min ago</span> --}}
+                        </div>
+                    </div>
+                    <div class="align-middle mb-25">
+                        <img src="{{url('assets/admin/img/user.png')}}" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                        <div class="d-inline-block">
+                            <a href="#!"><h6>-</h6></a>
+                            <p class="text-muted mb-0">-</p>
+                            {{-- <span class="status deactive text-mute"><i class="far fa-clock mr-10"></i>10 min ago</span> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-4">
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <div class="card ticket-card">
+                        <div class="card-body">
+                            <p class="mb-30 bg-green lbl-card"><i class="fas fa-users"></i> Siswa Online</p>
+                            <div class="text-center">
+                                <h2 id="user_online" class="mb-0 d-inline-block text-green">-</h2>
+                                <p class="mb-0 d-inline-block"></p>
+                                <p class="mb-0 mt-15">Siswa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-xl-12 col-md-12">
+                    <div class="card ticket-card">
+                        <div class="card-body">
+                            <p class="mb-30 bg-secondary lbl-card"><i class="fas fa-users"></i> Siswa Offline</p>
+                            <div class="text-center">
+                                <h2 id="user_offline" class="mb-0 d-inline-block text-secondary">-</h2>
+                                <p class="mb-0 d-inline-block"></p>
+                                <p class="mb-0 mt-15">Siswa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="row">
         <div class="col-xl-4 col-lg-12 col-12">
             <div class="card">
                 <div class="card-header pb-0">
@@ -481,17 +557,6 @@ Dashboard
                 </div>
             </div>
         </div>
-        {{-- <div class="col-xl-3 col-lg-12 col-12">
-            <div class="card">
-                <div class="card-header pb-0">
-                    <h6><b style="background-color: #f5a720;color: white;padding: 7px;border-top-left-radius: 10px;">Informasi
-                            Aplikasi </b></h6>
-                </div>
-                <div class="card-body section-chapter">
-
-                </div>
-            </div>
-        </div> --}}
     </div>
     <div class="row">
         <div class="col-xl-4 col-lg-12 col-12">
@@ -794,7 +859,112 @@ Dashboard
 $( document ).ready(function() {
     initChartAll()
     initSelectChartAll()
+    fetchUserActivity()
+    setInterval(fetchUserActivity, 5000);
 });
+
+function fetchUserActivity(){
+    getOnlineOfflineUser()
+    getUserActivity()
+}
+
+
+function getOnlineOfflineUser()
+{
+    $.ajax({
+            async: false,
+            url: `{{route("getCardOnlineOfflineUser")}}`,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                $('#user_online').html(data.user_online)
+                $('#user_offline').html(data.user_offline)
+            }
+        });
+}
+
+function getUserActivity()
+{
+    $.ajax({
+            async: false,
+            url: `{{route("getUserActivity")}}`,
+            type: "GET",
+            dataType: "json",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            statusCode: {
+                500: function (response) {
+                    console.log(response)
+                },
+            },
+            success: function (data) {
+                console.log(data)
+                let html = ``;
+                let index = 0;
+                data.data.forEach(item => {
+                    let profile_image = ''
+                    let status = ''
+                    let time = ''
+                    if(item.profile_photo_path == null){
+                        profile_image = `{{url('assets/admin/img/user.png')}}`
+                    }else{
+                        profile_image = item.profile_photo_path
+                    }
+
+                    if(index == 0){
+                        if(data.user_1 == 'Online'){
+                            status = 'active'
+                        }else{
+                            status = 'deactive'
+                            time = '<i class="far fa-clock mr-10"></i>' + data.user_1
+                        }
+                    }else if(index == 1){
+                        if(data.user_2 == 'Online'){
+                            status = 'active'
+                        }else{
+                            status = 'deactive'
+                            time = '<i class="far fa-clock mr-10"></i>' + data.user_2
+                        }
+                    }
+                    else if(index == 2){
+                        if(data.user_3 == 'Online'){
+                            status = 'active'
+                        }else{
+                            status = 'deactive'
+                            time = '<i class="far fa-clock mr-10"></i>' + data.user_3
+                        }
+                    }
+                    else if(index == 3){
+                        if(data.user_4 == 'Online'){
+                            status = 'active'
+                        }else{
+                            time = '<i class="far fa-clock mr-10"></i>' + data.user_4
+                        }
+                    }
+
+                    html += `<div class="align-middle mb-25">
+                        <img src="${profile_image}" alt="user image" class="rounded-circle img-40 align-top mr-15">
+                        <div class="d-inline-block">
+                            <a><h6>${item.name}</h6></a>
+                            <p class="text-muted mb-0"></p>
+                            <span class="status ${status}">${time}</span>
+                        </div>
+                    </div>`
+                    index++
+                });
+                $('#user_activity').html(html)
+            }
+        });
+}
 
 
 var myChart

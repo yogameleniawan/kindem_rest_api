@@ -54,6 +54,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
         Route::post('updateMateri', [APIController::class, 'updateMateri'])->name('updateMateri');
         Route::post('updateSoal', [APIController::class, 'updateSoal'])->name('updateSoal');
         Route::post('updateUser', [APIController::class, 'updateUser'])->name('updateUser');
+        Route::get('getCardOnlineOfflineUser', [APIController::class, 'getCardOnlineOfflineUser'])->name('getCardOnlineOfflineUser');
+        Route::get('getUserActivity', [APIController::class, 'getUserActivity'])->name('getUserActivity');
     });
     Route::get('userStatistic', [APIController::class, 'userStatistic'])->name('userStatistic');
     Route::get('chart', [APIController::class, 'chart'])->name('chart');

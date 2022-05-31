@@ -14,6 +14,7 @@ use App\Models\UserLevel;
 use App\Models\UserSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -280,5 +281,55 @@ class APIController extends Controller
         });
 
         return response()->json(['data' => $data, 'materi' => $materi], 200);
+    }
+
+    public function getCardOnlineOfflineUser()
+    {
+        $users = User::all();
+        $online = 0;
+        $offline = 0;
+        foreach ($users as $user) {
+            if (Cache::has('is_online' . $user->id)) {
+                $online++;
+            } else {
+                $offline++;
+            }
+        }
+
+        return response()->json(['user_online' => $online, 'user_offline' => $offline], 200);
+    }
+
+    public function getUserActivity()
+    {
+        $users = User::orderBy('last_seen', 'DESC')->take(4)->get();
+        $user_1 = '';
+        $user_2 = '';
+        $user_3 = '';
+        $user_4 = '';
+        foreach ($users as $key => $user) {
+            if (Cache::has('is_online' . $user->id)) {
+                if ($key == 0) {
+                    $user_1 = 'Online';
+                } else if ($key == 1) {
+                    $user_2 = 'Online';
+                } else if ($key == 2) {
+                    $user_3 = 'Online';
+                } else {
+                    $user_4 = 'Online';
+                }
+            } else {
+                if ($key == 0) {
+                    $user_1 = $user->last_seen == null ? '-' : Carbon::parse($user->last_seen)->diffForHumans();
+                } else if ($key == 1) {
+                    $user_2 = $user->last_seen == null ? '-' : Carbon::parse($user->last_seen)->diffForHumans();
+                } else if ($key == 2) {
+                    $user_3 = $user->last_seen == null ? '-' : Carbon::parse($user->last_seen)->diffForHumans();
+                } else {
+                    $user_4 = $user->last_seen == null ? '-' : Carbon::parse($user->last_seen)->diffForHumans();
+                }
+            }
+        }
+
+        return response()->json(['data' => $users, 'user_1' => $user_1, 'user_2' => $user_2, 'user_3' => $user_3, 'user_4' => $user_4], 200);
     }
 }

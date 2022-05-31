@@ -325,6 +325,8 @@ Users
                                         <th style="width: 3%"></th>
                                         <th>Email</th>
                                         <th>Nama</th>
+                                        <th>Status</th>
+                                        <th>Last Seen</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -332,6 +334,8 @@ Users
                                         <td style="width: 3%"></td>
                                         <th>Email</th>
                                         <th>Nama</th>
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -542,6 +546,18 @@ var table = $('#data-table').DataTable({
                 {
                     data: 'name',
                     name: 'name'
+                },
+                {
+                    data: 'status',
+                    name: 'status',
+                    orderable: false,
+                    searchable: false,
+                },
+                {
+                    data: 'last_seen',
+                    name: 'last_seen',
+                    orderable: false,
+                    searchable: false
                 },
 
             ]

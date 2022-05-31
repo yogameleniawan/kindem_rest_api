@@ -6,6 +6,8 @@ use App\Models\Level;
 use App\Models\User;
 use App\Models\UserLevel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -22,7 +24,7 @@ class UsersController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('users')
-                ->select(['users.id AS id', 'users.email AS email', 'users.password AS password', 'users.name AS name']);
+                ->select(['users.id AS id', 'users.email AS email', 'users.password AS password', 'users.name AS name', 'users.last_seen as last_seen']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -31,7 +33,28 @@ class UsersController extends Controller
                     data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('status', function ($data) {
+                    $status = '';
+                    if (Cache::has('is_online' . $data->id)) {
+                        $status = '<span class="badge badge-success">Online</span>';
+                    } else {
+                        $status = '<span class="badge badge-secondary">Offline</span>';
+                    }
+
+                    $btn = '<td>' . $status . '</td>';
+                    return $btn;
+                })
+                ->addColumn('last_seen', function ($data) {
+                    $data_last_seen = '';
+                    if ($data->last_seen == null) {
+                        $data_last_seen = '-';
+                    } else {
+                        $data_last_seen = Carbon::parse($data->last_seen)->diffForHumans();
+                    }
+                    $btn = '<td>' . $data_last_seen . '</td>';
+                    return $btn;
+                })
+                ->rawColumns(['action', 'status', 'last_seen'])
                 ->make(true);
         }
         return view('admin.users.index');
