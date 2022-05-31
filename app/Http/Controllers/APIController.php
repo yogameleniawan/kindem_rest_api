@@ -285,7 +285,7 @@ class APIController extends Controller
 
     public function getCardOnlineOfflineUser()
     {
-        $users = User::all();
+        $users = User::where('role', 'student')->get();
         $online = 0;
         $offline = 0;
         foreach ($users as $user) {
@@ -301,7 +301,7 @@ class APIController extends Controller
 
     public function getUserActivity()
     {
-        $users = User::orderBy('last_seen', 'DESC')->take(4)->get();
+        $users = User::where('role', 'student')->orderBy('last_seen', 'DESC')->take(4)->get();
         $user_1 = '';
         $user_2 = '';
         $user_3 = '';
