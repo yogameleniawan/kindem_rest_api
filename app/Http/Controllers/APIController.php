@@ -25,13 +25,13 @@ class APIController extends Controller
     public function getAllChapter()
     {
         $data = Category::orderBy('level', 'asc')->get();
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function getCategoryById(Request $request)
     {
         $data = Category::find($request->id);
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function updateCategory(Request $request)
@@ -53,7 +53,7 @@ class APIController extends Controller
         }
         $table->level = $table->level;
         if ($table->save()) {
-            return response()->json($table, 200);
+            return response()->json($table, 200,[],JSON_NUMERIC_CHECK);
             // return redirect()->route('categories.index')
             //     ->with('success', 'Category created successfully.');
         }
@@ -66,14 +66,14 @@ class APIController extends Controller
         $table->category_id = $request->category_id;
 
         if ($table->save()) {
-            return response()->json(['data' => $table], 200);
+            return response()->json(['data' => $table], 200,[],JSON_NUMERIC_CHECK);
         }
     }
 
     public function getAllMateri()
     {
         $data = SubCategory::all();
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function updateSoal(Request $request)
@@ -114,7 +114,7 @@ class APIController extends Controller
             $table->is_voice = false;
         }
         if ($table->save()) {
-            return response()->json(['data' => $table], 200);
+            return response()->json(['data' => $table], 200,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -129,7 +129,7 @@ class APIController extends Controller
             $table->password = $table->password;
         }
         if ($table->save()) {
-            return response()->json(['data' => $table], 200);
+            return response()->json(['data' => $table], 200,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -242,7 +242,7 @@ class APIController extends Controller
                 'nama_materi_tidak_dikuasai' => $nama_materi_tidak_dikuasai,
             ]
         );
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function chart(Request $request)
@@ -261,7 +261,7 @@ class APIController extends Controller
             return "{$start} - {$end}";
         });
 
-        return response()->json(['data' => $data, 'materi' => $materi], 200);
+        return response()->json(['data' => $data, 'materi' => $materi], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function allChartData(Request $request)
@@ -280,7 +280,7 @@ class APIController extends Controller
             return "{$start} - {$end}";
         });
 
-        return response()->json(['data' => $data, 'materi' => $materi], 200);
+        return response()->json(['data' => $data, 'materi' => $materi], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function getCardOnlineOfflineUser()
@@ -330,6 +330,6 @@ class APIController extends Controller
             }
         }
 
-        return response()->json(['data' => $users, 'user_1' => $user_1, 'user_2' => $user_2, 'user_3' => $user_3, 'user_4' => $user_4], 200);
+        return response()->json(['data' => $users, 'user_1' => $user_1, 'user_2' => $user_2, 'user_3' => $user_3, 'user_4' => $user_4], 200,[],JSON_NUMERIC_CHECK);
     }
 }

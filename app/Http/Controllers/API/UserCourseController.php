@@ -37,7 +37,7 @@ class UserCourseController extends Controller
         if ($table->save()) {
             return response()->json([
                 'success' => true,
-            ], 200);
+            ], 200 ,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -52,13 +52,13 @@ class UserCourseController extends Controller
             ->where('sub_category_id', '=', $request->sub_category_id)->count();
 
         // Count Total Point User
-        // $total_point = DB::table('user_courses')
-        //     ->where('user_id', '=', Auth::user()->id)
-        //     ->where('is_true', '=', true)->count();
+        $total_point = DB::table('user_courses')
+            ->where('user_id', '=', Auth::user()->id)
+            ->where('is_true', '=', true)->count();
 
-        // $point = UserLevel::where('user_id', Auth::user()->id)->first();
-        // $point->user_point = $total_point;
-        // $point->save();
+        $point = UserLevel::where('user_id', Auth::user()->id)->first();
+        $point->user_point = $total_point;
+        $point->save();
         // Count Total Point User
 
         $sub = SubCategory::find($request->sub_category_id);
@@ -113,7 +113,7 @@ class UserCourseController extends Controller
             'total_test' => $total_test,
             'level_up' => $level_up,
             'success' => true,
-        ], 200);
+        ], 200 ,[],JSON_NUMERIC_CHECK);
     }
 
     public function reloadTest(Request $request)
@@ -141,7 +141,7 @@ class UserCourseController extends Controller
         if ($table) {
             return response()->json([
                 'status' => true,
-            ], 200);
+            ], 200 ,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -157,7 +157,7 @@ class UserCourseController extends Controller
         } else {
             return response()->json([
                 'complete' => false,
-            ], 200);
+            ], 200 ,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -178,7 +178,7 @@ class UserCourseController extends Controller
             ->havingRaw('count(checked or null) > 0')
             ->groupBy('sub_category_id')
             ->get();
-        return response()->json(['data' => $data]);
+        return response()->json(['data' => $data],200 ,[],JSON_NUMERIC_CHECK);
     }
 
     public function checkIncompleteCourse(Request $request)
@@ -191,6 +191,6 @@ class UserCourseController extends Controller
             ->where('sub_category_id', $request->sub_category_id)
             ->groupBy('sub_category_id')
             ->get();
-        return response()->json(['data' => $data]);
+        return response()->json(['data' => $data],200 ,[],JSON_NUMERIC_CHECK);
     }
 }

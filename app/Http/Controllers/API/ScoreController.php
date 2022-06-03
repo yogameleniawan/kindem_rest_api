@@ -17,6 +17,7 @@ class ScoreController extends Controller
         $data = SubCategory::join('scores', 'sub_categories.id', '=', 'scores.sub_category_id')
             ->where('user_id', '=', Auth::user()->id)
             ->get();
-        return ScoreResource::collection($data);
+        return response()->json(['data' => $data], 200 ,[],JSON_NUMERIC_CHECK);
+        // return ScoreResource::collection($data);
     }
 }

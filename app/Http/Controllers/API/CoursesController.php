@@ -32,13 +32,12 @@ class CoursesController extends Controller
                 'courses.sub_category_id as sub_category_id',
                 'courses.is_voice as is_voice',
                 'courses.created_at as created_at',
-                'courses.updated_at as updated_at',
-            )
+                'courses.updated_at as updated_at')
             ->where('courses.sub_category_id', '=', $id)
             ->inRandomOrder()
             ->take(10)
             ->get();
-        return response()->json(['data' => $courses], 200);
+        return response()->json(['data' => $courses], 200,[],JSON_NUMERIC_CHECK);
         // return CourseResource::collection($data);
     }
 
@@ -70,8 +69,7 @@ class CoursesController extends Controller
                 'courses.sub_category_id as sub_category_id',
                 'courses.is_voice as is_voice',
                 'courses.created_at as created_at',
-                'courses.updated_at as updated_at',
-            )
+                'courses.updated_at as updated_at')
             ->where('checked', false)
             ->where('user_id', Auth::user()->id)
             ->where('courses.sub_category_id', $request->sub_category_id)
@@ -91,6 +89,6 @@ class CoursesController extends Controller
             'data' => $courses,
             'courses_total' => $courses_total,
             'course_answer_total' => $course_answer_total
-        ], 200);
+        ], 200,[],JSON_NUMERIC_CHECK);
     }
 }

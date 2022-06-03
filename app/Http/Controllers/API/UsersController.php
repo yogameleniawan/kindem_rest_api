@@ -25,6 +25,7 @@ class UsersController extends Controller
             ->groupBy('users.id')
             ->orderBy('levels.point', 'DESC')
             ->orderBy('user_levels.user_point', 'DESC')
+            ->orderBy('user_levels.updated_at', 'DESC')
             ->where('users.role', 'student')
             ->get();
         $current_position = 1;
@@ -47,19 +48,19 @@ class UsersController extends Controller
             ->orderBy('levels.point', 'DESC')
             ->where('users.role', 'student')
             ->where('users.id', Auth::user()->id)->first();
-        $ranking = collect(
-            (object) [
-                'id' => $user->id,
-                'name' => $user->name,
-                'email' => $user->email,
-                'profile_photo_path' => $user->profile_photo_path,
-                'level' => $user->level,
-                'ranking' => $current_position,
-                'complete_sub_category' => $user->complete_sub_category,
-                'point' => $user->point
-            ],
-        );
-        return $ranking;
+        // $ranking = collect(
+        //     (object) [
+        //         'id' => $user->id,
+        //         'name' => $user->name,
+        //         'email' => $user->email,
+        //         'profile_photo_path' => $user->profile_photo_path,
+        //         'level' => $user->level,
+        //         'ranking' => $current_position,
+        //         'complete_sub_category' => $user->complete_sub_category,
+        //         'point' => $user->point
+        //     ],
+        // );
+        return response()->json(['id' => $user->id,'name' => $user->name,'email' => $user->email,'profile_photo_path' => $user->profile_photo_path,'level' => $user->level,'ranking' => $current_position,'complete_sub_category' => $user->complete_sub_category,'point' => $user->point], 200,[],JSON_NUMERIC_CHECK);
     }
     public function getAllUsers()
     {
@@ -71,7 +72,7 @@ class UsersController extends Controller
             ->groupBy('users.id')
             ->where('users.role', 'student')
             ->get();
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data], 200 ,[],JSON_NUMERIC_CHECK);
     }
 
     public function getRankingUsers()
@@ -84,10 +85,11 @@ class UsersController extends Controller
             ->groupBy('users.id')
             ->orderBy('levels.point', 'DESC')
             ->orderBy('user_levels.user_point', 'DESC')
+            ->orderBy('user_levels.updated_at', 'DESC')
             ->where('users.role', 'student')
             ->get()
             ->take(10);
-        return response()->json(['data' => $datas], 200);
+        return response()->json(['data' => $datas], 200 ,[],JSON_NUMERIC_CHECK);
     }
 
     public function updateProfile(Request $request)
@@ -104,7 +106,7 @@ class UsersController extends Controller
         } else {
             $user->update($data);
             return response()
-                ->json(['status' => 'true', 'message' => "Profile updated", 'data' => $user]);
+                ->json(['status' => 'true', 'message' => "Profile updated", 'data' => $user], 200 ,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -113,7 +115,7 @@ class UsersController extends Controller
         $data = UserTutorial::where('page', $request->page)->where('user_id', Auth::user()->id)->count();
 
         if ($data > 0) {
-            return response()->json(['is_done' => true], 200);
+            return response()->json(['is_done' => true], 200 ,[],JSON_NUMERIC_CHECK);
         } else {
             $tutorial = new UserTutorial();
             $tutorial->id = Str::random(10);
@@ -121,7 +123,7 @@ class UsersController extends Controller
             $tutorial->user_id = Auth::user()->id;
             $tutorial->is_done = true;
             $tutorial->save();
-            return response()->json(['is_done' => false], 200);
+            return response()->json(['is_done' => false], 200 ,[],JSON_NUMERIC_CHECK);
         }
     }
 
@@ -132,6 +134,6 @@ class UsersController extends Controller
         $user_session->user_id = Auth::user()->id;
         $user_session->save();
 
-        return response()->json(['data' => $user_session], 200);
+        return response()->json(['data' => $user_session], 200 ,[],JSON_NUMERIC_CHECK);
     }
 }

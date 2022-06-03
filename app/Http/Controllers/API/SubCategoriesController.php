@@ -17,7 +17,7 @@ class SubCategoriesController extends Controller
     public function getAllSubCategories()
     {
         $data = SubCategory::all();
-        return SubCategoryResource::collection($data);
+        return response()->json(['data' => $data], 200 ,[],JSON_NUMERIC_CHECK);
     }
 
     public function getSubCategoriesById($id)
@@ -49,6 +49,6 @@ class SubCategoriesController extends Controller
             ->where('category_id', $id)
             ->groupBy('sub_category_id')
             ->get();
-        return response()->json(['data' => $data], 200);
+        return response()->json(['data' => $data], 200 ,[],JSON_NUMERIC_CHECK);
     }
 }

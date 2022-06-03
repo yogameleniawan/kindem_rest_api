@@ -35,6 +35,6 @@ class CategoriesController extends Controller
             ->selectRaw('categories.id as id, categories.name as name, categories.image as image, categories.level as level, complete_categories.is_complete as is_complete')
             ->orderBy('categories.level', 'asc')
             ->get();
-        return response()->json(['data' => $category], 200);
+        return response()->json(['data' => $category], 200 ,[],JSON_NUMERIC_CHECK);
     }
 }
