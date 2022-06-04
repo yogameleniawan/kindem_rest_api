@@ -332,4 +332,15 @@ class APIController extends Controller
 
         return response()->json(['data' => $users, 'user_1' => $user_1, 'user_2' => $user_2, 'user_3' => $user_3, 'user_4' => $user_4], 200,[],JSON_NUMERIC_CHECK);
     }
+    
+    public function sendEmail(Request $request){
+         $details = [
+            'title' => 'Title',
+            'body' => 'Body'
+        ];
+       
+        \Mail::to($request->email)->send(new \App\Mail\SendMail($details));
+        
+        return response()->json(['message'=>'Success'], 200);
+    }
 }

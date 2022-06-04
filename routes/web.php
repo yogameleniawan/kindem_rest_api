@@ -23,7 +23,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('landing');
-    // return view('auth.login');
+})->name('landing');
+
+Route::get('/register', function () {
+    return redirect()->route('landing');
 });
 Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -61,8 +64,10 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
     Route::get('userStatistic', [APIController::class, 'userStatistic'])->name('userStatistic');
     Route::get('chart', [APIController::class, 'chart'])->name('chart');
     Route::get('allChartData', [APIController::class, 'allChartData'])->name('allChartData');
+     
 });
 
+Route::get('sendEmail', [APIController::class, 'sendEmail'])->name('sendEmail');
 
 // Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 //     return view('dashboard');

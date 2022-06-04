@@ -28,9 +28,25 @@
 
     <!-- Template Stylesheet -->
     <link href="{{url('landing/css/style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
     <style>
         html,body{
             overflow-x: hidden;
+        }
+
+        .loader {
+        border: 4px solid #f3f3f3; /* Light grey */
+        border-top: 4px solid #f5a720; /* Blue */
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -583,7 +599,8 @@
                                         </div>
                                     </div> --}}
                                     <div class="col-12 text-center">
-                                        <button class="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Subscribe</button>
+                                        <div id="subscribe_text" class="btn btn-primary-gradient rounded-pill py-3 px-5" style="text-align: -webkit-center;">Subscribe</div>
+                                        <div id="subscribe_loader" class="btn btn-primary-gradient rounded-pill py-3 px-5 d-none" style="text-align: -webkit-center;"><div class="loader"></div></div>
                                     </div>
                                 </div>
                             </form>
@@ -661,6 +678,76 @@
         <a href="#" class="btn btn-lg btn-lg-square back-to-top pt-2"><i class="bi bi-arrow-up text-white"></i></a>
     </div>
 
+    <script>
+        var subs = document.getElementById('subscribe_text');
+
+        subs.addEventListener('click', function() {
+            doSubscribe()
+        }, false);
+
+        function IsEmail(email) {
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(!regex.test(email)) {
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        function doSubscribe(){
+
+            $('#subscribe_loader').removeClass('d-none')
+            $('#subscribe_text').addClass('d-none')
+            let email = $('#email').val()
+            console.log(IsEmail(email))
+            if(IsEmail(email) == false){
+                $('#subscribe_loader').addClass('d-none')
+                            $('#subscribe_text').removeClass('d-none')
+                            $.toast({
+                                heading: 'Error',
+                                text: 'Pastikan mengisi Email dengan benar.',
+                                showHideTransition: 'slide',
+                                icon: 'error',
+                                loaderBg: '#000000',
+                                position: 'bottom-right'
+                            })
+            }else{
+                $.ajax({
+                    url: `{{url("/sendEmail?email=`+email+`")}}`,
+                    type: "GET",
+                    dataType: "json",
+                    statusCode: {
+                        500: function (response) {
+                            $('#subscribe_loader').addClass('d-none')
+                            $('#subscribe_text').removeClass('d-none')
+                            $.toast({
+                                heading: 'Error',
+                                text: 'Pastikan data sudah diisi semua dan tidak ada yang kosong',
+                                showHideTransition: 'slide',
+                                icon: 'error',
+                                loaderBg: '#000000',
+                                position: 'bottom-right'
+                            })
+                        },
+                    },
+                    success: function (data) {
+                        $('#subscribe_loader').addClass('d-none')
+                        $('#subscribe_text').addClass('d-none')
+                        $.toast({
+                            heading: 'Subscribe Berhasil',
+                            text: 'Silahkan cek email untuk melihat informasi.',
+                            position: 'bottom-right',
+                            icon: 'success',
+                            stack: false,
+                            loaderBg: '#f5a720'
+                        })
+                    }
+                });
+            }
+
+        }
+    </script>
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -670,6 +757,9 @@
     <script src="{{url('landing/lib/counterup/counterup.min.js')}}"></script>
     <script src="{{url('landing/lib/owlcarousel/owl.carousel.min.js')}}"></script>
     <script src="{{url('landing/js/main.js')}}"></script>
+    <script src="{{url('assets/admin/js/alerts.js')}}"></script>
+    <script src="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
+
 </body>
 
 </html>
