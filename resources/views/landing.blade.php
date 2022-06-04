@@ -24,9 +24,15 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{url('landing/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- CSS only -->
 
     <!-- Template Stylesheet -->
     <link href="{{url('landing/css/style.css')}}" rel="stylesheet">
+    <style>
+        html,body{
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
@@ -44,22 +50,22 @@
         <div class="container-xxl position-relative p-0" id="home">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0">KINDEM</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                    {{-- <h1 class="m-0">KINDEM</h1> --}}
+                    <img src="{{url('landing/img/kindem-logo.png')}}"  alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                        <a href="#home" class="nav-item nav-link active">Home</a>
-                        <a href="#about" class="nav-item nav-link">About</a>
-                        <a href="#feature" class="nav-item nav-link">Feature</a>
-                        <a href="#pricing" class="nav-item nav-link">Pricing</a>
-                        <a href="#review" class="nav-item nav-link">Review</a>
-                        <a href="#contact" class="nav-item nav-link">Contact</a>
+                        <a href="#home" class="nav-item nav-link active">Beranda</a>
+                        <a href="#about" class="nav-item nav-link">Tentang</a>
+                        <a href="#feature" class="nav-item nav-link">Fitur</a>
+                        {{-- <a href="#pricing" class="nav-item nav-link">Pricing</a>
+                        <a href="#review" class="nav-item nav-link">Review</a> --}}
+                        <a href="#contact" class="nav-item nav-link">Kontak</a>
                     </div>
-                    <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Start Free Trial</a>
+                    <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Coba Aplikasi</a>
                 </div>
             </nav>
 
@@ -69,16 +75,23 @@
                         <div class="col-lg-8 text-center text-lg-start">
                             <h1 class="text-white mb-4 animated slideInDown">KINDEM: Kids Need Delightful English Mentor</h1>
                             <p class="text-white pb-3 animated slideInDown">Aplikasi belajar bahasa inggris menggunakan fitur voice recognition dan text to speech sehingga memudahkan kamu untuk mempelajari speaking dan pronunciation dalam Bahasa Inggris.</p>
-                            <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
+                            <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded me-3 animated slideInLeft"><i class="fa fa-download" aria-hidden="true" style="padding-right: 10px"></i> Unduh Aplikasi Kindem</a>
+                            {{-- <a href="" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Contact Us</a> --}}
+                            {{-- <a href="javascript:void(0)" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded me-3 animated slideInLeft">
+                                <i class="fab fa-apple fa-3x text-white flex-shrink-0"></i>
+                                <div class="ms-3">
+                                    <p class="text-white mb-0">Unduh Aplikasi</p>
+                                    <h5 class="text-white mb-0">KINDEM</h5>
+                                </div>
+                            </a> --}}
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                             <div class="owl-carousel screenshot-carousel">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-1.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-2.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-3.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-4.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-5.png')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_1.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_2.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_3.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_4.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_5.jpg')}}" alt="">
                             </div>
                         </div>
                     </div>
@@ -118,7 +131,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a>
+                        {{-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a> --}}
                     </div>
                     <div class="col-lg-6">
                         <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{url('landing/img/mobile.png')}}" style="max-width: 150%">
@@ -140,28 +153,28 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item bg-light rounded p-4">
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-eye text-white fs-4"></i>
+                                <i class="fa fa-volume-up text-white fs-4"></i>
                             </div>
-                            <h5 class="mb-3">High Resolution</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Text to Voice</h5>
+                            <p class="m-0">Mengubah bentuk teks menjadi suara sehingga dapat digunakan untuk melatih listening Bahasa Inggris.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="feature-item bg-light rounded p-4">
                             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-layer-group text-white fs-4"></i>
+                                <i class="fa fa-microphone text-white fs-4"></i>
                             </div>
-                            <h5 class="mb-3">Retina Ready</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Voice Recognition</h5>
+                            <p class="m-0">Mengubah bentuk suara menjadi teks sehingga dapat digunakan untuk melatih pronunciation Bahasa Inggris.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="feature-item bg-light rounded p-4">
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
-                                <i class="fa fa-edit text-white fs-4"></i>
+                                <i class="fa fa-database text-white fs-4"></i>
                             </div>
-                            <h5 class="mb-3">Editable Data</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Didukung Banyak Data</h5>
+                            <p class="m-0">Terdapat lebih dari 300 kosa kata sehingga membantu untuk mengenal kosa kata baru.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -169,8 +182,8 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
                                 <i class="fa fa-shield-alt text-white fs-4"></i>
                             </div>
-                            <h5 class="mb-3">Fully Secured</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Keamanan Pengguna</h5>
+                            <p class="m-0">Keamanan data pengguna dapat terjamin dengan sistem autentikasi dari setiap user.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -178,8 +191,8 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
                                 <i class="fa fa-cloud text-white fs-4"></i>
                             </div>
-                            <h5 class="mb-3">Cloud Storage</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Penyimpanan Data</h5>
+                            <p class="m-0">Data pengguna dan materi akan disimpan pada sebuah web server storage.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -187,8 +200,8 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle mb-4" style="width: 60px; height: 60px;">
                                 <i class="fa fa-mobile-alt text-white fs-4"></i>
                             </div>
-                            <h5 class="mb-3">Fully Responsive</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Tampilan Responsif</h5>
+                            <p class="m-0">Aplikasi Kindem dapat berjalan pada semua device smartphone dengan ukuran layar yang berbeda.</p>
                         </div>
                     </div>
                 </div>
@@ -203,20 +216,20 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
                         <h5 class="text-primary-gradient fw-medium">Screenshot</h5>
-                        <h1 class="mb-4">User Friendly interface And Very Easy To Use Fitness App</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Diam dolor diam ipsum et tempor sit</p>
-                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Aliqu diam amet diam et eos labore</p>
-                        <p class="mb-4"><i class="fa fa-check text-primary-gradient me-3"></i>Clita erat ipsum et lorem et sit</p>
-                        <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a>
+                        <h1 class="mb-4">Kindem Memiliki Antarmuka yang Ramah Pengguna dan Sangat Mudah Digunakan</h1>
+                        <p class="mb-4">Antarmuka yang ramah untuk pengguna dengan tujuan mempermudah penggunaan aplikasi sehingga selain penggunaan yang mudah proses pembelajaran Bahasa Inggris akan mudah dan menyenangkan.</p>
+                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Belajar Bahasa Inggris Kapan Saja dan Dimana Saja</p>
+                        <p><i class="fa fa-check text-primary-gradient me-3"></i>Fitur Voice Recognition untuk Membantu Belajar Pronunciation</p>
+                        <p class="mb-4"><i class="fa fa-check text-primary-gradient me-3"></i>Fitur Text to Voice untuk Membantu Belajar Listening</p>
+                        {{-- <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a> --}}
                     </div>
                     <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                         <div class="owl-carousel screenshot-carousel">
-                            <img class="img-fluid" src="{{url('landing/img/screenshot-1.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-2.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-3.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-4.png')}}" alt="">
-                                <img class="img-fluid" src="{{url('landing/img/screenshot-5.png')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_1.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_2.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_3.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_4.jpg')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshots/ss_5.jpg')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -229,8 +242,8 @@
         <div class="container-xxl py-5">
             <div class="container py-5 px-lg-5">
                 <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">How It Works</h5>
-                    <h1 class="mb-5">3 Easy Steps</h1>
+                    <h5 class="text-primary-gradient fw-medium">Bagaimana Aplikasi Berjalan</h5>
+                    <h1 class="mb-5">3 Langkah Mudah</h1>
                 </div>
                 <div class="row gy-5 gx-4 justify-content-center">
                     <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.1s">
@@ -238,8 +251,8 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                                 <i class="fa fa-cog fa-3x text-white"></i>
                             </div>
-                            <h5 class="mt-4 mb-3">Install the App</h5>
-                            <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet</p>
+                            <h5 class="mt-4 mb-3">Install Aplikasi</h5>
+                            <p class="mb-0">Unduh dan Install Aplikasi Kindem pada Smartphone melalui App Store maupun Play Store.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.3s">
@@ -247,8 +260,8 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-secondary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                                 <i class="fa fa-address-card fa-3x text-white"></i>
                             </div>
-                            <h5 class="mt-4 mb-3">Setup Your Profile</h5>
-                            <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet</p>
+                            <h5 class="mt-4 mb-3">Login pada Aplikasi</h5>
+                            <p class="mb-0">Login menggunakan email dan password untuk masuk ke dalam aplikasi Kindem.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center pt-4 wow fadeInUp" data-wow-delay="0.5s">
@@ -256,8 +269,8 @@
                             <div class="d-inline-flex align-items-center justify-content-center bg-primary-gradient rounded-circle position-absolute top-0 start-50 translate-middle shadow" style="width: 100px; height: 100px;">
                                 <i class="fa fa-check fa-3x text-white"></i>
                             </div>
-                            <h5 class="mt-4 mb-3">Enjoy The Features</h5>
-                            <p class="mb-0">Tempor erat elitr rebum clita dolor diam ipsum sit diam amet diam eos erat ipsum et lorem et sit sed stet</p>
+                            <h5 class="mt-4 mb-3">Nikmati Fiturnya</h5>
+                            <p class="mb-0">Belajar bahasa inggris menggunakan fitur voice recognition dan text to voice sehingga lebih interaktif dan menarik.</p>
                         </div>
                     </div>
                 </div>
@@ -271,27 +284,27 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6">
-                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="img/about.png">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.1s" src="{{url('landing/img/mobile.png')}}">
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
                         <h5 class="text-primary-gradient fw-medium">Download</h5>
-                        <h1 class="mb-4">Download The Latest Version Of Our App</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
+                        <h1 class="mb-4">Unduh Aplikasi Kindem dengan Versi Terbaru</h1>
+                        <p class="mb-4">Dapatkan aplikasi Kinden dengan mengunduh pada App Store atau Play Store dan belajar bahasa inggris menggunakan media yang interaktif dan seru.</p>
                         <div class="row g-4">
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
-                                <a href="" class="d-flex bg-primary-gradient rounded py-3 px-4">
+                                <a href="javascript:void(0)" class="d-flex bg-primary-gradient rounded py-3 px-4">
                                     <i class="fab fa-apple fa-3x text-white flex-shrink-0"></i>
                                     <div class="ms-3">
-                                        <p class="text-white mb-0">Available On</p>
+                                        <p class="text-white mb-0">Segera Rilis di </p>
                                         <h5 class="text-white mb-0">App Store</h5>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
-                                <a href="" class="d-flex bg-secondary-gradient rounded py-3 px-4">
+                                <a href="javascript:void(0)" class="d-flex bg-secondary-gradient rounded py-3 px-4">
                                     <i class="fab fa-android fa-3x text-white flex-shrink-0"></i>
                                     <div class="ms-3">
-                                        <p class="text-white mb-0">Available On</p>
+                                        <p class="text-white mb-0">Segera Rilis di </p>
                                         <h5 class="text-white mb-0">Play Store</h5>
                                     </div>
                                 </a>
@@ -305,7 +318,7 @@
 
 
         <!-- Pricing Start -->
-        <div class="container-xxl py-5" id="pricing">
+        {{-- <div class="container-xxl py-5" id="pricing">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5 class="text-primary-gradient fw-medium">Pricing Plan</h5>
@@ -446,12 +459,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Pricing End -->
 
 
         <!-- Testimonial Start -->
-        <div class="container-xxl py-5" id="review">
+        {{-- <div class="container-xxl py-5" id="review">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h5 class="text-primary-gradient fw-medium">Testimonial</h5>
@@ -528,7 +541,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Testimonial End -->
 
 
@@ -536,41 +549,41 @@
         <div class="container-xxl py-5" id="contact">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">Contact Us</h5>
-                    <h1 class="mb-5">Get In Touch!</h1>
+                    <h5 class="text-primary-gradient fw-medium">Kontak Kami</h5>
+                    <h1 class="mb-5">Subscribe!</h1>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-9">
                         <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
+                            <p class="text-center mb-4">Subscribe untuk mendapatkan informasi lebih lanjut mengenai aplikasi Kindem kepada email yang diisi pada formulir di bawah ini.</p>
                             <form>
                                 <div class="row g-3">
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Your Name</label>
+                                            <input type="text" class="form-control" id="name" placeholder="Nama">
+                                            <label for="name">Nama</label>
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" placeholder="Email">
+                                            <label for="email">Email</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                            <label for="email">Your Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
-                                            <label for="subject">Subject</label>
+                                            <input type="text" class="form-control" id="subject" placeholder="Subjek">
+                                            <label for="subject">Subjek</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                            <label for="message">Message</label>
+                                            <label for="message">Pesan</label>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-12 text-center">
-                                        <button class="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Send Message</button>
+                                        <button class="btn btn-primary-gradient rounded-pill py-3 px-5" type="submit">Subscribe</button>
                                     </div>
                                 </div>
                             </form>
@@ -587,40 +600,34 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-3">
-                        <h4 class="text-white mb-4">Address</h4>
-                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <h4 class="text-white mb-4">Kontak</h4>
+                        {{-- <p><i class="fa fa-map-marker-alt me-3"></i>Malang</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p> --}}
+                        <p><i class="fa fa-envelope me-3"></i>mail@kindem.my.id</p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <h4 class="text-white mb-4">Quick Link</h4>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a>
+                        <h4 class="text-white mb-4">Akses Cepat</h4>
+                        <a class="btn btn-link" href="#home">Beranda</a>
+                        <a class="btn btn-link" href="#feature">Fitur</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <h4 class="text-white mb-4">Popular Link</h4>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a>
+                        <h4 class="text-white mb-4">Link Populer</h4>
+                        <a class="btn btn-link" href="#about">Tentang</a>
+                        <a class="btn btn-link" href="#contact">Kontak</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <h4 class="text-white mb-4">Newsletter</h4>
-                        <p>Lorem ipsum dolor sit amet elit. Phasellus nec pretium mi. Curabitur facilisis ornare velit non vulpu</p>
-                        <div class="position-relative w-100 mt-3">
+                        <h4 class="text-white mb-4">Berita</h4>
+                        <p>Aplikasi ini masih dalam tahap uji coba sehingga membutuhkan waktu untuk merilis secara resmi pada App Store atau Play Store</p>
+                        {{-- <div class="position-relative w-100 mt-3">
                             <input class="form-control border-0 rounded-pill w-100 ps-4 pe-5" type="text" placeholder="Your Email" style="height: 48px;">
                             <button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary-gradient fs-4"></i></button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -628,19 +635,19 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+                            &copy; <a class="border-bottom" href="#">Kindem</a>, All Right Reserved.
 
 							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                             </br>
-                            Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                            Developed By <a class="border-bottom" href="https://themewagon.com" target="_blank">Abdul Rahman Saleh</a> & <a class="border-bottom" href="https://www.linkedin.com/in/yogameleniawan/" target="_blank">Yoga Meleniawan Pamungkas</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
-                                <a href="">Home</a>
+                                {{-- <a href="">Home</a>
                                 <a href="">Cookies</a>
                                 <a href="">Help</a>
-                                <a href="">FQAs</a>
+                                <a href="">FQAs</a> --}}
                             </div>
                         </div>
                     </div>
