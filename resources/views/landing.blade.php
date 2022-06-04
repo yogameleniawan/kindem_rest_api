@@ -19,14 +19,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="{{asset('landing/lib/animate/animate.min.css')}}" rel="stylesheet">
-    <link href="{{asset('landing/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{url('landing/lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{url('landing/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="{{asset('landing/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{url('landing/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="{{asset('landing/css/style.css')}}" rel="stylesheet">
+    <link href="{{url('landing/css/style.css')}}" rel="stylesheet">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="51">
@@ -44,7 +44,7 @@
         <div class="container-xxl position-relative p-0" id="home">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0">FitApp</h1>
+                    <h1 class="m-0">KINDEM</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -67,18 +67,18 @@
                 <div class="container px-lg-5">
                     <div class="row g-5">
                         <div class="col-lg-8 text-center text-lg-start">
-                            <h1 class="text-white mb-4 animated slideInDown">The Revolutionary App That Helps To Control Your Own Fitness</h1>
-                            <p class="text-white pb-3 animated slideInDown">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p>
+                            <h1 class="text-white mb-4 animated slideInDown">KINDEM: Kids Need Delightful English Mentor</h1>
+                            <p class="text-white pb-3 animated slideInDown">Aplikasi belajar bahasa inggris menggunakan fitur voice recognition dan text to speech sehingga memudahkan kamu untuk mempelajari speaking dan pronunciation dalam Bahasa Inggris.</p>
                             <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
                             <a href="" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                         </div>
                         <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                             <div class="owl-carousel screenshot-carousel">
-                                <img class="img-fluid" src="{{asset('img/screenshot-1.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-2.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-3.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-4.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-5.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-1.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-2.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-3.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-4.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-5.png')}}" alt="">
                             </div>
                         </div>
                     </div>
@@ -93,25 +93,27 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <h5 class="text-primary-gradient fw-medium">About App</h5>
-                        <h1 class="mb-4">#1 App For Your Fitness</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
+                        <h5 class="text-primary-gradient fw-medium">Tentang Aplikasi</h5>
+                        <h1 class="mb-4">#1 Aplikasi untuk belajar Bahasa Inggris</h1>
+                        <p class="mb-4">Aplikasi pembelajaran bahasa inggris yang interaktif dan portable sehingga memungkinkan
+                            kegiatan belajar mengajar antara guru dan siswa menjadi lebih efektif dan maksimal serta
+                            siswa dapat belajar bahasa inggris dimanapun dan kapanpun.</p>
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
                                 <div class="d-flex">
                                     <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
                                     <div class="ms-3">
-                                        <h2 class="mb-0" data-toggle="counter-up">1234</h2>
-                                        <p class="text-primary-gradient mb-0">Active Install</p>
+                                        <h2 class="mb-0" data-toggle="counter-up">68</h2>
+                                        <p class="text-primary-gradient mb-0">Aktif Install</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 wow fadeIn" data-wow-delay="0.7s">
                                 <div class="d-flex">
-                                    <i class="fa fa-comments fa-2x text-secondary-gradient flex-shrink-0 mt-1"></i>
+                                    <i class="fa fa-comments fa-2x  text-pengguna flex-shrink-0 mt-1"></i>
                                     <div class="ms-3">
-                                        <h2 class="mb-0" data-toggle="counter-up">1234</h2>
-                                        <p class="text-secondary-gradient mb-0">Clients Reviews</p>
+                                        <h2 class="mb-0" data-toggle="counter-up">68</h2>
+                                        <p class=" text-pengguna mb-0">Pengguna</p>
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +121,7 @@
                         <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded-pill mt-3">Read More</a>
                     </div>
                     <div class="col-lg-6">
-                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{asset('img/about.png')}}">
+                        <img class="img-fluid wow fadeInUp" data-wow-delay="0.5s" src="{{url('landing/img/mobile.png')}}" style="max-width: 150%">
                     </div>
                 </div>
             </div>
@@ -131,8 +133,8 @@
         <div class="container-xxl py-5" id="feature">
             <div class="container py-5 px-lg-5">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                    <h5 class="text-primary-gradient fw-medium">App Features</h5>
-                    <h1 class="mb-5">Awesome Features</h1>
+                    <h5 class="text-primary-gradient fw-medium">Fitur Aplikasi</h5>
+                    <h1 class="mb-5">Fitur Menarik</h1>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -210,11 +212,11 @@
                     </div>
                     <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end wow fadeInUp" data-wow-delay="0.3s">
                         <div class="owl-carousel screenshot-carousel">
-                            <img class="img-fluid" src="{{asset('img/screenshot-1.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-2.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-3.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-4.png')}}" alt="">
-                                <img class="img-fluid" src="{{asset('img/screenshot-5.png')}}" alt="">
+                            <img class="img-fluid" src="{{url('landing/img/screenshot-1.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-2.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-3.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-4.png')}}" alt="">
+                                <img class="img-fluid" src="{{url('landing/img/screenshot-5.png')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -655,12 +657,12 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('lib/wow/wow.min.js')}}"></script>
-    <script src="{{asset('lib/easing/easing.min.js')}}"></script>
-    <script src="{{asset('lib/waypoints/waypoints.min.js')}}"></script>
-    <script src="{{asset('lib/counterup/counterup.min.js')}}"></script>
-    <script src="{{asset('lib/owlcarousel/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('js/main.js')}}"></script>
+    <script src="{{url('landing/lib/wow/wow.min.js')}}"></script>
+    <script src="{{url('landing/lib/easing/easing.min.js')}}"></script>
+    <script src="{{url('landing/lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{url('landing/lib/counterup/counterup.min.js')}}"></script>
+    <script src="{{url('landing/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{url('landing/js/main.js')}}"></script>
 </body>
 
 </html>

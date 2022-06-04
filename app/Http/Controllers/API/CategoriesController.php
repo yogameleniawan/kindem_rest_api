@@ -32,8 +32,9 @@ class CategoriesController extends Controller
 
         $category = DB::table('categories')
             ->leftJoin('complete_categories', 'complete_categories.category_id', '=', 'categories.id')
-            ->selectRaw('categories.id as id, categories.name as name, categories.image as image, categories.level as level, complete_categories.is_complete as is_complete')
+            ->selectRaw('categories.id as id, categories.name as name, categories.image as image, categories.level as level, complete_categories.is_complete as is_complete, complete_categories.user_id as user_id')
             ->orderBy('categories.level', 'asc')
+            ->where('complete_categories.user_id', Auth::user()->id)
             ->get();
         return response()->json(['data' => $category], 200 ,[],JSON_NUMERIC_CHECK);
     }

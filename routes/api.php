@@ -36,6 +36,7 @@ Route::prefix('v1')->group(function () {
         //     return $request->user();
         // });
         Route::get('/user', [UsersController::class, 'getUser']);
+        Route::get('/getDetailUser', [UsersController::class, 'getDetailUser']);
         Route::get('/addSession', [UsersController::class, 'addSession']);
         Route::get('/getAllUsers', [UsersController::class, 'getAllUsers']);
         Route::get('/getRankingUsers', [UsersController::class, 'getRankingUsers']);
@@ -45,7 +46,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/getAllSubCategories', [SubCategoriesController::class, 'getAllSubCategories']);
         Route::get('/getSubCategoriesById/{id}', [SubCategoriesController::class, 'getSubCategoriesById']);
         Route::get('/getAllCourses', [CoursesController::class, 'getAllCourses']);
-        Route::get('/getCoursesById/{id}', [CoursesController::class, 'getCoursesById']);
+        Route::get('/getCoursesById', [CoursesController::class, 'getCoursesById']);
         Route::post('/getAnswerChoices', [CoursesController::class, 'getAnswerChoices']);
         Route::post('/redirectCourse', [CoursesController::class, 'redirectCourse']);
         Route::post('/storeAnswer', [UserCourseController::class, 'storeAnswer']);

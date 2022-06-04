@@ -22,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('auth.login');
-    return view('landing');
+    return view('auth.login');
 });
 Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

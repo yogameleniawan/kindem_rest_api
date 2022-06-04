@@ -22,7 +22,7 @@ class UserCourseController extends Controller
 {
     public function storeAnswer(Request $request)
     {
-        $table = UserCourse::where('course_id', $request->course_id)->first();
+        $table = UserCourse::where('course_id', $request->course_id)->where('user_id', Auth::user()->id)->first();
         $table->id = Str::random(10);
         $table->answer = $request->answer;
         $table->checked = true;
@@ -33,7 +33,6 @@ class UserCourseController extends Controller
         }
         $table->course_id = $request->course_id;
         $table->sub_category_id = $request->sub_category_id;
-        $table->user_id = Auth::user()->id;
         if ($table->save()) {
             return response()->json([
                 'success' => true,

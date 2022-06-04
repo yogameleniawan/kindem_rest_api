@@ -24,9 +24,11 @@ class DashboardController extends Controller
             ->join('user_levels', 'users.id', '=', 'user_levels.user_id')
             ->leftJoin('levels', 'user_levels.level_id', '=', 'levels.id')
             ->leftJoin('complete_categories', 'complete_categories.user_id', '=', 'users.id')
-            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('COUNT(complete_categories.is_complete) as complete_sub_category'), 'levels.point as point')
+            ->select('users.id as id', 'users.name as name', 'users.email as email', 'users.role as role', 'users.profile_photo_path as profile_photo_path', 'levels.name as level', DB::raw('COUNT(complete_categories.is_complete) as complete_sub_category'), 'levels.point as point', 'user_levels.user_point as user_point')
             ->groupBy('users.id')
+            ->orderBy('user_levels.updated_at', 'DESC')
             ->orderBy('levels.point', 'DESC')
+            ->orderBy('user_levels.user_point', 'DESC')
             ->where('users.role', 'student')
             ->get()
             ->take(10);

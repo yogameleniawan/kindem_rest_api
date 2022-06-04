@@ -44,23 +44,23 @@ h6,
 
 /*** Gradient Text & BG ***/
 .text-primary-gradient {
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .text-secondary-gradient {
-    background: linear-gradient(to bottom right, var(--secondary), var(--primary));
+    background: linear-gradient(to bottom right,  #0074CD, #022F4F)
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 .bg-primary-gradient {
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
 }
 
 .bg-secondary-gradient {
-    background: linear-gradient(to bottom right, var(--secondary), var(--primary));
+    background: linear-gradient(to bottom right,  #0074CD, #022F4F)
 }
 
 
@@ -93,12 +93,12 @@ h6,
 
 .btn.btn-primary-gradient,
 .btn.btn-secondary-gradient::after {
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right, #f5a720, #f5a720);
 }
 
 .btn.btn-secondary-gradient,
 .btn.btn-primary-gradient::after {
-    background: linear-gradient(to bottom right, var(--secondary), var(--primary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
 }
 
 .btn.btn-primary-gradient:hover::after,
@@ -139,7 +139,7 @@ h6,
     bottom: 45px;
     z-index: 99;
     border: none;
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
 }
 
 
@@ -220,7 +220,7 @@ h6,
     }
 
     .navbar-light .navbar-brand h1 {
-        background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+        background: linear-gradient(to bottom right,  #f5a720, #f5a720);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -238,7 +238,7 @@ h6,
         left: 0;
         z-index: 999;
     }
-    
+
     .sticky-top.navbar-light {
         position: fixed;
         background: #FFFFFF;
@@ -249,7 +249,7 @@ h6,
     }
 
     .sticky-top.navbar-light .navbar-brand h1 {
-        background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+        background: linear-gradient(to bottom right,  #f5a720, #f5a720);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
@@ -264,7 +264,7 @@ h6,
         url(../img/bg-circle.png),
         url(../img/bg-triangle.png),
         url(../img/bg-bottom.png),
-        linear-gradient(to bottom right, var(--primary), var(--secondary));
+        linear-gradient(to bottom right, #022f4f, #0074cd);
     background-position:
         left 0px top 0px,
         right 0px top 50%,
@@ -312,7 +312,7 @@ h6,
 
 .pricing .nav-link.active {
     color: #FFFFFF;
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
 }
 
 
@@ -360,7 +360,7 @@ h6,
     margin: 5px 0;
     width: 15px;
     height: 15px;
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
     border-radius: 15px;
     transition: .5s;
 }
@@ -388,7 +388,7 @@ h6,
 }
 
 .testimonial-carousel .owl-item.center .testimonial-item {
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
 }
 
 .testimonial-carousel .owl-item.center .testimonial-item h5,
@@ -411,7 +411,7 @@ h6,
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
-    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    background: linear-gradient(to bottom right,  #f5a720, #f5a720);
     border-radius: 60px;
     font-size: 18px;
     transition: .5s;
@@ -419,7 +419,7 @@ h6,
 
 .testimonial-carousel .owl-nav .owl-prev:hover,
 .testimonial-carousel .owl-nav .owl-next:hover {
-    background: linear-gradient(to bottom right, var(--secondary), var(--primary));
+    background: linear-gradient(to bottom right,  #0074CD, #022F4F)
 }
 
 
@@ -431,7 +431,7 @@ h6,
         url(../img/bg-circle.png),
         url(../img/bg-triangle.png),
         url(../img/bg-top.png),
-        linear-gradient(to bottom right, var(--primary), var(--secondary));
+        linear-gradient(to bottom right,  #0074CD, #022F4F);
     background-position:
         left 0px bottom 0px,
         right 0px top 50%,
@@ -499,4 +499,11 @@ h6,
     margin-right: 0;
     padding-right: 0;
     border-right: none;
+}
+
+
+.text-pengguna {
+    background:linear-gradient(to bottom right,  #0074CD, #022F4F);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

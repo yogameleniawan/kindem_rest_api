@@ -19,7 +19,7 @@ class CoursesController extends Controller
         return CourseResource::collection($data);
     }
 
-    public function getCoursesById($id)
+    public function getCoursesById(Request $request)
     {
         $courses = DB::table('user_courses')
             ->leftJoin('courses', 'user_courses.course_id', '=', 'courses.id')
@@ -33,7 +33,8 @@ class CoursesController extends Controller
                 'courses.is_voice as is_voice',
                 'courses.created_at as created_at',
                 'courses.updated_at as updated_at')
-            ->where('courses.sub_category_id', '=', $id)
+            ->where('courses.sub_category_id', '=', $request->id)
+            ->where('user_courses.user_id', '=', Auth::user()->id)
             ->inRandomOrder()
             ->take(10)
             ->get();
