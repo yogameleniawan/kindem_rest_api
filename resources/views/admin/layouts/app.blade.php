@@ -10,6 +10,8 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src *;img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
@@ -42,6 +44,21 @@
     <link rel="stylesheet" href="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
     {{-- <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background-color: #0074CD;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #F5A720;
+            border-radius: 30px;
+        }
+    </style>
     @yield('css')
 </head>
 

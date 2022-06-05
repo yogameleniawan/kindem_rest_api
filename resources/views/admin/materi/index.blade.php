@@ -1712,11 +1712,12 @@ Materi
 
 <script>
     var loadFile = function(event) {
-        var output = document.getElementById('output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function() {
-            URL.revokeObjectURL(output.src)
-        }
+        let output = document.getElementById('output');
+        let file = $("#image_course")[0].files[0]
+        output.src = URL.createObjectURL(file);
+        // output.onload = function() {
+        //     URL.revokeObjectURL(output.src)
+        // }
     };
 
     var loadFileEdit = function(event) {

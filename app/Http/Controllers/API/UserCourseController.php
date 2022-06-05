@@ -82,7 +82,7 @@ class UserCourseController extends Controller
         }
 
         if ($total_complete == $total_sub) { // check total soal yang dikerjakan == total soal yang disediakan
-            $table = CompleteCategory::where('category_id', $sub->category_id)->first();
+            $table = CompleteCategory::where('category_id', $sub->category_id)->where('user_id', Auth::user()->id)->first();
             $table->is_complete = true; // maka materi sudah dikerjakan
             $table->save();
         }

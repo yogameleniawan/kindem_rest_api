@@ -48,6 +48,19 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
         }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background-color: #0074CD;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background-color: #F5A720;
+            border-radius: 30px;
+        }
     </style>
 </head>
 
@@ -657,7 +670,7 @@
 							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
 							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                             </br>
-                            Developed By <a class="border-bottom" href="https://themewagon.com" target="_blank">Abdul Rahman Saleh</a> & <a class="border-bottom" href="https://www.linkedin.com/in/yogameleniawan/" target="_blank">Yoga Meleniawan Pamungkas</a>
+                            Developed By <a class="border-bottom" href="https://www.linkedin.com/in/abdul-rahman-saleh-714120217/" target="_blank">Abdul Rahman Saleh</a> & <a class="border-bottom" href="https://www.linkedin.com/in/yogameleniawan/" target="_blank">Yoga Meleniawan Pamungkas</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
