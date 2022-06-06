@@ -9,6 +9,13 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    
+    <meta name="description" content="Kindem adalah Aplikasi belajar bahasa inggris menggunakan fitur voice recognition dan text to speech sehingga memudahkan kamu untuk mempelajari speaking dan pronunciation dalam Bahasa Inggris."/>
+    <meta property="og:image" content="{{url('images/kindem-blue.jpg')}}"/>
+    <meta property="og:image:type" content="image/jpg"/>
+    <meta property="og:image:width" content="300"/>
+    <meta property="og:image:height" content="300"/>
+    
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -611,7 +618,7 @@
                                             <label for="message">Pesan</label>
                                         </div>
                                     </div> --}}
-                                    <div class="col-12 text-center">
+                                    <div id="btn_subscribe" class="col-12 text-center">
                                         <div id="subscribe_text" class="btn btn-primary-gradient rounded-pill py-3 px-5" style="text-align: -webkit-center;">Subscribe</div>
                                         <div id="subscribe_loader" class="btn btn-primary-gradient rounded-pill py-3 px-5 d-none" style="text-align: -webkit-center;"><div class="loader"></div></div>
                                     </div>
@@ -746,6 +753,7 @@
                     success: function (data) {
                         $('#subscribe_loader').addClass('d-none')
                         $('#subscribe_text').addClass('d-none')
+                        $('#btn_subscribe').html('')
                         $.toast({
                             heading: 'Subscribe Berhasil',
                             text: 'Silahkan cek email untuk melihat informasi.',

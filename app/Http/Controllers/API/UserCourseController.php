@@ -100,6 +100,7 @@ class UserCourseController extends Controller
                 $level_up = true;
                 $level = UserLevel::where('user_id', Auth::user()->id)->first();
                 $level->level_id = $next_level->id;
+                $level->user_point = $total_score;
                 $level->save();
             }
         }
