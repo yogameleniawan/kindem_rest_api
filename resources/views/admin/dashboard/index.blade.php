@@ -996,7 +996,7 @@ $('#date_chart_all').change(function(){
     initChartAll()
 })
 
-$('#materi_chart_select').change(function(){
+$('#materi_chart_select_all').change(function(){
     chartAll.destroy()
     initChartAll()
 })
