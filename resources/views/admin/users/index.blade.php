@@ -326,7 +326,7 @@ Users
                                         <th>Email</th>
                                         <th>Nama</th>
                                         <th>Status</th>
-                                        <th>Last Seen</th>
+                                        <th>Terakhir Dilihat</th>
                                     </tr>
                                 </thead>
                                 <tfoot>

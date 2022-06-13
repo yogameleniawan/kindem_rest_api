@@ -101,7 +101,7 @@
                         <a href="#review" class="nav-item nav-link">Review</a> --}}
                         <a href="#contact" class="nav-item nav-link">Kontak</a>
                     </div>
-                    <a href="" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Coba Aplikasi</a>
+                    <a href="#btn-download" class="btn btn-primary-gradient rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Coba Aplikasi</a>
                 </div>
             </nav>
 
@@ -111,7 +111,7 @@
                         <div class="col-lg-8 text-center text-lg-start">
                             <h1 class="text-white mb-4 animated slideInDown">KINDEM: Kids Need Delightful English Mentor</h1>
                             <p class="text-white pb-3 animated slideInDown">Aplikasi belajar bahasa inggris menggunakan fitur voice recognition dan text to speech sehingga memudahkan kamu untuk mempelajari speaking dan pronunciation dalam Bahasa Inggris.</p>
-                            <a href="" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded me-3 animated slideInLeft"><i class="fa fa-download" aria-hidden="true" style="padding-right: 10px"></i> Unduh Aplikasi Kindem</a>
+                            <a id="btn-download" href="{{url('download/kindem-app.apk')}}" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded me-3 animated slideInLeft"><i class="fa fa-download" aria-hidden="true" style="padding-right: 10px"></i> Unduh Aplikasi Kindem</a>
                             {{-- <a href="" class="btn btn-secondary-gradient py-sm-3 px-4 px-sm-5 rounded-pill animated slideInRight">Contact Us</a> --}}
                             {{-- <a href="javascript:void(0)" class="btn btn-primary-gradient py-sm-3 px-4 px-sm-5 rounded me-3 animated slideInLeft">
                                 <i class="fab fa-apple fa-3x text-white flex-shrink-0"></i>

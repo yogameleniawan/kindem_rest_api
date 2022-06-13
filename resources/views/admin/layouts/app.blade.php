@@ -11,8 +11,6 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src *;img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
-
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
