@@ -642,10 +642,10 @@
                         <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p> --}}
                         <p><i class="fa fa-envelope me-3"></i>mail@kindem.my.id</p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/channel/UChlB3Xa35MttSeH59TvjXMg" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <!--<a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>-->
+                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/kindem_app/" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <!--<a class="btn btn-outline-light btn-social" href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>-->
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-3">
