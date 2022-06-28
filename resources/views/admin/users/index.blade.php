@@ -154,6 +154,21 @@ Users
                         <div class="footer-buttons">
                             <br>
                             <div id="user-loader" class="loader d-none"></div>
+                            
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button id="user-btn-add" class="btn btn-primary tooltip" disabled>
+                                Tambah
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            <button id="user-btn-edit" class="btn btn-success tooltip d-none" disabled>
+                                Update
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            <button id="user-btn-delete" class="btn btn-danger tooltip d-none" disabled>
+                                Delete
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="user-btn-add" type="button" class="btn btn-primary" onclick="addUser()">
                                 Tambah
                             </button>
@@ -163,6 +178,7 @@ Users
                             <button id="user-btn-delete" type="button" class="btn btn-danger d-none" onclick="deleteUser()">
                                 Delete
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>

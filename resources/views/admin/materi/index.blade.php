@@ -144,6 +144,7 @@ Materi
     .slider.round:before {
         border-radius: 50%;
     }
+    
 </style>
 @endsection
 @section('iconHeader')
@@ -171,7 +172,6 @@ Materi
                 <div id="import_chapter" class="d-none">
                     <form id="form-chapter-import" method="POST" class="text-left border border-light p-5" action="{{route('materi.import')}}" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
-                    <!-- <form id="form-chapter-import" class="text-left border border-light p-5" enctype="multipart/form-data" style="padding-bottom: 50px;"> -->
                     <a href="{{route('materi.template')}}" class="btn btn-primary mb-3">Download Template</a>
                         <div class="form-group">
                             <label>Upload File Excel</label>
@@ -185,10 +185,16 @@ Materi
                         <div class="footer-buttons">
                             <br>
                             <div id="chapter-loader-import" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-secondary tooltip" disabled>
+                                Import
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="btn-chapter-import" type="submit" class="btn btn-primary">
-                            <!-- <button id="btn-chapter-import" type="submit" class="btn btn-primary" onclick="importChapter()"> -->
                                 Import
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -219,9 +225,16 @@ Materi
                         <div class="footer-buttons">
 
                             <div id="chapter-loader" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-primary tooltip" disabled>
+                                Tambah
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="btn-chapter" type="button" class="btn btn-primary" onclick="addChapter()">
                                 Tambah
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -255,9 +268,16 @@ Materi
                         <div class="footer-buttons">
 
                             <div id="chapter-loader-update" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-success tooltip" disabled>
+                                Update
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="btn-chapter-update" type="button" class="btn btn-success" onclick="updateChapter()">
                                 Update
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -278,9 +298,16 @@ Materi
                         <div class="footer-buttons">
 
                             <div id="chapter-loader-delete" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-danger tooltip" disabled>
+                                Hapus
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="btn-chapter-delete" type="button" class="btn btn-danger" onclick="removeChapter()">
                                 Hapus
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -345,10 +372,16 @@ Materi
                         <div class="footer-buttons">
                             <br>
                             <div id="materi-loader-import" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-secondary tooltip" disabled>
+                                Import
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="materi-btn-import" type="submit" class="btn btn-primary">
-                            <!-- <button id="materi-btn-import" type="submit" class="btn btn-primary" onclick="importMateri()"> -->
                                 Import
                             </button>
+                            @endif
                         </div>
                     </form>
                 </div>
@@ -372,9 +405,17 @@ Materi
 
                         <div class="footer-buttons">
                             <div id="materi-loader" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-primary tooltip" disabled>
+                                Tambah
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="materi-btn" type="button" class="btn btn-primary" onclick="addMateri()">
                                 Tambah
                             </button>
+                            @endif
+                            
                         </div>
 
                     </form>
@@ -400,9 +441,17 @@ Materi
 
                         <div class="footer-buttons">
                             <div id="materi-loader-update" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-success tooltip" disabled>
+                                Update
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="materi-btn-update" type="button" class="btn btn-success" onclick="updateMateri()">
                                 Update
                             </button>
+                            @endif
+                            
                         </div>
 
                     </form>
@@ -422,9 +471,16 @@ Materi
 
                         <div class="footer-buttons">
                             <div id="materi-loader-delete" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-danger tooltip" disabled>
+                                Hapus
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="materi-btn-delete" type="button" class="btn btn-danger" onclick="deleteMateri()">
                                 Hapus
                             </button>
+                            @endif
                         </div>
 
                     </form>
@@ -487,10 +543,17 @@ Materi
                         <div class="footer-buttons">
                             <br>
                             <div id="course-loader-import" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button class="btn btn-secondary tooltip" disabled>
+                                Import
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="course-btn-import" type="submit" class="btn btn-primary">
-                            <!-- <button id="course-btn-import" type="submit" class="btn btn-primary" onclick="importCourse()"> -->
                                 Import
                             </button>
+                            @endif
+                            
                         </div>
                     </form>
                 </div>
@@ -567,16 +630,30 @@ Materi
                         <div class="footer-buttons">
                             <br>
                             <div id="course-loader" class="loader d-none"></div>
+                            @if(Auth::user()->email == 'guest@kindem.my.id')
+                            <button id="course-btn-add" class="btn btn-primary tooltip" disabled>
+                                Tambah
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            <button id="course-btn-edit" class="btn btn-success tooltip d-none" disabled>
+                                Update
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            <button id="course-btn-delete" class="btn btn-danger tooltip d-none" disabled>
+                                Delete
+                                <span class="tooltiptext">Guest Forbidden</span>
+                            </button>
+                            @else
                             <button id="course-btn-add" type="button" class="btn btn-primary" onclick="addCourse()">
                                 Tambah
                             </button>
                             <button id="course-btn-edit" type="button" class="btn btn-success d-none" onclick="updateCourse()">
                                 Update
                             </button>
-
                             <button id="course-btn-delete" type="button" class="btn btn-danger d-none" onclick="deleteCourse()">
                                 Delete
                             </button>
+                            @endif
                         </div>
 
                     </form>
@@ -1785,3 +1862,4 @@ Materi
     });
 </script>
 @endsection
+

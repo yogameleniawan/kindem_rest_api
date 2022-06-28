@@ -24,7 +24,7 @@ class UsersController extends Controller
     {
         if ($request->ajax()) {
             $data = DB::table('users')
-                ->select(['users.id AS id', 'users.email AS email', 'users.password AS password', 'users.name AS name', 'users.last_seen as last_seen']);
+                ->select(['users.id AS id', 'users.email AS email', 'users.password AS password', 'users.name AS name', 'users.last_seen as last_seen'])->where('users.role','student');
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {

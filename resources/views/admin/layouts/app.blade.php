@@ -168,6 +168,35 @@
             background: #4a587263;
             border-radius: 5px;
         }
+        
+            .tooltip {
+              position: relative;
+              display: inline-block;
+              border-bottom: 1px dotted black;
+            }
+            
+            .tooltip .tooltiptext {
+              visibility: hidden;
+              width: 120px;
+              background-color: black;
+              color: #fff;
+              text-align: center;
+              border-radius: 6px;
+              padding: 5px 0;
+            
+              /* Position the tooltip */
+              position: absolute;
+              z-index: 1;
+            }
+            
+            .tooltip:hover{
+              cursor:not-allowed;
+            }
+            
+            .tooltip:hover .tooltiptext {
+              visibility: visible;
+              cursor:not-allowed;
+            }
 
     </style>
     @yield('header')
@@ -264,8 +293,7 @@
             </footer>
         </div>
     </div>
-
-
+    
     <script>
         $('.mobile-nav-toggle').click(function () {
             $('#btn-sidebar').removeClass('hide-sidebar')
@@ -274,6 +302,7 @@
     </script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
     <script>
         window.jQuery || document.write(
             '<script src="{{url("assets/admin/src/js/vendor/jquery-3.3.1.min.js")}}"><\/script>')
@@ -297,7 +326,6 @@
     <script src="{{url('assets/admin/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}">
     </script>
     <script src="{{url('assets/admin/plugins/jvectormap/jquery-jvectormap.min.js')}}"></script>
-    <script src="{{url('assets/admin/plugins/jvectormap/tests/assets/jquery-jvectormap-world-mill-en.js')}}"></script>
     <script src="{{url('assets/admin/plugins/moment/moment.js')}}"></script>
     <script src="{{url('assets/admin/plugins/tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js')}}">
     </script>
@@ -308,7 +336,8 @@
     <script src="{{url('assets/admin/js/charts.js')}}"></script>
     <script src="{{url('assets/admin/js/alerts.js')}}"></script>
     <script src="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
-
+    
+    
     @yield('footer')
 
 </body>
