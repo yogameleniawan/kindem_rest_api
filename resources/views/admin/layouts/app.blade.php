@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800" rel="stylesheet">
@@ -42,16 +42,16 @@
     <link rel="stylesheet" href="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
     {{-- <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    
+
     <style>
         ::-webkit-scrollbar {
             width: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background-color: #0074CD;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background-color: #F5A720;
             border-radius: 30px;
@@ -168,13 +168,13 @@
             background: #4a587263;
             border-radius: 5px;
         }
-        
+
             .tooltip {
               position: relative;
               display: inline-block;
               border-bottom: 1px dotted black;
             }
-            
+
             .tooltip .tooltiptext {
               visibility: hidden;
               width: 120px;
@@ -183,19 +183,27 @@
               text-align: center;
               border-radius: 6px;
               padding: 5px 0;
-            
+
               /* Position the tooltip */
               position: absolute;
               z-index: 1;
             }
-            
+
             .tooltip:hover{
               cursor:not-allowed;
             }
-            
+
             .tooltip:hover .tooltiptext {
               visibility: visible;
               cursor:not-allowed;
+            }
+
+            .wrapper .page-wrap .app-sidebar {
+                z-index: 9999;
+            }
+
+            .wrapper .header-top {
+                z-index: 9999;
             }
 
     </style>
@@ -293,7 +301,7 @@
             </footer>
         </div>
     </div>
-    
+
     <script>
         $('.mobile-nav-toggle').click(function () {
             $('#btn-sidebar').removeClass('hide-sidebar')
@@ -336,8 +344,8 @@
     <script src="{{url('assets/admin/js/charts.js')}}"></script>
     <script src="{{url('assets/admin/js/alerts.js')}}"></script>
     <script src="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
-    
-    
+
+
     @yield('footer')
 
 </body>
