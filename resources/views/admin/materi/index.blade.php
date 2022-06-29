@@ -144,7 +144,7 @@ Materi
     .slider.round:before {
         border-radius: 50%;
     }
-    
+
 </style>
 @endsection
 @section('iconHeader')
@@ -166,9 +166,146 @@ Materi
         <div class="card">
             <div class="box-body">
                 <div class="card-header">
-                    <i class="ik ik-plus-square" onclick="addChapterPage()"></i>
-                    <button type="button" class="btn btn-primary ml-3" onclick="importChapterPage()">Import Data</button>
+                    <i class="ik ik-plus-square" onclick="addChapterPage()" data-toggle="modal" data-target="#chapterModal"></i>Tambah Data
+                    <button type="button" class="btn btn-primary ml-3" onclick="importChapterPage()" data-toggle="modal" data-target="#chapterModal">Import Data</button>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered" id="data-table" style="width: 102%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th>Name</th>
+                                            <th>Chapter</th>
+                                            <th>Image</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="width: 3%"></td>
+                                            <th>Name</th>
+                                            <th>Chapter</th>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="ik ik-plus-square" onclick="addMateriPage()" data-toggle="modal" data-target="#materiModal"></i>Tambah Data
+                <button type="button" id="materi-btn-import" class="btn btn-primary ml-3" onclick="importMateriPage()" data-toggle="modal" data-target="#materiModal">Import Data</button>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered" id="data-table-materi" style="width: 102%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th>Chapter</th>
+                                            <th>Nama</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="width: 3%"></td>
+                                            <th>Chapter</th>
+                                            <th>Nama</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="ik ik-plus-square" onclick="addCoursePage()" data-toggle="modal" data-target="#demoModal"></i>Tambah Data
+                <button type="button" id="course-btn-import" class="btn btn-primary ml-3" onclick="importCoursePage()" data-toggle="modal" data-target="#demoModal">Import Data</button>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-body">
+                            <div class="dt-responsive">
+                                <table class="table table-bordered" id="data-table-course" style="width: 102%">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%"></th>
+                                            <th>Materi</th>
+                                            <th>Bahasa Indonesia</th>
+                                            <th>Bahasa Inggris</th>
+                                            <th>Gambar Materi</th>
+                                            <th>Gambar Ujian</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td style="width: 3%"></td>
+                                            <th>Materi</th>
+                                            <th>Bahasa Indonesia</th>
+                                            <th>Bahasa Inggris</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+</div>
+
+<div class="modal fade" id="chapterModal" tabindex="-1" role="dialog" aria-labelledby="chapterModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="chapterModalLabel">Chapter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
                 <div id="import_chapter" class="d-none">
                     <form id="form-chapter-import" method="POST" class="text-left border border-light p-5" action="{{route('materi.import')}}" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
@@ -311,51 +448,23 @@ Materi
                         </div>
                     </form>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card-body">
-                            <div class="dt-responsive">
-                                <table class="table table-bordered" id="data-table" style="width: 102%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3%"></th>
-                                            <th>Name</th>
-                                            <th>Chapter</th>
-                                            <th>Image</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td style="width: 3%"></td>
-                                            <th>Name</th>
-                                            <th>Chapter</th>
-                                            <td></td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
-
             </div>
-            <!-- /.box-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <!-- /.box -->
     </div>
-    <!-- /.col -->
 </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <i class="ik ik-plus-square" onclick="addMateriPage()"></i>
-                <button type="button" id="materi-btn-import" class="btn btn-primary ml-3" onclick="importMateriPage()">Import Data</button>
+<div class="modal fade" id="materiModal" tabindex="-1" role="dialog" aria-labelledby="materiModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="materiModalLabel">Materi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
             </div>
-            <div class="box-body">
+            <div class="modal-body">
                 <div id="import_materi" class="d-none">
                     <form id="form-import-materi" action="{{route('sub_categories.import')}}" class="text-left border border-light p-5" method="POST" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
@@ -415,7 +524,7 @@ Materi
                                 Tambah
                             </button>
                             @endif
-                            
+
                         </div>
 
                     </form>
@@ -451,7 +560,7 @@ Materi
                                 Update
                             </button>
                             @endif
-                            
+
                         </div>
 
                     </form>
@@ -485,48 +594,23 @@ Materi
 
                     </form>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card-body">
-                            <div class="dt-responsive">
-                                <table class="table table-bordered" id="data-table-materi" style="width: 102%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3%"></th>
-                                            <th>Chapter</th>
-                                            <th>Nama</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td style="width: 3%"></td>
-                                            <th>Chapter</th>
-                                            <th>Nama</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
             </div>
-            <!-- /.box-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <!-- /.box -->
     </div>
-    <!-- /.col -->
 </div>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="card">
-            <div class="card-header">
-                <i class="ik ik-plus-square" onclick="addCoursePage()"></i>
-                <button type="button" id="course-btn-import" class="btn btn-primary ml-3" onclick="importCoursePage()">Import Data</button>
+<div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="demoModalLabel">Course</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
             </div>
-            <div class="box-body">
+            <div class="modal-body">
                 <div id="import_course" class="d-none">
                     <form id="form-import-course" action="{{route('courses.import')}}" class="text-left border border-light p-5" method="POST" enctype="multipart/form-data" style="padding-bottom: 50px;">
                     @csrf
@@ -553,7 +637,7 @@ Materi
                                 Import
                             </button>
                             @endif
-                            
+
                         </div>
                     </form>
                 </div>
@@ -658,44 +742,12 @@ Materi
 
                     </form>
                 </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card-body">
-                            <div class="dt-responsive">
-                                <table class="table table-bordered" id="data-table-course" style="width: 102%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3%"></th>
-                                            <th>Materi</th>
-                                            <th>Bahasa Indonesia</th>
-                                            <th>Bahasa Inggris</th>
-                                            <th>Gambar Materi</th>
-                                            <th>Gambar Ujian</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td style="width: 3%"></td>
-                                            <th>Materi</th>
-                                            <th>Bahasa Indonesia</th>
-                                            <th>Bahasa Inggris</th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-                    <!-- /.box -->
-                </div>
             </div>
-            <!-- /.box-body -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
         </div>
-        <!-- /.box -->
     </div>
-    <!-- /.col -->
 </div>
 <!-- /.content-wrapper -->
 @endsection

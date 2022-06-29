@@ -30,8 +30,8 @@ class CoursesController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
 
-                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editCoursePage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->indonesia_text . '`,`' . $data->english_text . '`,`' . $data->image . '`,`' . $data->image_course . '`,`' . $data->is_voice . '`)"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteCoursePage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->indonesia_text . '`,`' . $data->english_text . '`,`' . $data->image . '`,`' . $data->image_course . '`,`' . $data->is_voice . '`)" data-toggle="modal"
-                    data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
+                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editCoursePage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->indonesia_text . '`,`' . $data->english_text . '`,`' . $data->image . '`,`' . $data->image_course . '`,`' . $data->is_voice . '`)" data-toggle="modal" data-target="#demoModal"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteCoursePage(`' . $data->id . '`,`' . $data->sub_category_id . '`,`' . $data->indonesia_text . '`,`' . $data->english_text . '`,`' . $data->image . '`,`' . $data->image_course . '`,`' . $data->is_voice . '`)" data-toggle="modal"
+                    data-target="#demoModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
                 ->addColumn('image', function ($data) {
@@ -117,7 +117,7 @@ class CoursesController extends Controller
     {
         return response()->download(public_path('pipeline/pipeline soal.xlsx'));
     }
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'

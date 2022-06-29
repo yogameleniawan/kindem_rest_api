@@ -30,8 +30,8 @@ class SubCategoriesController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
 
-                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editMateriPage(`' . $data->id . '`,`' . $data->category_id . '`,`' . $data->name . '`)"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteMateriPage(`' . $data->id .  '`,`' . $data->name . '`)" data-toggle="modal"
-                    data-target="#exampleModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
+                    $btn = '<td class="dropdown"><div class="ik ik-more-vertical dropdown-toggle" data-toggle="dropdown"></div><ul class="dropdown-menu" role="menu"><a class="dropdown-item edit-table" onclick="editMateriPage(`' . $data->id . '`,`' . $data->category_id . '`,`' . $data->name . '`)" data-toggle="modal" data-target="#materiModal"><li> <i class="ik ik-edit" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Edit</span></li></a><a class="dropdown-item delete" onclick="deleteMateriPage(`' . $data->id .  '`,`' . $data->name . '`)" data-toggle="modal"
+                    data-target="#materiModal" data-id=' . $data->id . '><li><i class="ik ik-trash-2" style="color: white;font-size:16px;padding-right:5px"></i><span style="font-size:14px"> Delete</span></li></a></ul></td>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -69,7 +69,7 @@ class SubCategoriesController extends Controller
         }
     }
 
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'

@@ -109,222 +109,7 @@ Users
 <div class="content-wrapper">
     <div class="card">
         <div class="card-header">
-            <i class="ik ik-plus-square" onclick="addUserPage()"></i>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <form id="form-user" class="text-left border border-light p-5" action="{{route('users.store')}}" method="POST"
-                        enctype="multipart/form-data" style="padding-bottom: 50px;">
-                        @csrf
-                        <input type="hidden" name="id" id="id">
-                        <div class="form-group" id="email-form">
-                            <label>Email</label>
-                            <div class="input-group">
-                                <span class="input-group-prepend">
-                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                                </span>
-                                <input type="text" class="form-control  " placeholder="Email" id="email" name="email"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="password-form">
-                            <label>Password</label>
-                            <div class="input-group">
-                                <span class="input-group-prepend">
-                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                                </span>
-                                <input type="password" class="form-control  " placeholder="Password" id="password"
-                                    name="password" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group" id="name-form">
-                            <label>Nama</label>
-                            <div class="input-group">
-                                <span class="input-group-prepend">
-                                    <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
-                                </span>
-                                <input type="text" class="form-control  " placeholder="Nama" id="nama" name="name"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div class="footer-buttons">
-                            <br>
-                            <div id="user-loader" class="loader d-none"></div>
-                            
-                            @if(Auth::user()->email == 'guest@kindem.my.id')
-                            <button id="user-btn-add" class="btn btn-primary tooltip" disabled>
-                                Tambah
-                                <span class="tooltiptext">Guest Forbidden</span>
-                            </button>
-                            <button id="user-btn-edit" class="btn btn-success tooltip d-none" disabled>
-                                Update
-                                <span class="tooltiptext">Guest Forbidden</span>
-                            </button>
-                            <button id="user-btn-delete" class="btn btn-danger tooltip d-none" disabled>
-                                Delete
-                                <span class="tooltiptext">Guest Forbidden</span>
-                            </button>
-                            @else
-                            <button id="user-btn-add" type="button" class="btn btn-primary" onclick="addUser()">
-                                Tambah
-                            </button>
-                            <button id="user-btn-edit" type="button" class="btn btn-success d-none" onclick="updateUser()">
-                                Update
-                            </button>
-                            <button id="user-btn-delete" type="button" class="btn btn-danger d-none" onclick="deleteUser()">
-                                Delete
-                            </button>
-                            @endif
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div id="stats-loader" class="row d-none" style="text-align: -webkit-center;margin-top:20px">
-                <div class="col-md-12">
-                    <div class="loader"></div>
-                </div>
-            </div>
-            <div class="row d-none" id="user-stats">
-                <div class="col-md-12">
-                    <form class="text-left border border-light p-3" style="margin-top:20px">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 style="background-color: #007bff;color: white;padding: 10px;border-radius: 15px;">Informasi User</h4>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="card sale-card ">
-                                    <div class="card-header">
-                                        <h3>Level User</h3>
-                                    </div>
-                                    <div class="card-block text-center">
-                                        <div id="percent-level">
-                                            <div class="radial-bar radial-bar-0 radial-bar-lg radial-bar-danger">
-                                                <img src="{{url('assets/admin/img/user.png')}}" alt="User-Image">
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h5>Level : <span id="user_level_name">loading..</span></h5>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="s-caption bg-default"></div>
-                                                <div class="s-cont d-inline-block">
-                                                    <h5 class="fw-700 mb-0" id="sisa_point"></h5>
-                                                    <p class="mb-0">Sisa Point Dibutuhkan</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6 border-left">
-                                                <div class="s-caption bg-red"></div>
-                                                <div class="s-cont d-inline-block">
-                                                    <h5 class="fw-700 mb-0" id="user_point"></h5>
-                                                    <p class="mb-0">Jumlah Point Terkumpul </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card ticket-card">
-                                    <div class="card-body">
-                                        <p class="mb-30 bg-primary lbl-card"><i class="fas fa-folder-open"></i> Chapter Dikerjakan</p>
-                                        <div class="text-center">
-                                            <h2 class="mb-0 d-inline-block text-primary" id="chapter_complete"></h2>
-                                            <p class="mb-0 d-inline-block">Chapter</p>
-                                            <p class="mb-0 mt-15"><span id="chapter_incomplete"></span> Chapter tersisa yang belum dikerjakan</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card ticket-card">
-                                    <div class="card-body">
-                                        <p class="mb-30 bg-blue lbl-card"><i class="fas fa-file-archive"></i> Materi Dikerjakan</p>
-                                        <div class="text-center">
-                                            <h2 class="mb-0 d-inline-block text-blue" id="materi_complete"></h2>
-                                            <p class="mb-0 d-inline-block">Materi</p>
-                                            <p class="mb-0 mt-15"><span id="materi_incomplete"></span> Materi sisa yang belum dikerjakan</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card ticket-card">
-                                    <div class="card-body">
-                                        <p class="mb-30 bg-green lbl-card"><i class="fa fa-check-square" aria-hidden="true"></i> Jumlah Benar</p>
-                                        <div class="text-center">
-                                            <h2 class="mb-0 d-inline-block text-green" id="jumlah_benar"></h2>
-                                            <p class="mb-0 d-inline-block">Benar</p>
-                                            <p class="mb-0 mt-15">Sangat menguasai di Materi <span id="nama_materi_dikuasai"></span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card ticket-card">
-                                    <div class="card-body">
-                                        <p class="mb-30 bg-warning lbl-card"><i class="fa fa-window-close" aria-hidden="true"></i> Jumlah Salah</p>
-                                        <div class="text-center">
-                                            <h2 class="mb-0 d-inline-block text-warning" id="jumlah_salah"></h2>
-                                            <p class="mb-0 d-inline-block">Salah </p>
-                                            <p class="mb-0 mt-15">Kurang menguasai di Materi <span id="nama_materi_tidak_dikuasai"></span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="chart-loader" class="row d-none" style="text-align: -webkit-center;margin-top:20px">
-                            <div class="col-md-12">
-                                <div class="loader"></div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p style="background-color: #007bff;color: white;text-align: center;padding: 7px;">Total Membuka Aplikasi Pada : </p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select class="form-control select2" name="" id="date_chart"></select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p style="background-color: #28a745;color: white;text-align: center;padding: 7px;">Total Mengerjakan Soal Pada : </p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select class="form-control select2" name="" id="materi_chart_select"></select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row" id="chart-data">
-                            <div class="col-md-12">
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <canvas id="chLine" height="100"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
+            <i class="ik ik-plus-square" onclick="addUserPage()" data-toggle="modal" data-target="#demoModal"></i>Tambah Data
         </div>
     </div>
 
@@ -362,6 +147,235 @@ Users
         </div>
     </div>
 
+</div>
+<div class="modal fade" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="demoModalLabel">User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <form id="form-user" class="text-left border border-light p-5" action="{{route('users.store')}}" method="POST"
+                            enctype="multipart/form-data" style="padding-bottom: 50px;">
+                            @csrf
+                            <input type="hidden" name="id" id="id">
+                            <div class="form-group" id="email-form">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                    </span>
+                                    <input type="text" class="form-control  " placeholder="Email" id="email" name="email"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="password-form">
+                                <label>Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                    </span>
+                                    <input type="password" class="form-control  " placeholder="Password" id="password"
+                                        name="password" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="name-form">
+                                <label>Nama</label>
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <label class="input-group-text"><i class="ik ik-edit-1"></i></label>
+                                    </span>
+                                    <input type="text" class="form-control  " placeholder="Nama" id="nama" name="name"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="footer-buttons">
+                                <br>
+                                <div id="user-loader" class="loader d-none"></div>
+
+                                @if(Auth::user()->email == 'guest@kindem.my.id')
+                                <button id="user-btn-add" class="btn btn-primary tooltip" disabled>
+                                    Tambah
+                                    <span class="tooltiptext">Guest Forbidden</span>
+                                </button>
+                                <button id="user-btn-edit" class="btn btn-success tooltip d-none" disabled>
+                                    Update
+                                    <span class="tooltiptext">Guest Forbidden</span>
+                                </button>
+                                <button id="user-btn-delete" class="btn btn-danger tooltip d-none" disabled>
+                                    Delete
+                                    <span class="tooltiptext">Guest Forbidden</span>
+                                </button>
+                                @else
+                                <button id="user-btn-add" type="button" class="btn btn-primary" onclick="addUser()">
+                                    Tambah
+                                </button>
+                                <button id="user-btn-edit" type="button" class="btn btn-success d-none" onclick="updateUser()">
+                                    Update
+                                </button>
+                                <button id="user-btn-delete" type="button" class="btn btn-danger d-none" onclick="deleteUser()">
+                                    Delete
+                                </button>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="stats-loader" class="row d-none" style="text-align: -webkit-center;margin-top:20px">
+                    <div class="col-md-12">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+                <div class="row d-none" id="user-stats">
+                    <div class="col-md-12">
+                        <form class="text-left border border-light p-3" style="margin-top:20px">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h4 style="background-color: #007bff;color: white;padding: 10px;border-radius: 15px;">Informasi User</h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card sale-card ">
+                                        <div class="card-header">
+                                            <h3>Level User</h3>
+                                        </div>
+                                        <div class="card-block text-center">
+                                            <div id="percent-level">
+                                                <div class="radial-bar radial-bar-0 radial-bar-lg radial-bar-danger">
+                                                    <img src="{{url('assets/admin/img/user.png')}}" alt="User-Image">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5>Level : <span id="user_level_name">loading..</span></h5>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="s-caption bg-default"></div>
+                                                    <div class="s-cont d-inline-block">
+                                                        <h5 class="fw-700 mb-0" id="sisa_point"></h5>
+                                                        <p class="mb-0">Sisa Point Dibutuhkan</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 border-left">
+                                                    <div class="s-caption bg-red"></div>
+                                                    <div class="s-cont d-inline-block">
+                                                        <h5 class="fw-700 mb-0" id="user_point"></h5>
+                                                        <p class="mb-0">Jumlah Point Terkumpul </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card ticket-card">
+                                        <div class="card-body">
+                                            <p class="mb-30 bg-primary lbl-card"><i class="fas fa-folder-open"></i> Chapter Dikerjakan</p>
+                                            <div class="text-center">
+                                                <h2 class="mb-0 d-inline-block text-primary" id="chapter_complete"></h2>
+                                                <p class="mb-0 d-inline-block">Chapter</p>
+                                                <p class="mb-0 mt-15"><span id="chapter_incomplete"></span> Chapter tersisa yang belum dikerjakan</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card ticket-card">
+                                        <div class="card-body">
+                                            <p class="mb-30 bg-blue lbl-card"><i class="fas fa-file-archive"></i> Materi Dikerjakan</p>
+                                            <div class="text-center">
+                                                <h2 class="mb-0 d-inline-block text-blue" id="materi_complete"></h2>
+                                                <p class="mb-0 d-inline-block">Materi</p>
+                                                <p class="mb-0 mt-15"><span id="materi_incomplete"></span> Materi sisa yang belum dikerjakan</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card ticket-card">
+                                        <div class="card-body">
+                                            <p class="mb-30 bg-green lbl-card"><i class="fa fa-check-square" aria-hidden="true"></i> Jumlah Benar</p>
+                                            <div class="text-center">
+                                                <h2 class="mb-0 d-inline-block text-green" id="jumlah_benar"></h2>
+                                                <p class="mb-0 d-inline-block">Benar</p>
+                                                <p class="mb-0 mt-15">Sangat menguasai di Materi <span id="nama_materi_dikuasai"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-md-6">
+                                    <div class="card ticket-card">
+                                        <div class="card-body">
+                                            <p class="mb-30 bg-warning lbl-card"><i class="fa fa-window-close" aria-hidden="true"></i> Jumlah Salah</p>
+                                            <div class="text-center">
+                                                <h2 class="mb-0 d-inline-block text-warning" id="jumlah_salah"></h2>
+                                                <p class="mb-0 d-inline-block">Salah </p>
+                                                <p class="mb-0 mt-15">Kurang menguasai di Materi <span id="nama_materi_tidak_dikuasai"></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="chart-loader" class="row d-none" style="text-align: -webkit-center;margin-top:20px">
+                                <div class="col-md-12">
+                                    <div class="loader"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p style="background-color: #007bff;color: white;text-align: center;padding: 7px;">Total Membuka Aplikasi Pada : </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control select2" name="" id="date_chart"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p style="background-color: #28a745;color: white;text-align: center;padding: 7px;">Total Mengerjakan Soal Pada : </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control select2" name="" id="materi_chart_select"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" id="chart-data">
+                                <div class="col-md-12">
+                                    <div class="card shadow-sm">
+                                        <div class="card-body">
+                                            <canvas id="chLine" height="100"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- /.content-wrapper -->
 @endsection

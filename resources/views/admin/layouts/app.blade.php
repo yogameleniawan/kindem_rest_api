@@ -206,6 +206,17 @@
                 z-index: 9999;
             }
 
+            @media (min-width: 576px)
+            {
+                .modal-dialog {
+                max-width: 900px;
+                }
+            }
+
+            .modal {
+                z-index: 9999;
+            }
+
     </style>
     @yield('header')
 
