@@ -152,7 +152,7 @@
                                 <div class="d-flex">
                                     <i class="fa fa-cogs fa-2x text-primary-gradient flex-shrink-0 mt-1"></i>
                                     <div class="ms-3">
-                                        <h2 class="mb-0" data-toggle="counter-up">68</h2>
+                                        <h2 class="mb-0" data-toggle="counter-up">69</h2>
                                         <p class="text-primary-gradient mb-0">Aktif Install</p>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                                 <div class="d-flex">
                                     <i class="fa fa-comments fa-2x  text-pengguna flex-shrink-0 mt-1"></i>
                                     <div class="ms-3">
-                                        <h2 class="mb-0" data-toggle="counter-up">68</h2>
+                                        <h2 class="mb-0" data-toggle="counter-up">69</h2>
                                         <p class=" text-pengguna mb-0">Pengguna</p>
                                     </div>
                                 </div>

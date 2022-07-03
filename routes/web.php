@@ -40,7 +40,6 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
     Route::post('courses/import', [CoursesController::class, 'import'])->name('courses.import');
     Route::get('courses/template', [CoursesController::class, 'template'])->name('courses.template');
 
-    Route::prefix('admin')->group(function () {
         Route::resources([
             'materi' => CategoriesController::class,
             'courses' => CoursesController::class,
@@ -49,7 +48,6 @@ Route::middleware(['auth:sanctum', 'verified', 'can:admin'])->group(function () 
             'user_courses' => UserCoursesController::class,
             'user_details' => UserDetailsController::class,
         ]);
-    });
     Route::prefix('api')->group(function () {
         Route::get('getAllChapter', [APIController::class, 'getAllChapter'])->name('getAllChapter');
         Route::get('getAllMateri', [APIController::class, 'getAllMateri'])->name('getAllMateri');

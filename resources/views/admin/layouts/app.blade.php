@@ -216,7 +216,7 @@
             .modal {
                 z-index: 9999;
             }
-
+            
         .jq-toast-wrap {
             z-index: 99999!important;
         }
