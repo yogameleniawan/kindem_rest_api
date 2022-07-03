@@ -210,7 +210,7 @@
                                 <i class="fa fa-database text-white fs-4"></i>
                             </div>
                             <h5 class="mb-3">Didukung Banyak Data</h5>
-                            <p class="m-0">Terdapat lebih dari 300 kosa kata sehingga membantu untuk mengenal kosa kata baru.</p>
+                            <p class="m-0">Terdapat lebih dari 450 kosa kata sehingga membantu untuk mengenal kosa kata baru.</p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">

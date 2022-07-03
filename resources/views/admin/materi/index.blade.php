@@ -952,7 +952,7 @@ Materi
 
         tableChapter.columns().eq(0).each(function(colIdx) {
             $('input', tableChapter.column(colIdx).footer()).on('keyup change', function() {
-                console.log(colIdx + '-' + this.value);
+                // console.log(colIdx + '-' + this.value);
                 tableChapter
                     .column(colIdx)
                     .search(this.value)
@@ -973,7 +973,7 @@ Materi
 
         tableMateri.columns().eq(0).each(function(colIdx) {
             $('input', tableMateri.column(colIdx).footer()).on('keyup change', function() {
-                console.log(colIdx + '-' + this.value);
+                // console.log(colIdx + '-' + this.value);
                 tableMateri
                     .column(colIdx)
                     .search(this.value)
@@ -994,7 +994,7 @@ Materi
 
         tableCourse.columns().eq(0).each(function(colIdx) {
             $('input', tableCourse.column(colIdx).footer()).on('keyup change', function() {
-                console.log(colIdx + '-' + this.value);
+                // console.log(colIdx + '-' + this.value);
                 tableCourse
                     .column(colIdx)
                     .search(this.value)
@@ -1085,7 +1085,7 @@ Materi
         $('#course-loader').removeClass('d-none')
         $('#course-btn-add').addClass('d-none')
         var data = new FormData($('#form-course')[0]);
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '{{route('courses.store')}}',
             type: "POST",
@@ -1364,7 +1364,7 @@ Materi
         $('#materi-loader').removeClass('d-none')
         $('#materi-btn').addClass('d-none')
         var data = new FormData($('#form-add-materi')[0]);
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '{{route('sub_categories.store')}}',
             type: "POST",
@@ -1412,7 +1412,7 @@ Materi
         $('#materi-loader-import').removeClass('d-none')
         $('#materi-btn-import').addClass('d-none')
         var data = new FormData($('#form-import-materi')[0]);
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '{{route('sub_categories.import')}}',
             type: "POST",
@@ -1507,7 +1507,7 @@ Materi
     }
 
     function deleteMateri() {
-        console.log($('#id_materi').val())
+        // console.log($('#id_materi').val())
         $('#materi-loader-delete').removeClass('d-none')
         $('#materi-btn-delete').addClass('d-none')
         $.ajax({
@@ -1595,7 +1595,7 @@ Materi
         $('#chapter-loader').removeClass('d-none')
         $('#btn-chapter').addClass('d-none')
         var data = new FormData($('#form-chapter')[0]);
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '{{route('materi.store')}}',
             type: "POST",
@@ -1638,7 +1638,7 @@ Materi
         $('#chapter-loader-import').removeClass('d-none')
         $('#btn-chapter-import').addClass('d-none')
         var data = new FormData($('#form-chapter-import')[0]);
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '{{route('materi.import')}}',
             type: "POST",

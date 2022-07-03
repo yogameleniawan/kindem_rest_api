@@ -480,7 +480,7 @@ function initChart(){
                 },
             },
             success: function (data) {
-                console.log(data.data)
+                // console.log(data.data)
                 $('#chart-loader').addClass('d-none')
                 $('#date_chart').removeClass('d-none')
                 $('#chart-data').removeClass('d-none')
@@ -606,7 +606,7 @@ var table = $('#data-table').DataTable({
 
         table.columns().eq(0).each(function (colIdx) {
             $('input', table.column(colIdx).footer()).on('keyup change', function () {
-                console.log(colIdx + '-' + this.value);
+                // console.log(colIdx + '-' + this.value);
                 table
                     .column(colIdx)
                     .search(this.value)
@@ -677,7 +677,7 @@ var table = $('#data-table').DataTable({
         $('#user-loader').removeClass('d-none')
         $('#user-btn-add').addClass('d-none')
         var data = new FormData($('#form-user')[0]);
-        console.log(data)
+        // console.log(data)
         $.ajax({
             url: '{{route('users.store')}}',
             type: "POST",

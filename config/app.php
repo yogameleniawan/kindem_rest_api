@@ -179,7 +179,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         App\Providers\GoogleDriveServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
+        App\Providers\BroadcastServiceProvider::class,
     ],
 
     /*

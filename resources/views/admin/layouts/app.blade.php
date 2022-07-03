@@ -60,7 +60,12 @@
     @yield('css')
 </head>
 
-<body>
+<body 
+@if(Auth::user()->email == 'guest@kindem.my.id')
+oncontextmenu="return false;"
+@else
+@endif
+>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -360,7 +365,29 @@
     <script src="{{url('assets/admin/js/alerts.js')}}"></script>
     <script src="{{url('assets/admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
 
-
+    <script>
+             document.addEventListener('contextmenu',(e)=>{
+                    e.preventDefault();
+                  }
+                  );
+                  document.onkeydown = function(e) {
+                  if(event.keyCode == 123) {
+                     return false;
+                  }
+                  if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                     return false;
+                  }
+                  if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                     return false;
+                  }
+                  if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                     return false;
+                  }
+                  if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                     return false;
+                  }
+            }
+    </script>
     @yield('footer')
 
 </body>

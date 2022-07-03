@@ -854,6 +854,16 @@ Dashboard
 <script src="{{ url('assets/admin/dynamictable/dynamitable.jquery.min.js') }}"></script>
 <script src="{{ url('assets/admin/dynamictable/dynamitable.jquery.min.js') }}"></script>
 
+    <script src="/js/app.js"></script>
+
+    // <script type="module">
+    // window.Echo.channel("online-status").listen("OnlineUserNotification", (event) => {
+    //     console.log(event);
+    //     // alert('online');
+    // });
+
+    // </script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 <script>
 $( document ).ready(function() {
@@ -862,7 +872,7 @@ $( document ).ready(function() {
     fetchUserActivity()
     setInterval(fetchUserActivity, 5000);
 });
-    
+
 var myChart
 var chartAll
 function fetchUserActivity(){
@@ -1086,7 +1096,7 @@ function initChart(user_id){
                 },
             },
             success: function (data) {
-                console.log(data.data)
+                // console.log(data.data)
                 $('#chart-loader').addClass('d-none')
                 $('#date_chart').removeClass('d-none')
                 $('#chart-data').removeClass('d-none')
@@ -1236,12 +1246,12 @@ function initChartAll(){
                 },
             },
             success: function (data) {
-                console.log(data.data)
+                // console.log(data.data)
                 $('#stats-loader-all').addClass('d-none')
                 $('#stats-body-all').removeClass('d-none')
 
                 result_item_all = data.data[$('#date_chart_all').val()]
-                console.log($('#date_chart_all').val())
+                // console.log($('#date_chart_all').val())
                 senin_all = result_item_all.find(o => o.week_day === 0) == null ? '0' : result_item_all.find(o => o.week_day === 0).count
                 selasa_all = result_item_all.find(o => o.week_day === 1) == null ? '0' : result_item_all.find(o => o.week_day === 1).count
                 rabu_all = result_item_all.find(o => o.week_day === 2) == null ? '0' : result_item_all.find(o => o.week_day === 2).count
