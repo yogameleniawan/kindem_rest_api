@@ -12,9 +12,9 @@
 1. Clone repository
 	```bash
 	# Clone dengan SSH
-	git clone git@github.com:NgopiBareng/digital-invitation.git
+	git clone git@github.com/yogameleniawan/kindem_rest_api.git
 	# Clone dengan HTTPS
-	git clone https://github.com/NgopiBareng/digital-invitation.git
+	git clone https://github.com/yogameleniawan/kindem_rest_api.git
 	```
 2. Install laravel dan php dependency
 	```
