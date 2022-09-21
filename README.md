@@ -47,7 +47,7 @@ Pastikan konfigurasi database di `.env` sudah benar
 	npm install
 	```
 8. Running Aplikasi
-    Jalankan 2 perintah dibawah ini :
+    Jalankan perintah dibawah ini :
     ```
 	php artisan serve
     ```
